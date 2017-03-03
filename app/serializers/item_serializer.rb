@@ -1,3 +1,4 @@
 class ItemSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :task
+  belongs_to :checklist
 end

@@ -1,4 +1,5 @@
 class ChecklistSerializer < ActiveModel::Serializer
-  attributes :id, :task
-  belongs_to :checklist
+  attributes :id, :job_id
+  has_many :items
+  belongs_to :job
 end
