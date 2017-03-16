@@ -1,4 +1,5 @@
 (function() {
+
   'use strict';
 
   function JobFactory($http) {
@@ -11,7 +12,9 @@
     }
 
     function getJobs() {
-
+      return $http.get('/jobs')
+        .then(handleSuccess)
+        .catch(handleError);
     };
 
     function getJob() {
@@ -35,5 +38,5 @@
   angular
     .module('app')
     .controller('JobFactory', JobFactory);
-    
+
 }());
