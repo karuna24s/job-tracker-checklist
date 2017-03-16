@@ -8,13 +8,13 @@
       $stateProvider
         .state('home', {
           url: '/',
-          templateUrl: 'views/home.html',
+          templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
       })
       $stateProvider
         .state('jobs', {
           url: '/jobs',
-          templateUrl: 'views/jobs.html',
+          templateUrl: 'jobs/jobs.html',
           controller: 'JobsController as vm'
       });
       $urlRouterProvider.otherwise('/')
