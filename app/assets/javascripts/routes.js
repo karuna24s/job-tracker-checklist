@@ -12,7 +12,7 @@
           controller: 'HomeController as vm'
       })
       $stateProvider
-        .state('home.jobs', {
+        .state('jobs', {
           url: '/jobs',
           templateUrl: 'views/jobs.html',
           controller: 'JobsController as vm'

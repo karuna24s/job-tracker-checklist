@@ -5,8 +5,8 @@
     var vm = this;
 
     // callable methods on the vm
-    vm.name = 'Karuna'
-    vm.test = "Let's see if this shows!";
+    // vm.name = 'Karuna'
+    // vm.test = "Let's see if this shows!";
 
     //instantiated info
     activate();
