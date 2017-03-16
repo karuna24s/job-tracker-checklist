@@ -52170,6 +52170,63 @@ function ngMessageDirectiveFactory() {
     .module('app')
     .controller('HomeController', HomeController);
 }());
+// Angular Rails Template
+// source: app/assets/javascripts/home/home.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("home/home.html", '<!-- <h1>{{vm.test}}</h1> -->\n<!-- {{vm.name}} -->\n<h1>Home View</h1>\n<a href="#" ui-sref="home">Home</a>\n<a href="#" ui-sref="jobs">Job</a>')
+}]);
+
+(function() {
+
+
+}).call(this);
+(function() {
+
+
+}).call(this);
+(function() {
+
+  'use strict';
+
+  function JobFactory($http) {
+    return {
+      getJobs: getJobs,
+      getJob: getJob,
+      createJob: createJob,
+      updateJob: updateJob,
+      deleteJob: deleteJob
+    }
+
+    function getJobs() {
+      return $http.get('/jobs')
+        .then(handleSuccess)
+        .catch(handleError);
+    };
+
+    function getJob() {
+
+    };
+
+    function createJob() {
+
+    };
+
+    function updateJob() {
+
+    };
+
+    function deleteJob() {
+
+    };
+
+  };
+
+  angular
+    .module('app')
+    .controller('JobFactory', JobFactory);
+
+}());
 (function() {
   'use strict';
 
@@ -52193,14 +52250,13 @@ function ngMessageDirectiveFactory() {
     .module('app')
     .controller('JobsController', JobsController);
 }());
-(function() {
+// Angular Rails Template
+// source: app/assets/javascripts/jobs/jobs.html
 
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("jobs/jobs.html", "<h1>{{ vm.test }}</h1>")
+}]);
 
-}).call(this);
-(function() {
-
-
-}).call(this);
 (function(){
 
   'use strict';
@@ -52211,13 +52267,13 @@ function ngMessageDirectiveFactory() {
       $stateProvider
         .state('home', {
           url: '/',
-          templateUrl: 'views/home.html',
+          templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
       })
       $stateProvider
         .state('jobs', {
           url: '/jobs',
-          templateUrl: 'views/jobs.html',
+          templateUrl: 'jobs/jobs.html',
           controller: 'JobsController as vm'
       });
       $urlRouterProvider.otherwise('/')
@@ -52226,20 +52282,6 @@ function ngMessageDirectiveFactory() {
 
 }())
 ;
-// Angular Rails Template
-// source: app/assets/javascripts/views/home.html
-
-angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("views/home.html", "<!-- <h1>{{vm.test}}</h1> -->\n<!-- {{vm.name}} -->\n<h1>Home View</h1>")
-}]);
-
-// Angular Rails Template
-// source: app/assets/javascripts/views/jobs.html
-
-angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("views/jobs.html", "<h1>{{ vm.test }}</h1>")
-}]);
-
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
