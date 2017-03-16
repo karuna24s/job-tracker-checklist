@@ -52152,13 +52152,46 @@ function ngMessageDirectiveFactory() {
   function HomeController() {
     var vm = this;
 
-    // callable methods on the view model
-    vm.name = 'Karuna'
+    // callable methods on the vm
+    // vm.name = 'Karuna'
+    // vm.test = "Let's see if this shows!";
+
+    //instantiated info
+    activate();
+
+    //defined methods on the vm
+    function activate() {
+
+    };
+
   };
 
   angular
     .module('app')
     .controller('HomeController', HomeController);
+}());
+(function() {
+  'use strict';
+
+  function JobsController() {
+    var vm = this;
+
+    // callable methods on the vm
+    vm.test = "View the jobs!";
+
+    //instantiated info
+    activate();
+
+    //defined methods on the vm
+    function activate() {
+
+    };
+
+  };
+
+  angular
+    .module('app')
+    .controller('JobsController', JobsController);
 }());
 (function() {
 
@@ -52182,7 +52215,7 @@ function ngMessageDirectiveFactory() {
           controller: 'HomeController as vm'
       })
       $stateProvider
-        .state('home.jobs', {
+        .state('jobs', {
           url: '/jobs',
           templateUrl: 'views/jobs.html',
           controller: 'JobsController as vm'
@@ -52197,14 +52230,14 @@ function ngMessageDirectiveFactory() {
 // source: app/assets/javascripts/views/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("views/home.html", "{{vm.name}}")
+  $templateCache.put("views/home.html", "<!-- <h1>{{vm.test}}</h1> -->\n<!-- {{vm.name}} -->\n<h1>Home View</h1>")
 }]);
 
 // Angular Rails Template
 // source: app/assets/javascripts/views/jobs.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("views/jobs.html", "")
+  $templateCache.put("views/jobs.html", "<h1>{{ vm.test }}</h1>")
 }]);
 
 // This is a manifest file that'll be compiled into application.js, which will include all the files
