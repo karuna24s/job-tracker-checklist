@@ -50,6 +50,6 @@
 
   angular
     .module('app')
-    .controller('JobFactory', JobFactory);
+    .factory('JobFactory', JobFactory);
 
 }());

@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function JobsController() {
+  function JobsController(JobFactory) {
     var vm = this;
 
     // callable methods on the vm
@@ -12,7 +12,17 @@
 
     //defined methods on the vm
     function activate() {
+      getJobs();
+    };
 
+    function getJobs() {
+      return JobFactory.getJobs()
+            .then(setJobs);
+    };
+
+    function setJobs(data) {
+      debugger;
+      return vm.jobs = data;
     };
 
   };
