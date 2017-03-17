@@ -33,6 +33,19 @@
 
     };
 
+    function handleSuccess(response) {
+      //$http requests return a promise which needs to be parsed for its .data attribute
+      //print to console to confirm visually
+      console.log(response);
+      //return to controller
+      return response.data;
+    };
+
+    function handleError(error) {
+      //print to console to confirm visually
+      console.log(error);
+    };
+
   };
 
   angular
