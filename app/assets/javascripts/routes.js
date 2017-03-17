@@ -10,13 +10,17 @@
           url: '/',
           templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
-      })
-      $stateProvider
+        })
         .state('jobs', {
           url: '/jobs',
-          templateUrl: 'jobs/jobs.html',
+          templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
-      });
+        })
+        .state('create', {
+          url: '/jobs/create',
+          templateUrl: 'jobs/create.html',
+          controller: 'JobsController as vm'
+        });
       $urlRouterProvider.otherwise('/')
     })
 

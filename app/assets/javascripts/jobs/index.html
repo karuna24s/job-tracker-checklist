@@ -1,4 +1,9 @@
 <h1>{{ vm.test }}</h1>
-<ul>
+
+<br />
+<a href="#" ui-sref="create">Add a Job</a>
+<br />
+
+<ul id="jobs-list" ng-click="hideJobs()">
   <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + ' position at ' + job.company"></li>
 </ul>
