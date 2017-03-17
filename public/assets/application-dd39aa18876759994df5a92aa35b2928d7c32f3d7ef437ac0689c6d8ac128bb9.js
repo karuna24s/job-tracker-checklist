@@ -52220,17 +52220,30 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     };
 
+    function handleSuccess(response) {
+      //$http requests return a promise which needs to be parsed for its .data attribute
+      //print to console to confirm visually
+      console.log(response);
+      //return to controller
+      return response.data;
+    };
+
+    function handleError(error) {
+      //print to console to confirm visually
+      console.log(error);
+    };
+
   };
 
   angular
     .module('app')
-    .controller('JobFactory', JobFactory);
+    .factory('JobFactory', JobFactory);
 
 }());
 (function() {
   'use strict';
 
-  function JobsController() {
+  function JobsController(JobFactory) {
     var vm = this;
 
     // callable methods on the vm
@@ -52241,7 +52254,16 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     //defined methods on the vm
     function activate() {
+      getJobs();
+    };
 
+    function getJobs() {
+      return JobFactory.getJobs()
+            .then(setJobs);
+    };
+
+    function setJobs(data) {
+      return vm.jobs = data;
     };
 
   };
@@ -52254,7 +52276,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/jobs.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/jobs.html", "<h1>{{ vm.test }}</h1>")
+  $templateCache.put("jobs/jobs.html", '<h1>{{ vm.test }}</h1>\n<ul>\n  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + \' position at \' + job.company"></li>\n</ul>')
 }]);
 
 (function(){
