@@ -52185,6 +52185,20 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 
 }).call(this);
+// Angular Rails Template
+// source: app/assets/javascripts/jobs/create.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("jobs/create.html", '<h1>Let\'s Make a Job</h1>\n<form ng-submit="vm.createJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" ng-model="vm.newJob.job_title" />\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" ng-model="vm.newJob.company" />\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.newJob.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <input type="text" ng-model="vm.newJob.company_url" />\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.newJob.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" ng-model="vm.newJob.status" />\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.newJob.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.newJob.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.newJob.tech_stack" />\n    <br />\n    <!-- <label form="state">State: </label>\n    <!- TBD: How to have selection for state_id -->\n    <!-- <br /> -->\n    <input type="submit" value="Add Job">\n</form>')
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/jobs/index.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click="hideJobs()">\n  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + \' position at \' + job.company"></li>\n</ul>')
+}]);
+
 (function() {
 
   'use strict';
@@ -52272,13 +52286,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     .module('app')
     .controller('JobsController', JobsController);
 }());
-// Angular Rails Template
-// source: app/assets/javascripts/jobs/jobs.html
-
-angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/jobs.html", '<h1>{{ vm.test }}</h1>\n<ul>\n  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + \' position at \' + job.company"></li>\n</ul>')
-}]);
-
 (function(){
 
   'use strict';
@@ -52291,13 +52298,17 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           url: '/',
           templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
-      })
-      $stateProvider
+        })
         .state('jobs', {
           url: '/jobs',
-          templateUrl: 'jobs/jobs.html',
+          templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
-      });
+        })
+        .state('create', {
+          url: '/jobs/create',
+          templateUrl: 'jobs/create.html',
+          controller: 'JobsController as vm'
+        });
       $urlRouterProvider.otherwise('/')
     })
 
