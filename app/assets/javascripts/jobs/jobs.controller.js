@@ -21,7 +21,6 @@
     };
 
     function setJobs(data) {
-      debugger;
       return vm.jobs = data;
     };
 

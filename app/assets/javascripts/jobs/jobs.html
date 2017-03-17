@@ -1,1 +1,4 @@
 <h1>{{ vm.test }}</h1>
+<ul>
+  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + ' position at ' + job.company"></li>
+</ul>
