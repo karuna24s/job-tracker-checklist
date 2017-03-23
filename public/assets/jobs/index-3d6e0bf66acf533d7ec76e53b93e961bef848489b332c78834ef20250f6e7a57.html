@@ -4,6 +4,6 @@
 <a href="#" ui-sref="create">Add a Job</a>
 <br />
 
-<ul id="jobs-list" ng-click="hideJobs()">
+<ul id="jobs-list" ng-click>
   <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + ' position at ' + job.company"></li>
 </ul>

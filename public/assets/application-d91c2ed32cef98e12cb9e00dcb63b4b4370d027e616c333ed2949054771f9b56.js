@@ -52146,6 +52146,71 @@ function ngMessageDirectiveFactory() {
 
 
 }).call(this);
+(function(){
+
+    'use strict';
+
+    function ChecklistFactory($http) {
+
+        return {
+            getChecklists: getChecklists
+        }
+
+        function getChecklists() {
+            return $http.get('/checklists')
+                .then(handleSuccess)
+                .catch(handleError)
+        };
+
+        function handleSuccess(response) {
+            console.log(response);
+            return response.data;
+        };
+
+        function handleError(error) {
+            console.log(error);
+        };
+
+    };
+
+  angular
+      .module('app')
+      .factory('ChecklistFactory', ChecklistFactory);
+
+}());
+(function(){
+
+    'use strict';
+
+    function ChecklistsController(ChecklistFactory) {
+
+        var vm = this;
+
+        //callable methods on the vm
+        vm.test = "Here is the checklist!";
+
+        //defined methods on the vm
+        function activate() {
+            getChecklists();
+        };
+
+        function getChecklists() {
+            return ChecklistFactory.getChecklists()
+                .then(setChecklists);
+        };
+
+        function setChecklists(data) {
+            return vm.checklists = data;
+        };
+
+
+    };
+
+    angular
+      .module('app')
+      .controller('ChecklistsController', ChecklistsController);
+
+}());
 (function() {
   'use strict';
 
@@ -52189,14 +52254,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/create.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/create.html", '<h1>Let\'s Make a Job</h1>\n<form ng-submit="vm.createJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" ng-model="vm.newJob.job_title" />\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" ng-model="vm.newJob.company" />\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.newJob.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <input type="text" ng-model="vm.newJob.company_url" />\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.newJob.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" ng-model="vm.newJob.status" />\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.newJob.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.newJob.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.newJob.tech_stack" />\n    <br />\n    <!-- <label form="state">State: </label>\n    <!- TBD: How to have selection for state_id -->\n    <!-- <br /> -->\n    <input type="submit" value="Add Job">\n</form>')
+  $templateCache.put("jobs/create.html", '<h1>Let\'s Make a Job</h1>\n<form ng-submit="vm.createJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" ng-model="vm.newJob.job_title" />\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" ng-model="vm.newJob.company" />\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.newJob.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <input type="text" ng-model="vm.newJob.company_url" />\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.newJob.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" ng-model="vm.newJob.status" />\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.newJob.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.newJob.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.newJob.tech_stack" />\n    <br />\n    <label form="checklist">Job Application Checklist: </label>\n    <div ng-controller="ChecklistsController as vm" ng-bind="vm.test">\n    <!-- TBD: How to have selection for checklist_id -->\n    </div>\n    <br />\n    <input type="submit" value="Add Job">\n</form>')
 }]);
 
 // Angular Rails Template
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click="hideJobs()">\n  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + \' position at \' + job.company"></li>\n</ul>')
+  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + \' position at \' + job.company"></li>\n</ul>')
 }]);
 
 (function() {
@@ -52308,6 +52373,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           url: '/jobs/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
+        })
+        .state('jobs.show.checklists', {
+          url: '/checklists',
+          templateUrl: 'checklists/index.html',
+          controller: 'ChecklistsController as vm'
         });
       $urlRouterProvider.otherwise('/')
     })
