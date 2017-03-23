@@ -2,23 +2,27 @@
 
     'use strict';
 
-    function ChecklistsController() {
+    function ChecklistsController(ChecklistFactory) {
 
         var vm = this;
 
         //callable methods on the vm
         vm.test = "Here is the checklist!";
 
-        // //instantiate info
-        // activate();
-        //
-        // function activate() {
-        //     getChecklists();
-        // };
-        //
-        // function getChecklists {
-        //
-        // };
+        //defined methods on the vm
+        function activate() {
+            getChecklists();
+        };
+
+        function getChecklists() {
+            return ChecklistFactory.getChecklists()
+                .then(setChecklists);
+        };
+
+        function setChecklists(data) {
+            return vm.checklists = data;
+        };
+
 
     };
 
