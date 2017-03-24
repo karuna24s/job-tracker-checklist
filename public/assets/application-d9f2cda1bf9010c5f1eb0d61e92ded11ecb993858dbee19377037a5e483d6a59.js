@@ -52395,7 +52395,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.create', {
+        .state('create', {
           url: '/jobs/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
