@@ -6,6 +6,7 @@
 
     // callable methods on the vm
     vm.test = "View the jobs!";
+    vm.createJob = createJob;
 
     //instantiated info
     activate();
@@ -18,6 +19,12 @@
     function getJobs() {
       return JobFactory.getJobs()
             .then(setJobs);
+    };
+
+    function createJob() {
+      // debugger;
+      return JobFactory.createJob(vm.newJob)
+             .then(getJobs)
     };
 
     function setJobs(data) {

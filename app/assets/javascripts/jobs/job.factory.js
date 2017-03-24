@@ -21,8 +21,20 @@
 
     };
 
-    function createJob() {
+    function createJob(job) {
+      var req = {
+          method: 'POST',
+          url: '/jobs',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          data: {
+              job: job
+          }
+      };
 
+      return $http(req)
+                 .catch(handleError)
     };
 
     function updateJob() {
