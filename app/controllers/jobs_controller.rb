@@ -11,6 +11,7 @@ class JobsController < ApplicationController
   end
 
   def create
+    binding.pry
     job = Job.new(job_params)
     if params[:create_checklist]
       checklist = job.create_checklist
@@ -41,8 +42,8 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.require(:job).permit(:job_title, :job_description, :company_url, :date, :status,
+    params.require(:job).permit(:job_title, :company, :job_description, :company_url, :date, :status,
      :point_of_contact, :job_reference, :tech_stack, :user_id)
   end
-  
+
 end
