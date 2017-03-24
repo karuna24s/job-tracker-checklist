@@ -16,9 +16,14 @@
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('create', {
+        .state('jobs.create', {
           url: '/jobs/create',
           templateUrl: 'jobs/create.html',
+          controller: 'JobsController as vm'
+        })
+        .state('jobs.show', {
+          url: '/:id',
+          templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
         .state('jobs.show.checklists', {
