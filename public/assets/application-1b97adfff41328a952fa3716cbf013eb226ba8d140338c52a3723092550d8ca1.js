@@ -52370,6 +52370,13 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     .module('app')
     .controller('JobsController', JobsController);
 }());
+// Angular Rails Template
+// source: app/assets/javascripts/jobs/show.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("jobs/show.html", "<h1>Show a Job</h1>")
+}]);
+
 (function(){
 
   'use strict';
@@ -52388,9 +52395,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('create', {
+        .state('jobs.create', {
           url: '/jobs/create',
           templateUrl: 'jobs/create.html',
+          controller: 'JobsController as vm'
+        })
+        .state('jobs.show', {
+          url: '/:id',
+          templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
         .state('jobs.show.checklists', {
