@@ -52261,7 +52261,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs" ng-bind="job.job_title + \' position at \' + job.company"></li>\n</ul>')
+  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs">\n    <a href="" ui-sref="jobs.show({ id: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n  </li>\n</ul>')
 }]);
 
 (function() {

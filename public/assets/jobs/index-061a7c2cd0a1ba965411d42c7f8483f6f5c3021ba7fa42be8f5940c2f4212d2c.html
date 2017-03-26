@@ -1,0 +1,11 @@
+<h1>{{ vm.test }}</h1>
+
+<br />
+<a href="#" ui-sref="create">Add a Job</a>
+<br />
+
+<ul id="jobs-list" ng-click>
+  <li ng-repeat="job in vm.jobs">
+    <a href="" ui-sref="jobs.show({ id: job.id })">{{ job.job_title }}, {{ job.company }}</a>
+  </li>
+</ul>
