@@ -13,11 +13,16 @@
         })
         .state('jobs', {
           url: '/jobs',
+          templateUrl: 'jobs/home.html',
+          controller: 'JobsController as vm'
+        })
+        .state('jobs.index', {
+          url: '/index',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('create', {
-          url: '/jobs/create',
+        .state('jobs.create', {
+          url: '/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
