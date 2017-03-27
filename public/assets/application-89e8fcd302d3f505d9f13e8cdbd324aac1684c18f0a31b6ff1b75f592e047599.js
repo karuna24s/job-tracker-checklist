@@ -52239,7 +52239,7 @@ function ngMessageDirectiveFactory() {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", '<!-- <h1>{{vm.test}}</h1> -->\n<!-- {{vm.name}} -->\n<h1>Home View</h1>\n<a href="#" ui-sref="home">Home</a>\n<a href="#" ui-sref="jobs">Job</a>')
+  $templateCache.put("home/home.html", "<!-- <h1>{{vm.test}}</h1> -->\n<!-- {{vm.name}} -->\n<h1>Home View</h1>")
 }]);
 
 (function() {
@@ -52255,6 +52255,20 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
   $templateCache.put("jobs/create.html", '<h1>Let\'s Make a Job</h1>\n<form ng-submit="vm.createJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" ng-model="vm.newJob.job_title" />\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" ng-model="vm.newJob.company" />\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.newJob.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <input type="text" ng-model="vm.newJob.company_url" />\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.newJob.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" ng-model="vm.newJob.status" />\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.newJob.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.newJob.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.newJob.tech_stack" />\n    <br />\n    <input type="submit" value="Add Job">\n</form>')
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/jobs/edit.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("jobs/edit.html", "<h1>Let's Edit a Job</h1>")
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/jobs/home.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("jobs/home.html", '<h1>Jobs Main Page</h1>\n<a href="#" ui-sref="home">Home</a>\n<a href="#" ui-sref="jobs">Job</a>\n<ui-view></ui-view>')
 }]);
 
 // Angular Rails Template
@@ -52404,12 +52418,22 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         })
         .state('jobs', {
           url: '/jobs',
+          templateUrl: 'jobs/home.html',
+          controller: 'JobsController as vm'
+        })
+        .state('jobs.index', {
+          url: '/index',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('create', {
-          url: '/jobs/create',
+        .state('jobs.create', {
+          url: '/create',
           templateUrl: 'jobs/create.html',
+          controller: 'JobsController as vm'
+        })
+        .state('jobs.edit', {
+          url: '/edit',
+          templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
         .state('jobs.show', {
