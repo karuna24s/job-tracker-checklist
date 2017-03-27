@@ -6,6 +6,6 @@
 
 <ul id="jobs-list" ng-click>
   <li ng-repeat="job in vm.jobs">
-    <a href="" ui-sref="jobs.show({ id: job.id })">{{ job.job_title }}, {{ job.company }}</a>
+    <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
   </li>
 </ul>

@@ -17,8 +17,10 @@
         .catch(handleError);
     };
 
-    function getJob() {
-
+    function getJob(id) {
+      return $http.get('/jobs/' + id)
+        .then(handleSuccess)
+        .catch(handleError)
     };
 
     function createJob(job) {

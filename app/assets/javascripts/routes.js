@@ -22,7 +22,7 @@
           controller: 'JobsController as vm'
         })
         .state('jobs.show', {
-          url: '/:id',
+          url: '/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })

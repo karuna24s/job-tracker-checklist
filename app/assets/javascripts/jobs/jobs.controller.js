@@ -31,6 +31,11 @@
       return vm.jobs = data;
     };
 
+    function setJob(data) {
+      return vm.showJob = data;
+    }
+
+
   };
 
   angular
