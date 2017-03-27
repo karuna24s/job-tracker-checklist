@@ -52268,14 +52268,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/home.html", '<h1>Jobs Main Page</h1>\n<a href="#" ui-sref="home">Home</a>\n<a href="#" ui-sref="jobs">Job</a>\n<ui-view></ui-view>')
+  $templateCache.put("jobs/home.html", '<h1>Jobs Main Page</h1>\n<a href="" ui-sref="jobs.list">Jobs</a>\n<a href="" ui-sref="jobs.create">Add a Job</a>\n<ui-view></ui-view>')
 }]);
 
 // Angular Rails Template
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs">\n    <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n  </li>\n</ul>')
+  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="jobs.create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs">\n    <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n  </li>\n</ul>')
 }]);
 
 (function() {
@@ -52421,8 +52421,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.index', {
-          url: '/index',
+        .state('jobs.list', {
+          url: '/list',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
