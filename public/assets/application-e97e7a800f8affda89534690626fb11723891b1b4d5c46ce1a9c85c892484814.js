@@ -52261,7 +52261,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs">\n    <a href="" ui-sref="jobs.show({ id: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n  </li>\n</ul>')
+  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs">\n    <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n  </li>\n</ul>')
 }]);
 
 (function() {
@@ -52283,8 +52283,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         .catch(handleError);
     };
 
-    function getJob() {
-
+    function getJob(id) {
+      return $http.get('/jobs/' + id)
+        .then(handleSuccess)
+        .catch(handleError)
     };
 
     function createJob(job) {
@@ -52354,6 +52356,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
             .then(setJobs);
     };
 
+    function getJob(id) {
+      return JobFactory.getJob(id)
+            .then(setBrewery);
+    };
+
     function createJob() {
       // debugger;
       return JobFactory.createJob(vm.newJob)
@@ -52363,6 +52370,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     function setJobs(data) {
       return vm.jobs = data;
     };
+
+    function setJob(data) {
+      return vm.showJob = data;
+    }
+
 
   };
 
@@ -52374,7 +52386,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/show.html", "<h1>Show a Job</h1>")
+  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.getJob.job_title }}<br />\n    Company: {{ vm.getJob.company }}<br />\n    Job Description: <br />{{ vm.getJob.job_description }}<br />\n    Company URL: <a href="{{ vm.jobs.job.company_url }}">{{ vm.getJob.company_url }}</a><br />\n    Date : {{ vm.getJob.date }}<br />\n    Status: {{ vm.getJob.status }}<br />\n    Point of Contact: {{ vm.getJob.point_of_contact }}<br />\n    Job Reference: {{ vm.getJob.job_reference }}<br />\n    Tech Stack: {{ vm.getJob.tech_stack }}<br />\n</div>')
 }]);
 
 (function(){
@@ -52401,7 +52413,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           controller: 'JobsController as vm'
         })
         .state('jobs.show', {
-          url: '/:id',
+          url: '/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
