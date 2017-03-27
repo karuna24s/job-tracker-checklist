@@ -21,6 +21,11 @@
             .then(setJobs);
     };
 
+    function getJob(id) {
+      return JobFactory.getJob(id)
+            .then(setBrewery);
+    };
+
     function createJob() {
       // debugger;
       return JobFactory.createJob(vm.newJob)
