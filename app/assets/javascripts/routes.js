@@ -16,8 +16,8 @@
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.index', {
-          url: '/index',
+        .state('jobs.list', {
+          url: '/list',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
