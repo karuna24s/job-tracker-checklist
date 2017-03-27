@@ -21,6 +21,11 @@
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
+        .state('jobs.edit', {
+          url: '/edit',
+          templateUrl: 'jobs/edit.html',
+          controller: 'JobsController as vm'
+        })
         .state('jobs.show', {
           url: '/:jobId',
           templateUrl: 'jobs/show.html',
