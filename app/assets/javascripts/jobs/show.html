@@ -10,3 +10,7 @@
     Job Reference: {{ vm.getJob.job_reference }}<br />
     Tech Stack: {{ vm.getJob.tech_stack }}<br />
 </div>
+
+<a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>
+<br />
+<a href="" ng-click="vm.destroyBrewery(vm.job.id )">Delete Job</a>

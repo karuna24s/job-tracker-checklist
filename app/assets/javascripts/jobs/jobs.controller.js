@@ -6,9 +6,11 @@
 
     // callable methods on the vm
     vm.test = "View the jobs!";
+    vm.getJobs = getJobs;
     vm.createJob = createJob;
     vm.getJob = getJob;
     vm.updateJob = updateJob;
+    vm.destroyJob = destroyJob;
 
     //instantiated info
     activate();
@@ -39,6 +41,12 @@
             .then(showJob);
     };
 
+    function destroyJob(id) {
+      return BreweryFactory.destroyJob(id)
+            .then(showJobs);
+    };
+
+
     function setJobs(data) {
       return vm.jobs = data;
     };
@@ -49,6 +57,10 @@
 
     function showJob(data) {
         $state.go('jobs.show', { jobId: data.id });
+    };
+
+    function showJobs() {
+        $state.go('jobs.list');
     };
 
   };
