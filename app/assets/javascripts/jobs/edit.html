@@ -28,6 +28,19 @@
     <input type="text" ng-model="vm.newJob.tech_stack" />
     <br />
 
+    <div>After updates the information will be:
+      <br />
+      Job Title: <span ng-bind="vm.job.job_title"></span>
+      Company: <span ng-bind="vm.job.company"></span>
+      Job Description: <span ng-bind="vm.job.job_description"></span>
+      Company URL: <span ng-bind="vm.job.company_url"></span>
+      Date: <span ng-bind="vm.job.date"></span>
+      Status: <span ng-bind="vm.job.status"></span>
+      Point of Contact: <span ng-bind="vm.job.point_of_contact"></span>
+      Job Reference: <span ng-bind="vm.job.job_reference"></span>
+      Tech Stack: <span ng-bind="vm.job.tech_Stack"></span>
+    </div>
+    <br />
     <!-- <label for="current-state">State: </label>
     <div ng-controller="StatesController as statesCtrl">
         <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">
