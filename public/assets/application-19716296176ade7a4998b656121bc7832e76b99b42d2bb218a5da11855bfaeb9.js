@@ -52326,7 +52326,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/edit.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/edit.html", "<h1>Let's Edit a Job</h1>")
+  $templateCache.put("jobs/edit.html", '<h1>Let\'s Edit a Job</h1>\n<form ng-submit="vm.updateJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" ng-model="vm.newJob.job_title" />\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" ng-model="vm.newJob.company" />\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.newJob.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <input type="text" ng-model="vm.newJob.company_url" />\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.newJob.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" ng-model="vm.newJob.status" />\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.newJob.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.newJob.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.newJob.tech_stack" />\n    <br />\n\n    <!-- <label for="current-state">State: </label>\n    <div ng-controller="StatesController as statesCtrl">\n        <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">\n              <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>\n        </select>\n    </div> -->\n\n    <input type="submit" name="Edit Job">\n\n</form>')
 }]);
 
 // Angular Rails Template
@@ -52353,7 +52353,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       getJob: getJob,
       createJob: createJob,
       updateJob: updateJob,
-      deleteJob: deleteJob
+      destroyJob: destroyJob
     }
 
     function getJobs() {
@@ -52381,15 +52381,32 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       };
 
       return $http(req)
+                 .then(handleSuccess)
                  .catch(handleError)
     };
 
-    function updateJob() {
+    function updateJob(job) {
+         var req = {
+             method: 'PATCH',
+             url: '/jobs/' + job.id,
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             data: {
+               job: job
+             }
+         };
 
-    };
+         return $http(req)
+                    .then(handleSuccess)
+                    .catch(handleError)
+     };
 
-    function deleteJob() {
 
+    function destroyJob(id) {
+      return $http.delete('/jobs/' + id)
+              .then(handleSuccess)
+              .catch(handleError)
     };
 
     function handleSuccess(response) {
@@ -52420,9 +52437,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     // callable methods on the vm
     vm.test = "View the jobs!";
+    vm.getJobs = getJobs;
     vm.createJob = createJob;
     vm.getJob = getJob;
     vm.updateJob = updateJob;
+    vm.destroyJob = destroyJob;
 
     //instantiated info
     activate();
@@ -52445,13 +52464,19 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     function createJob() {
       // debugger;
       return JobFactory.createJob(vm.Job)
-             .then(getJobs)
+             .then(showJob)
     };
 
     function updateJob() {
       return JobFactory.updateJob(vm.Job)
-            .then(showUpdatedJob);
+            .then(showJob);
     };
+
+    function destroyJob(id) {
+      return BreweryFactory.destroyJob(id)
+            .then(showJobs);
+    };
+
 
     function setJobs(data) {
       return vm.jobs = data;
@@ -52461,8 +52486,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       return vm.showJob = data;
     };
 
-    function showUpdatedJob(data) {
+    function showJob(data) {
         $state.go('jobs.show', { jobId: data.id });
+    };
+
+    function showJobs() {
+        $state.go('jobs.list');
     };
 
   };
@@ -52475,7 +52504,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.getJob.job_title }}<br />\n    Company: {{ vm.getJob.company }}<br />\n    Job Description: <br />{{ vm.getJob.job_description }}<br />\n    Company URL: <a href="{{ vm.jobs.job.company_url }}">{{ vm.getJob.company_url }}</a><br />\n    Date : {{ vm.getJob.date }}<br />\n    Status: {{ vm.getJob.status }}<br />\n    Point of Contact: {{ vm.getJob.point_of_contact }}<br />\n    Job Reference: {{ vm.getJob.job_reference }}<br />\n    Tech Stack: {{ vm.getJob.tech_stack }}<br />\n</div>')
+  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.getJob.job_title }}<br />\n    Company: {{ vm.getJob.company }}<br />\n    Job Description: <br />{{ vm.getJob.job_description }}<br />\n    Company URL: <a href="{{ vm.jobs.job.company_url }}">{{ vm.getJob.company_url }}</a><br />\n    Date : {{ vm.getJob.date }}<br />\n    Status: {{ vm.getJob.status }}<br />\n    Point of Contact: {{ vm.getJob.point_of_contact }}<br />\n    Job Reference: {{ vm.getJob.job_reference }}<br />\n    Tech Stack: {{ vm.getJob.tech_stack }}<br />\n</div>\n\n<a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>\n<br />\n<a href="" ng-click="vm.destroyBrewery(vm.job.id )">Delete Job</a>')
 }]);
 
 (function(){
