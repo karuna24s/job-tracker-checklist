@@ -52246,6 +52246,71 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 
 }).call(this);
+(function(){
+
+    'use strict';
+
+    function ItemFactory($http) {
+
+        return {
+            getItems: getItems
+        }
+
+        function getItems() {
+            return $http.get('/items')
+                .then(handleSuccess)
+                .catch(handleError)
+        };
+
+        function handleSuccess(response) {
+            console.log(response);
+            return response.data;
+        };
+
+        function handleError(error) {
+            console.log(error);
+        };
+
+    };
+
+  angular
+      .module('app')
+      .factory('ItemFactory', ItemFactory);
+
+}());
+(function(){
+
+    'use strict';
+
+    function ItemsController(ItemFactory) {
+
+        var vm = this;
+
+        //callable methods on the vm
+        vm.test = "Here are the items!";
+
+        //defined methods on the vm
+        function activate() {
+            getItems();
+        };
+
+        function getItems() {
+            return ItemFactory.getItems()
+                .then(setItems);
+        };
+
+        function setItems(data) {
+            return vm.items = data;
+        };
+
+
+    };
+
+    angular
+      .module('app')
+      .controller('ItemsController', ItemsController);
+
+}());
 (function() {
 
 
@@ -52455,6 +52520,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           url: '/checklists',
           templateUrl: 'checklists/index.html',
           controller: 'ChecklistsController as vm'
+        })
+        .state('jobs.show.checklists.items', {
+          url: '/items',
+          templateUrl: 'items/index.html',
+          controller: 'ItemsController as vm'
         });
       $urlRouterProvider.otherwise('/')
     })
