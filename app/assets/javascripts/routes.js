@@ -40,6 +40,11 @@
           url: '/checklists',
           templateUrl: 'checklists/index.html',
           controller: 'ChecklistsController as vm'
+        })
+        .state('jobs.show.checklists.items', {
+          url: '/items',
+          templateUrl: 'items/index.html',
+          controller: 'ItemsController as vm'
         });
       $urlRouterProvider.otherwise('/')
     })
