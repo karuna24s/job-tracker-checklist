@@ -31,12 +31,12 @@
     function createJob() {
       // debugger;
       return JobFactory.createJob(vm.Job)
-             .then(getJobs)
+             .then(showJob)
     };
 
     function updateJob() {
       return JobFactory.updateJob(vm.Job)
-            .then(showUpdatedJob);
+            .then(showJob);
     };
 
     function setJobs(data) {
@@ -47,7 +47,7 @@
       return vm.showJob = data;
     };
 
-    function showUpdatedJob(data) {
+    function showJob(data) {
         $state.go('jobs.show', { jobId: data.id });
     };
 

@@ -36,12 +36,27 @@
       };
 
       return $http(req)
+                 .then(handleSuccess)
                  .catch(handleError)
     };
 
-    function updateJob() {
+    function updateJob(job) {
+         var req = {
+             method: 'PATCH',
+             url: '/jobs/' + job.id,
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             data: {
+               job: job
+             }
+         };
 
-    };
+         return $http(req)
+                    .then(handleSuccess)
+                    .catch(handleError)
+     };
+
 
     function deleteJob() {
 
