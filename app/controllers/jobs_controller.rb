@@ -11,7 +11,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     job = Job.new(job_params)
     if params[:create_checklist]
       checklist = job.create_checklist
