@@ -1,10 +1,10 @@
 <h1>Let's Make a Job</h1>
 <form ng-submit="vm.createJob()">
     <label form="job_title">Job Title: </label>
-    <input type="text" ng-model="vm.newJob.job_title" />
+    <input type="text" ng-model="vm.newJob.job_title" required="required"/>
     <br />
     <label form="company">Company: </label>
-    <input type="text" ng-model="vm.newJob.company" />
+    <input type="text" ng-model="vm.newJob.company" required="required"/>
     <br />
     <label form="job_description">Job Description: </label>
     <textarea ng-model="vm.newJob.job_description"></textarea>
@@ -16,7 +16,7 @@
     <input type="text" ng-model="vm.newJob.date" />
     <br />
     <label form="status">Status: </label>
-    <input type="text" ng-model="vm.newJob.status" />
+    <input type="text" ng-model="vm.newJob.status" required="required"/>
     <br />
     <label form="point_of_contact">Point of Contact: </label>
     <input type="text" ng-model="vm.newJob.point_of_contact" />
