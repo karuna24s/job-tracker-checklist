@@ -3,6 +3,7 @@
 
   function JobsController(JobFactory, $state) {
     var vm = this;
+    console.log($state);
 
     // callable methods on the vm
     vm.test = "View the jobs!";
@@ -11,6 +12,20 @@
     vm.getJob = getJob;
     vm.updateJob = updateJob;
     vm.destroyJob = destroyJob;
+    vm.updateStatus = updateStatus;
+
+    vm.statuses = [
+      {id: 1, value: 'Discovered'},
+      {id: 2, value: 'Application in Progress'},
+      {id: 3, value: 'Applied'},
+      {id: 4, value: 'Interviewing'},
+      {id: 5, value: 'Pending Response'},
+      {id: 6, value: 'No Response'},
+      {id: 7, value: 'Job Offer Received'},
+      {id: 8, value: 'Job Offer Accepted'},
+      {id: 9, value: 'Job Offer Declined'}
+    ];
+
 
     //instantiated info
     activate();
@@ -27,7 +42,7 @@
 
     function getJob(id) {
       return JobFactory.getJob(id)
-            .then(setBrewery);
+            .then(setJob);
     };
 
     function createJob() {
@@ -46,6 +61,9 @@
             .then(showJobs);
     };
 
+    function updateStatus(jobId, jobStatus) {
+      return JobFactory.updateStatus(jobId, jobStatus)
+    }
 
     function setJobs(data) {
       return vm.jobs = data;
