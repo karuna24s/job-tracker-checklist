@@ -52319,14 +52319,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/create.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/create.html", '<h1>Let\'s Make a Job</h1>\n<form name="newJob" ng-submit="vm.createJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" required name="job_title" ng-model="vm.job.job_title" />\n    <div ng-messages="newJob.job_title.$error" ng-show="newJob.job_title.$touched || newJob.$submitted">\n      <div ng-message="required">Job Title is required.</div>\n    </div>\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" required name="company" ng-model="vm.job.company" />\n    <div ng-messages="newJob.company.$error" ng-show="newJob.company.$touched || newJob.$submitted">\n      <div ng-message="required">Company is required.</div>\n    </div>\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.job.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <textarea ng-model="vm.job.company_url"></textarea>\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.job.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" required name="status" ng-model="vm.job.status" />\n    <div ng-messages="newJob.status.$error" ng-show="newJob.status.$touched || newJob.$submitted">\n      <div ng-message="required">Status is required.</div>\n    </div>\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.job.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.job.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.job.tech_stack" />\n    <br />\n    <input type="submit" value="Add Job">\n</form>')
+  $templateCache.put("jobs/create.html", '<h1>Let\'s Make a Job</h1>\n<form name="newJob" ng-submit="vm.createJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" required name="job_title" ng-model="vm.job.job_title" />\n    <div ng-messages="newJob.job_title.$error" ng-show="newJob.job_title.$touched || newJob.$submitted">\n      <div ng-message="required">Job Title is required.</div>\n    </div>\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" required name="company" ng-model="vm.job.company" />\n    <div ng-messages="newJob.company.$error" ng-show="newJob.company.$touched || newJob.$submitted">\n      <div ng-message="required">Company is required.</div>\n    </div>\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.job.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <textarea ng-model="vm.job.company_url"></textarea>\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.job.date" />\n    <br />\n    <label form="status">Status: </label>\n    <select name="status" required name="status" ng-model="vm.job.status" required>\n          <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n    </select>\n    <div ng-messages="newJob.status.$error" ng-show="newJob.status.$touched || newJob.$submitted">\n      <div ng-message="required">Status is required.</div>\n    </div>\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.job.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.job.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.job.tech_stack" />\n    <br />\n    <input type="submit" value="Add Job">\n</form>')
 }]);
 
 // Angular Rails Template
 // source: app/assets/javascripts/jobs/edit.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/edit.html", '<h1>Let\'s Edit a Job</h1>\n<form name="editJob" ng-submit="vm.updateJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" required name="job_title" ng-model="vm.job.job_title" />\n    <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">\n      <div ng-message="required">Job Title is required.</div>\n    </div>\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" required name="company" ng-model="vm.job.company" />\n    <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">\n      <div ng-message="required">Company is required.</div>\n    </div>\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.job.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <textarea ng-model="vm.job.company_url"></textarea>\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.job.date" />\n    <br />\n    <label form="status">Status: </label>\n    <input type="text" required name="status"ng-model="vm.job.status" />\n    <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">\n      <div ng-message="required">Status is required.</div>\n    </div>\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.job.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.job.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.job.tech_stack" />\n    <br />\n    <br />\n\n    <div>After updates the information will be:\n      <br />\n      Job Title: <span ng-bind="vm.job.job_title"></span><br />\n      Company: <span ng-bind="vm.job.company"></span><br />\n      Job Description: <span ng-bind="vm.job.job_description"></span><br />\n      Company URL: <span ng-bind="vm.job.company_url"></span><br />\n      Date: <span ng-bind="vm.job.date"></span><br />\n      Status: <span ng-bind="vm.job.status"></span><br />\n      Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />\n      Job Reference: <span ng-bind="vm.job.job_reference"></span><br />\n      Tech Stack: <span ng-bind="vm.job.tech_Stack"></span><br />\n    </div>\n    <br />\n    <br />\n    <!-- <label for="current-state">State: </label>\n    <div ng-controller="StatesController as statesCtrl">\n        <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">\n              <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>\n        </select>\n    </div> -->\n\n    <input type="submit" name="Edit Job">\n\n</form>')
+  $templateCache.put("jobs/edit.html", '<h1>Let\'s Edit a Job</h1>\n<form name="editJob" ng-submit="vm.updateJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" required name="job_title" ng-model="vm.job.job_title" />\n    <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">\n      <div ng-message="required">Job Title is required.</div>\n    </div>\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" required name="company" ng-model="vm.job.company" />\n    <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">\n      <div ng-message="required">Company is required.</div>\n    </div>\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.job.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <textarea ng-model="vm.job.company_url"></textarea>\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.job.date" />\n    <br />\n    <label form="status">Status: </label>\n    <!-- <select name="status" required name="status" ng-model="vm.job.status" required>\n          <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n    </select> -->\n    <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">\n      <div ng-message="required">Status is required.</div>\n    </div>\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.job.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.job.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.job.tech_stack" />\n    <br />\n    <br />\n\n    <div>After updates the information will be:\n      <br />\n      Job Title: <span ng-bind="vm.job.job_title"></span><br />\n      Company: <span ng-bind="vm.job.company"></span><br />\n      Job Description: <span ng-bind="vm.job.job_description"></span><br />\n      Company URL: <span ng-bind="vm.job.company_url"></span><br />\n      Date: <span ng-bind="vm.job.date"></span><br />\n      Status: <span ng-bind="vm.job.status"></span><br />\n      Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />\n      Job Reference: <span ng-bind="vm.job.job_reference"></span><br />\n      Tech Stack: <span ng-bind="vm.job.tech_Stack"></span><br />\n    </div>\n    <br />\n    <br />\n    <!-- <label for="current-state">State: </label>\n    <div ng-controller="StatesController as statesCtrl">\n        <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">\n              <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>\n        </select>\n    </div> -->\n\n    <input type="submit" name="Edit Job">\n\n</form>')
 }]);
 
 // Angular Rails Template
@@ -52434,6 +52434,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
   function JobsController(JobFactory, $state) {
     var vm = this;
+    console.log($state);
 
     // callable methods on the vm
     vm.test = "View the jobs!";
@@ -52442,6 +52443,20 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     vm.getJob = getJob;
     vm.updateJob = updateJob;
     vm.destroyJob = destroyJob;
+    vm.updateStatus = updateStatus;
+
+    vm.statuses = [
+      {id: 1, value: 'Discovered'},
+      {id: 2, value: 'Application in Progress'},
+      {id: 3, value: 'Applied'},
+      {id: 4, value: 'Interviewing'},
+      {id: 5, value: 'Pending Response'},
+      {id: 6, value: 'No Response'},
+      {id: 7, value: 'Job Offer Received'},
+      {id: 8, value: 'Job Offer Accepted'},
+      {id: 9, value: 'Job Offer Declined'}
+    ];
+
 
     //instantiated info
     activate();
@@ -52458,7 +52473,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     function getJob(id) {
       return JobFactory.getJob(id)
-            .then(setBrewery);
+            .then(setJob);
     };
 
     function createJob() {
@@ -52477,6 +52492,9 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
             .then(showJobs);
     };
 
+    function updateStatus(jobId, jobStatus) {
+      return JobFactory.updateStatus(jobId, jobStatus)
+    }
 
     function setJobs(data) {
       return vm.jobs = data;

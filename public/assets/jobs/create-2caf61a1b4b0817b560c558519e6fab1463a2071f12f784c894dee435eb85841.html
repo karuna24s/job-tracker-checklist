@@ -22,7 +22,9 @@
     <input type="text" ng-model="vm.job.date" />
     <br />
     <label form="status">Status: </label>
-    <input type="text" required name="status" ng-model="vm.job.status" />
+    <select name="status" required name="status" ng-model="vm.job.status" required>
+          <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>
+    </select>
     <div ng-messages="newJob.status.$error" ng-show="newJob.status.$touched || newJob.$submitted">
       <div ng-message="required">Status is required.</div>
     </div>
