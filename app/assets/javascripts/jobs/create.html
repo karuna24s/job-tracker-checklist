@@ -1,31 +1,40 @@
 <h1>Let's Make a Job</h1>
-<form ng-submit="vm.createJob()">
+<form name="newJob" ng-submit="vm.createJob()">
     <label form="job_title">Job Title: </label>
-    <input type="text" ng-model="vm.newJob.job_title" required="required"/>
+    <input type="text" required name="job_title" ng-model="vm.job.job_title" />
+    <div ng-messages="newJob.job_title.$error" ng-show="newJob.job_title.$touched || newJob.$submitted">
+      <div ng-message="required">Job Title is required.</div>
+    </div>
     <br />
     <label form="company">Company: </label>
-    <input type="text" ng-model="vm.newJob.company" required="required"/>
+    <input type="text" required name="company" ng-model="vm.job.company" />
+    <div ng-messages="newJob.company.$error" ng-show="newJob.company.$touched || newJob.$submitted">
+      <div ng-message="required">Company is required.</div>
+    </div>
     <br />
     <label form="job_description">Job Description: </label>
-    <textarea ng-model="vm.newJob.job_description"></textarea>
+    <textarea ng-model="vm.job.job_description"></textarea>
     <br />
     <label form="company_url">Company URL: </label>
-    <textarea ng-model="vm.newJob.company_url"></textarea>
+    <textarea ng-model="vm.job.company_url"></textarea>
     <br />
     <label form="date">Date: </label>
-    <input type="text" ng-model="vm.newJob.date" />
+    <input type="text" ng-model="vm.job.date" />
     <br />
     <label form="status">Status: </label>
-    <input type="text" ng-model="vm.newJob.status" required="required"/>
+    <input type="text" required name="status" ng-model="vm.job.status" />
+    <div ng-messages="newJob.status.$error" ng-show="newJob.status.$touched || newJob.$submitted">
+      <div ng-message="required">Status is required.</div>
+    </div>
     <br />
     <label form="point_of_contact">Point of Contact: </label>
-    <input type="text" ng-model="vm.newJob.point_of_contact" />
+    <input type="text" ng-model="vm.job.point_of_contact" />
     <br />
     <label form="job_reference">Job Reference: </label>
-    <input type="text" ng-model="vm.newJob.job_reference" />
+    <input type="text" ng-model="vm.job.job_reference" />
     <br />
     <label form="tech_stack">Tech Stack: </label>
-    <input type="text" ng-model="vm.newJob.tech_stack" />
+    <input type="text" ng-model="vm.job.tech_stack" />
     <br />
     <input type="submit" value="Add Job">
 </form>
