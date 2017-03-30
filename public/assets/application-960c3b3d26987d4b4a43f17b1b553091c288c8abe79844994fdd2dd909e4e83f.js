@@ -52146,38 +52146,88 @@ function ngMessageDirectiveFactory() {
 
 
 }).call(this);
-(function(){
+(function() {
 
-    'use strict';
-
-    function ChecklistFactory($http) {
-
-        return {
-            getChecklists: getChecklists
-        }
-
-        function getChecklists() {
-            return $http.get('/checklists')
-                .then(handleSuccess)
-                .catch(handleError)
-        };
-
-        function handleSuccess(response) {
-            console.log(response);
-            return response.data;
-        };
-
-        function handleError(error) {
-            console.log(error);
-        };
-
-    };
+  'use strict'
 
   angular
-      .module('app')
-      .factory('ChecklistFactory', ChecklistFactory);
+    .module('app')
+    .factory('ChecklistFactory', ['$http', '$state', function($http, $state) {
 
-}());
+    return {
+      getChecklists: getChecklists,
+      createChecklist: createChecklist
+    }
+
+    function getChecklists() {
+      return $http.get('/jobs/' + $state.params.id + '/checklists')
+        .then(handleSuccess)
+        .then(handleError)
+    }
+
+    function createChecklist(checklist) {
+      var req = {
+        method: 'POST',
+        url: '/jobs/' + $state.params.id + '/checklists',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            checklist: checklist
+        }
+      }
+
+      return $http(req)
+        .then(handleSuccess)
+        .catch(handleError)
+    }
+
+    function handleSuccess(response) {
+      console.log(response);
+      return response.data;
+    }
+
+    function handleError(error) {
+      console.log(error);
+    }
+  }]);
+
+}())
+
+
+
+// (function(){
+//
+//     'use strict';
+//
+//     function ChecklistFactory($http) {
+//
+//         return {
+//             getChecklists: getChecklists
+//         }
+//
+//         function getChecklists() {
+//             return $http.get('/checklists')
+//                 .then(handleSuccess)
+//                 .catch(handleError)
+//         };
+//
+//         function handleSuccess(response) {
+//             console.log(response);
+//             return response.data;
+//         };
+//
+//         function handleError(error) {
+//             console.log(error);
+//         };
+//
+//     };
+//
+//   angular
+//       .module('app')
+//       .factory('ChecklistFactory', ChecklistFactory);
+//
+// }());
 (function(){
 
     'use strict';
@@ -52188,7 +52238,8 @@ function ngMessageDirectiveFactory() {
 
         //callable methods on the vm
         vm.test = "Here is the checklist!";
-
+        vm.createNote = createNote;
+        activate();
         //defined methods on the vm
         function activate() {
             getChecklists();
@@ -52197,6 +52248,11 @@ function ngMessageDirectiveFactory() {
         function getChecklists() {
             return ChecklistFactory.getChecklists()
                 .then(setChecklists);
+        };
+
+        function createChecklist() {
+            return ChecklistFactory.createChecklist(vm.Note)
+                .then(getChecklists());
         };
 
         function setChecklists(data) {
@@ -52463,7 +52519,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     //defined methods on the vm
     function activate() {
-      getJobs();
+      if ($state.current.name == "jobs.list") {
+        getJobs();
+      }
+      else if  ($state.current.name == "jobs.show") {
+        getJob($state.params.id)
+      }
     };
 
     function getJobs() {
@@ -52471,15 +52532,15 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
             .then(setJobs);
     };
 
-    function getJob(id) {
-      return JobFactory.getJob(id)
+    function getJob(params) {
+      return JobFactory.getJob(params)
             .then(setJob);
     };
 
     function createJob() {
       // debugger;
       return JobFactory.createJob(vm.Job)
-             .then(showJob)
+             .then(showJobs)
     };
 
     function updateJob() {
