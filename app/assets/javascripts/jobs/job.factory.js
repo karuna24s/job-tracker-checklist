@@ -8,6 +8,7 @@
       getJob: getJob,
       createJob: createJob,
       updateJob: updateJob,
+      updateStatus: updateStatus,
       destroyJob: destroyJob
     }
 
@@ -55,8 +56,24 @@
          return $http(req)
                     .then(handleSuccess)
                     .catch(handleError)
-     };
+    };
 
+    function updateStatus(id, status) {
+         var req = {
+             method: 'PATCH',
+             url: '/jobs/' + id,
+             headers: {
+               'Content-Type': 'application/json'
+             },
+             data: {
+               status: status
+             }
+         };
+
+      return $http(req)
+                 .then(handleSuccess)
+                 .catch(handleError)
+    };
 
     function destroyJob(id) {
       return $http.delete('/jobs/' + id)
