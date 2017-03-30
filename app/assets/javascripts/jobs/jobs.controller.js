@@ -53,7 +53,7 @@
     function createJob() {
       // debugger;
       return JobFactory.createJob(vm.Job)
-             .then(showJob)
+             .then(showJobs)
     };
 
     function updateJob() {
