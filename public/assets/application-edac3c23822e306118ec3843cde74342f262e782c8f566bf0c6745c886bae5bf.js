@@ -52437,7 +52437,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/edit.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/edit.html", '<h1>Let\'s Edit a Job</h1>\n<form name="editJob" ng-submit="vm.updateJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" required name="job_title" ng-model="vm.job.job_title" />\n    <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">\n      <div ng-message="required">Job Title is required.</div>\n    </div>\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" required name="company" ng-model="vm.job.company" />\n    <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">\n      <div ng-message="required">Company is required.</div>\n    </div>\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.job.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <textarea ng-model="vm.job.company_url"></textarea>\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.job.date" />\n    <br />\n    <label form="status">Status: </label>\n    <!-- <select name="status" required name="status" ng-model="vm.job.status" required>\n          <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n    </select> -->\n    <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">\n      <div ng-message="required">Status is required.</div>\n    </div>\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.job.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.job.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.job.tech_stack" />\n    <br />\n    <br />\n\n    <div>After updates the information will be:\n      <br />\n      Job Title: <span ng-bind="vm.job.job_title"></span><br />\n      Company: <span ng-bind="vm.job.company"></span><br />\n      Job Description: <span ng-bind="vm.job.job_description"></span><br />\n      Company URL: <span ng-bind="vm.job.company_url"></span><br />\n      Date: <span ng-bind="vm.job.date"></span><br />\n      Status: <span ng-bind="vm.job.status"></span><br />\n      Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />\n      Job Reference: <span ng-bind="vm.job.job_reference"></span><br />\n      Tech Stack: <span ng-bind="vm.job.tech_Stack"></span><br />\n    </div>\n    <br />\n    <br />\n    <!-- <label for="current-state">State: </label>\n    <div ng-controller="StatesController as statesCtrl">\n        <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">\n              <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>\n        </select>\n    </div> -->\n\n    <input type="submit" name="Edit Job">\n\n</form>')
+  $templateCache.put("jobs/edit.html", '<h1>Let\'s Edit a Job</h1>\n<form name="editJob" ng-submit="vm.updateJob()">\n    <label form="job_title">Job Title: </label>\n    <input type="text" required name="job_title" ng-model="vm.job.job_title" />\n    <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">\n      <div ng-message="required">Job Title is required.</div>\n    </div>\n    <br />\n    <label form="company">Company: </label>\n    <input type="text" required name="company" ng-model="vm.job.company" />\n    <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">\n      <div ng-message="required">Company is required.</div>\n    </div>\n    <br />\n    <label form="job_description">Job Description: </label>\n    <textarea ng-model="vm.job.job_description"></textarea>\n    <br />\n    <label form="company_url">Company URL: </label>\n    <textarea ng-model="vm.job.company_url"></textarea>\n    <br />\n    <label form="date">Date: </label>\n    <input type="text" ng-model="vm.job.date" />\n    <br />\n    <label form="status">Status: </label>\n    <select name="status" required name="status" ng-model="vm.job.status" required>\n          <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n    </select>\n    <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">\n      <div ng-message="required">Status is required.</div>\n    </div>\n    <br />\n    <label form="point_of_contact">Point of Contact: </label>\n    <input type="text" ng-model="vm.job.point_of_contact" />\n    <br />\n    <label form="job_reference">Job Reference: </label>\n    <input type="text" ng-model="vm.job.job_reference" />\n    <br />\n    <label form="tech_stack">Tech Stack: </label>\n    <input type="text" ng-model="vm.job.tech_stack" />\n    <br />\n    <br />\n\n    <div>After updates the information will be:\n      <br />\n      Job Title: <span ng-bind="vm.job.job_title"></span><br />\n      Company: <span ng-bind="vm.job.company"></span><br />\n      Job Description: <span ng-bind="vm.job.job_description"></span><br />\n      Company URL: <span ng-bind="vm.job.company_url"></span><br />\n      Date: <span ng-bind="vm.job.date"></span><br />\n      Status: <span ng-bind="vm.job.status"></span><br />\n      Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />\n      Job Reference: <span ng-bind="vm.job.job_reference"></span><br />\n      Tech Stack: <span ng-bind="vm.job.tech_Stack"></span><br />\n    </div>\n    <br />\n    <br />\n    <!-- <label for="current-state">State: </label>\n    <div ng-controller="StatesController as statesCtrl">\n        <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">\n              <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>\n        </select>\n    </div> -->\n\n    <input type="submit" name="Edit Job">\n\n</form>')
 }]);
 
 // Angular Rails Template
@@ -52456,69 +52456,88 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 (function() {
 
-  'use strict';
+  'use strict'
 
-  function JobFactory($http) {
+  angular
+    .module('app')
+    .factory('JobFactory', ['$http', '$state', function($http, $state) {
+
+    //callable methods on JobFactory
     return {
       getJobs: getJobs,
       getJob: getJob,
       createJob: createJob,
       updateJob: updateJob,
+      updateStatus: updateStatus,
       destroyJob: destroyJob
     }
 
+    //define methods
     function getJobs() {
       return $http.get('/jobs')
         .then(handleSuccess)
-        .catch(handleError);
-    };
+        .catch(handleError)
+    }
 
     function getJob(id) {
       return $http.get('/jobs/' + id)
         .then(handleSuccess)
         .catch(handleError)
-    };
+    }
 
     function createJob(job) {
       var req = {
-          method: 'POST',
-          url: '/jobs',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          data: {
-              job: job
-          }
-      };
-
+        method: 'POST',
+        url: '/jobs',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          job: job
+        }
+      }
       return $http(req)
-                 .then(handleSuccess)
-                 .catch(handleError)
-    };
+        .then(handleSuccess)
+        .catch(handleError)
+    }
 
     function updateJob(job) {
-         var req = {
-             method: 'PATCH',
-             url: '/jobs/' + job.id,
-             headers: {
-                 'Content-Type': 'application/json'
-             },
-             data: {
-               job: job
-             }
-         };
+      var req = {
+        method: 'PATCH',
+        url: '/jobs/' + job.id,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          job: job
+        }
+      }
+      return $http(req)
+        .then(handleSuccess)
+        .catch(handleError)
+    }
 
-         return $http(req)
-                    .then(handleSuccess)
-                    .catch(handleError)
-     };
-
+    function updateStatus(id, status) {
+      var req = {
+        method: 'PATCH',
+        url: '/jobs/' + id,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          status: status
+        }
+      }
+      return $http(req)
+        .then(handleSuccess)
+        .catch(handleError)
+    }
 
     function destroyJob(id) {
       return $http.delete('/jobs/' + id)
               .then(handleSuccess)
               .catch(handleError)
-    };
+    }
 
     function handleSuccess(response) {
       //$http requests return a promise which needs to be parsed for its .data attribute
@@ -52526,20 +52545,122 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       console.log(response);
       //return to controller
       return response.data;
-    };
+    }
 
     function handleError(error) {
       //print to console to confirm visually
       console.log(error);
-    };
+    }
+    
+  }]);
 
-  };
+}())
 
-  angular
-    .module('app')
-    .factory('JobFactory', JobFactory);
 
-}());
+
+// (function() {
+//
+//   'use strict';
+//
+//   function JobFactory($http) {
+//     return {
+//       getJobs: getJobs,
+//       getJob: getJob,
+//       createJob: createJob,
+//       updateJob: updateJob,
+//       updateStatus: updateStatus,
+//       destroyJob: destroyJob
+//     }
+//
+//     function getJobs() {
+//       return $http.get('/jobs')
+//         .then(handleSuccess)
+//         .catch(handleError);
+//     };
+//
+//     function getJob(id) {
+//       return $http.get('/jobs/' + id)
+//         .then(handleSuccess)
+//         .catch(handleError)
+//     };
+//
+//     function createJob(job) {
+//       var req = {
+//           method: 'POST',
+//           url: '/jobs',
+//           headers: {
+//               'Content-Type': 'application/json'
+//           },
+//           data: {
+//               job: job
+//           }
+//       };
+//
+//       return $http(req)
+//                  .then(handleSuccess)
+//                  .catch(handleError)
+//     };
+//
+//     function updateJob(job) {
+//          var req = {
+//              method: 'PATCH',
+//              url: '/jobs/' + job.id,
+//              headers: {
+//                  'Content-Type': 'application/json'
+//              },
+//              data: {
+//                job: job
+//              }
+//          };
+//
+//          return $http(req)
+//                     .then(handleSuccess)
+//                     .catch(handleError)
+//     };
+//
+//     function updateStatus(id, status) {
+//          var req = {
+//              method: 'PATCH',
+//              url: '/jobs/' + id,
+//              headers: {
+//                'Content-Type': 'application/json'
+//              },
+//              data: {
+//                status: status
+//              }
+//          };
+//
+//       return $http(req)
+//                  .then(handleSuccess)
+//                  .catch(handleError)
+//     };
+//
+//     function destroyJob(id) {
+//       return $http.delete('/jobs/' + id)
+//               .then(handleSuccess)
+//               .catch(handleError)
+//     };
+//
+//     function handleSuccess(response) {
+//       //$http requests return a promise which needs to be parsed for its .data attribute
+//       //print to console to confirm visually
+//       console.log(response);
+//       //return to controller
+//       return response.data;
+//     };
+//
+//     function handleError(error) {
+//       //print to console to confirm visually
+//       console.log(error);
+//     };
+//
+//   };
+//
+//   angular
+//     .module('app')
+//     .factory('JobFactory', JobFactory);
+//
+// }());
 (function() {
   'use strict';
 
@@ -52604,7 +52725,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function destroyJob(id) {
-      return BreweryFactory.destroyJob(id)
+      return JobFactory.destroyJob(id)
             .then(showJobs);
     };
 
@@ -52638,7 +52759,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.job.job_title }}<br />\n    Company: {{ vm.job.company }}<br />\n    Job Description: <br />{{ vm.job.job_description }}<br />\n    Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n    Date : {{ vm.job.date }}<br />\n    Status: {{ vm.job.status }}<br />\n    Point of Contact: {{ vm.job.point_of_contact }}<br />\n    Job Reference: {{ vm.job.job_reference }}<br />\n    Tech Stack: {{ vm.job.tech_stack }}<br />\n</div>\n\n<a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>\n<br />\n<a href="" ng-click="vm.destroyBrewery(vm.job.id )">Delete Job</a>')
+  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.job.job_title }}<br />\n    Company: {{ vm.job.company }}<br />\n    Job Description: <br />{{ vm.job.job_description }}<br />\n    Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n    Date : {{ vm.job.date }}<br />\n    Status: {{ vm.job.status }}<br />\n    Point of Contact: {{ vm.job.point_of_contact }}<br />\n    Job Reference: {{ vm.job.job_reference }}<br />\n    Tech Stack: {{ vm.job.tech_stack }}<br />\n</div>\n\n<a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>\n<br />\n<a href="" ng-click="vm.destroyJob(vm.job.id )">Delete Job</a>')
 }]);
 
 (function(){
