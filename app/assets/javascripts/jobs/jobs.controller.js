@@ -32,7 +32,12 @@
 
     //defined methods on the vm
     function activate() {
-      getJobs();
+      if ($state.current.name == "jobs.list") {
+        getJobs();
+      }
+      else if  ($state.current.name == "jobs.show") {
+        getJob($state.params.id)
+      }
     };
 
     function getJobs() {
@@ -40,8 +45,8 @@
             .then(setJobs);
     };
 
-    function getJob(id) {
-      return JobFactory.getJob(id)
+    function getJob(params) {
+      return JobFactory.getJob(params)
             .then(setJob);
     };
 
