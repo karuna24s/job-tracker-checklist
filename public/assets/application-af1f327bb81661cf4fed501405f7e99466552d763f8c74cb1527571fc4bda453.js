@@ -52251,7 +52251,7 @@ function ngMessageDirectiveFactory() {
         };
 
         function createChecklist() {
-            return ChecklistFactory.createChecklist(vm.Note)
+            return ChecklistFactory.createChecklist(vm.Checklist)
                 .then(getChecklists());
         };
 
@@ -52302,38 +52302,87 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 
 }).call(this);
-(function(){
+(function() {
 
-    'use strict';
-
-    function ItemFactory($http) {
-
-        return {
-            getItems: getItems
-        }
-
-        function getItems() {
-            return $http.get('/items')
-                .then(handleSuccess)
-                .catch(handleError)
-        };
-
-        function handleSuccess(response) {
-            console.log(response);
-            return response.data;
-        };
-
-        function handleError(error) {
-            console.log(error);
-        };
-
-    };
+  'use strict'
 
   angular
-      .module('app')
-      .factory('ItemFactory', ItemFactory);
+    .module('app')
+    .factory('ItemFactory', ['$http', '$state', function($http, $state) {
 
-}());
+    return {
+      getItems: getItems,
+      createItem: createItem
+    }
+
+    function getItems() {
+      return $http.get('/jobs/' + $state.params.id + '/checklists' + '/items')
+        .then(handleSuccess)
+        .then(handleError)
+    }
+
+    function createItem(item) {
+      var req = {
+        method: 'POST',
+        url: '/jobs/' + $state.params.id + '/checklists' + '/items',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: {
+            item: item
+        }
+      }
+
+      return $http(req)
+        .then(handleSuccess)
+        .catch(handleError)
+    }
+
+    function handleSuccess(response) {
+      console.log(response);
+      return response.data;
+    }
+
+    function handleError(error) {
+      console.log(error);
+    }
+  }]);
+
+}())
+
+
+// (function(){
+//
+//     'use strict';
+//
+//     function ItemFactory($http) {
+//
+//         return {
+//             getItems: getItems
+//         }
+//
+//         function getItems() {
+//             return $http.get('/items')
+//                 .then(handleSuccess)
+//                 .catch(handleError)
+//         };
+//
+//         function handleSuccess(response) {
+//             console.log(response);
+//             return response.data;
+//         };
+//
+//         function handleError(error) {
+//             console.log(error);
+//         };
+//
+//     };
+//
+//   angular
+//       .module('app')
+//       .factory('ItemFactory', ItemFactory);
+//
+// }());
 (function(){
 
     'use strict';
@@ -52344,7 +52393,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
         //callable methods on the vm
         vm.test = "Here are the items!";
-
+        vm.createItem = createItem;
+        activate();
         //defined methods on the vm
         function activate() {
             getItems();
@@ -52353,6 +52403,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         function getItems() {
             return ItemFactory.getItems()
                 .then(setItems);
+        };
+
+        function createItem() {
+            return ItemFactory.createItem(vm.Item)
+                .then(getItems());
         };
 
         function setItems(data) {
