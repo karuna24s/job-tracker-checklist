@@ -62,7 +62,7 @@
     };
 
     function destroyJob(id) {
-      return BreweryFactory.destroyJob(id)
+      return JobFactory.destroyJob(id)
             .then(showJobs);
     };
 
