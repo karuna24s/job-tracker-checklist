@@ -21,7 +21,7 @@
         };
 
         function createChecklist() {
-            return ChecklistFactory.createChecklist(vm.Note)
+            return ChecklistFactory.createChecklist(vm.Checklist)
                 .then(getChecklists());
         };
 

@@ -8,7 +8,8 @@
 
         //callable methods on the vm
         vm.test = "Here are the items!";
-
+        vm.createItem = createItem;
+        activate();
         //defined methods on the vm
         function activate() {
             getItems();
@@ -17,6 +18,11 @@
         function getItems() {
             return ItemFactory.getItems()
                 .then(setItems);
+        };
+
+        function createItem() {
+            return ItemFactory.createItem(vm.Item)
+                .then(getItems());
         };
 
         function setItems(data) {
