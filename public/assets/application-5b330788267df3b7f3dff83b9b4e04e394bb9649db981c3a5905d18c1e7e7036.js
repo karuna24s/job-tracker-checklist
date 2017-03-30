@@ -52626,12 +52626,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         })
         .state('jobs.show.checklists', {
           url: '/checklists',
-          templateUrl: 'checklists/index.html',
+          templateUrl: 'checklists/show.html',
           controller: 'ChecklistsController as vm'
         })
         .state('jobs.show.checklists.items', {
           url: '/items',
-          templateUrl: 'items/index.html',
+          templateUrl: 'items/show.html',
           controller: 'ItemsController as vm'
         });
       $urlRouterProvider.otherwise('/')
