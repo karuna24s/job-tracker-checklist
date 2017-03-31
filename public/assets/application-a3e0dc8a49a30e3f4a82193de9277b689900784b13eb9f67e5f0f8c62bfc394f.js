@@ -52320,7 +52320,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", "<!-- <h1>{{vm.test}}</h1> -->\n<!-- {{vm.name}} -->\n<h1>Home View</h1>")
+  $templateCache.put("home/home.html", '<h1>Home View</h1>\n<div class="collapse navbar-collapse pull-right" ng-controller="NavbarController">\n    <ul class="nav navbar-nav">\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()"><a href="" ng-click="logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
 }]);
 
 (function() {
@@ -52528,14 +52528,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/home.html", '<h1>Jobs Main Page</h1>\n<a href="" ui-sref="jobs.list">Jobs</a>\n<a href="" ui-sref="jobs.create">Add a Job</a>\n<ui-view></ui-view>')
+  $templateCache.put("jobs/home.html", '<h1>Jobs Main Page</h1>\n<a href="" ui-sref="home.jobs.list">Jobs</a>\n<a href="" ui-sref="home.jobs.create">Add a Job</a>\n<ui-view></ui-view>')
 }]);
 
 // Angular Rails Template
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="jobs.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
+  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="home.jobs.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="home.jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
 }]);
 
 // (function() {
@@ -52853,7 +52853,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/show.html", '<div class="container">\n  <div class=" well col-sm-6">\n    <h2>Job Show Page</h2><br>\n      Job Title: {{ vm.job.job_title }}<br />\n      Company: {{ vm.job.company }}<br />\n      Job Description: <br />{{ vm.job.job_description }}<br />\n      Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n      Date : {{ vm.job.date }}<br />\n      Status: {{ vm.job.status }}<br />\n      Point of Contact: {{ vm.job.point_of_contact }}<br />\n      Job Reference: {{ vm.job.job_reference }}<br />\n      Tech Stack: {{ vm.job.tech_stack }}<br /><br />\n    <a href="" ui-sref="jobs.show.checklists({ jobId: vm.job.id })" class="btn btn-primary btn-sm">Create Checklist</a>\n    <br />\n    <br />\n    <a href="" ui-sref="jobs.edit({ jobId: vm.job.id })" class="btn btn-info btn-sm">Edit Job</a>\n    <br />\n    </br/>\n    <a href="" ng-click="vm.destroyJob(vm.job.id )" class="btn btn-warning btn-sm ">Delete Job</a>\n\n  </div>\n</div>')
+  $templateCache.put("jobs/show.html", '<div class="container">\n  <div class=" well col-sm-6">\n    <h2>Job Show Page</h2><br>\n      Job Title: {{ vm.job.job_title }}<br />\n      Company: {{ vm.job.company }}<br />\n      Job Description: <br />{{ vm.job.job_description }}<br />\n      Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n      Date : {{ vm.job.date }}<br />\n      Status: {{ vm.job.status }}<br />\n      Point of Contact: {{ vm.job.point_of_contact }}<br />\n      Job Reference: {{ vm.job.job_reference }}<br />\n      Tech Stack: {{ vm.job.tech_stack }}<br /><br />\n    <a href="" ui-sref="home.jobs.show.checklists({ jobId: vm.job.id })" class="btn btn-primary btn-sm">Create Checklist</a>\n    <br />\n    <br />\n    <a href="" ui-sref="home.jobs.edit({ jobId: vm.job.id })" class="btn btn-info btn-sm">Edit Job</a>\n    <br />\n    </br/>\n    <a href="" ng-click="vm.destroyJob(vm.job.id )" class="btn btn-warning btn-sm ">Delete Job</a>\n\n  </div>\n</div>')
 }]);
 
 (function(){
@@ -52869,37 +52869,37 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
         })
-        .state('jobs', {
+        .state('home.jobs', {
           url: '/jobs',
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.list', {
+        .state('home.jobs.list', {
           url: '/list',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.create', {
+        .state('home.jobs.create', {
           url: '/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.edit', {
-          url: '/edit',
+        .state('home.jobs.edit', {
+          url: '/edit/:jobId',
           templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.show', {
-          url: '/:jobId',
+        .state('home.jobs.show', {
+          url: '/show/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.show.checklists', {
+        .state('home.jobs.show.checklists', {
           url: '/checklists',
           templateUrl: 'checklists/show.html',
           controller: 'ChecklistsController as vm'
         })
-        .state('jobs.show.checklists.items', {
+        .state('home.jobs.show.checklists.items', {
           url: '/items',
           templateUrl: 'items/show.html',
           controller: 'ItemsController as vm'

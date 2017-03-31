@@ -4,7 +4,7 @@
     <h2>{{ vm.test }}</h2>
 
     <br />
-    <a href="#" ui-sref="jobs.create">Add a Job</a>
+    <a href="#" ui-sref="home.jobs.create">Add a Job</a>
     <br />
 
     <label for="search">Search: </label>
@@ -14,7 +14,7 @@
 
     <ul id="jobs-list" ng-click>
       <li ng-repeat="job in vm.filteredList track by job.id">
-          <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
+          <a href="" ui-sref="home.jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
       </li>
     </ul>
   </div>
