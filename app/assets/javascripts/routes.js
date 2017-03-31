@@ -11,37 +11,37 @@
           templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
         })
-        .state('jobs', {
+        .state('home.jobs', {
           url: '/jobs',
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.list', {
+        .state('home.jobs.list', {
           url: '/list',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.create', {
+        .state('home.jobs.create', {
           url: '/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.edit', {
-          url: '/edit',
+        .state('home.jobs.edit', {
+          url: '/edit/:jobId',
           templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.show', {
-          url: '/:jobId',
+        .state('home.jobs.show', {
+          url: '/show/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
-        .state('jobs.show.checklists', {
+        .state('home.jobs.show.checklists', {
           url: '/checklists',
           templateUrl: 'checklists/show.html',
           controller: 'ChecklistsController as vm'
         })
-        .state('jobs.show.checklists.items', {
+        .state('home.jobs.show.checklists.items', {
           url: '/items',
           templateUrl: 'items/show.html',
           controller: 'ItemsController as vm'

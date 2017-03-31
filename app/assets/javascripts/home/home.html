@@ -1,3 +1,13 @@
-<!-- <h1>{{vm.test}}</h1> -->
-<!-- {{vm.name}} -->
 <h1>Home View</h1>
+<div class="collapse navbar-collapse pull-right" ng-controller="NavbarController">
+    <ul class="nav navbar-nav">
+        <li><a href="" ui-sref="home">Home</a></li>
+        <li><a href="" ui-sref="home.jobs">Jobs</a></li>
+        <!-- will not show when signedIn() is true -->
+        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>
+        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>
+        <!-- will only show when signedIn() is true -->
+        <li ng-show="signedIn()"><a href="" ng-click="logout()">Log Out</a></li>
+    </ul>
+</div>
+<ui-view></ui-view>

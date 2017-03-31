@@ -10,10 +10,10 @@
       Point of Contact: {{ vm.job.point_of_contact }}<br />
       Job Reference: {{ vm.job.job_reference }}<br />
       Tech Stack: {{ vm.job.tech_stack }}<br /><br />
-    <a href="" ui-sref="jobs.show.checklists({ jobId: vm.job.id })" class="btn btn-primary btn-sm">Create Checklist</a>
+    <a href="" ui-sref="home.jobs.show.checklists({ jobId: vm.job.id })" class="btn btn-primary btn-sm">Create Checklist</a>
     <br />
     <br />
-    <a href="" ui-sref="jobs.edit({ jobId: vm.job.id })" class="btn btn-info btn-sm">Edit Job</a>
+    <a href="" ui-sref="home.jobs.edit({ jobId: vm.job.id })" class="btn btn-info btn-sm">Edit Job</a>
     <br />
     </br/>
     <a href="" ng-click="vm.destroyJob(vm.job.id )" class="btn btn-warning btn-sm ">Delete Job</a>
