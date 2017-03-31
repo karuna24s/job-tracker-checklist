@@ -1,0 +1,70 @@
+<div class="container">
+  <div class=" well col-sm-6">
+    <h2>Let's Edit a Job</h2><br />
+    <form name="editJob" ng-submit="vm.updateJob()">
+        <label form="job_title">Job Title: </label>
+        <input type="text" required name="job_title" ng-model="vm.job.job_title" class="form-control" />
+        <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">
+          <div ng-message="required">Job Title is required.</div>
+        </div>
+        <br />
+        <label form="company">Company: </label>
+        <input type="text" required name="company" ng-model="vm.job.company" class="form-control" />
+        <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">
+          <div ng-message="required">Company is required.</div>
+        </div>
+        <br />
+        <label form="job_description">Job Description: </label>
+        <textarea ng-model="vm.job.job_description" class="form-control" ></textarea>
+        <br />
+        <label form="company_url">Company URL: </label>
+        <textarea ng-model="vm.job.company_url" class="form-control" ></textarea>
+        <br />
+        <label form="date">Date: </label>
+        <input type="text" ng-model="vm.job.date" class="form-control" />
+        <br />
+        <label form="status">Status: </label>
+        <select name="status" required name="status" ng-model="vm.job.status" class="form-control" >
+              <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>
+        </select>
+        <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">
+          <div ng-message="required">Status is required.</div>
+        </div>
+        <br />
+        <label form="point_of_contact">Point of Contact: </label>
+        <input type="text" ng-model="vm.job.point_of_contact" class="form-control" />
+        <br />
+        <label form="job_reference">Job Reference: </label>
+        <input type="text" ng-model="vm.job.job_reference" class="form-control" />
+        <br />
+        <label form="tech_stack">Tech Stack: </label>
+        <input type="text" ng-model="vm.job.tech_stack" class="form-control" />
+        <br />
+        <br />
+
+        <div>After updates the information will be:
+          <br /><br />
+          Job Title: <span ng-bind="vm.job.job_title"></span><br />
+          Company: <span ng-bind="vm.job.company"></span><br />
+          Job Description: <span ng-bind="vm.job.job_description"></span><br />
+          Company URL: <span ng-bind="vm.job.company_url"></span><br />
+          Date: <span ng-bind="vm.job.date"></span><br />
+          Status: <span ng-bind="vm.job.status"></span><br />
+          Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />
+          Job Reference: <span ng-bind="vm.job.job_reference"></span><br />
+          Tech Stack: <span ng-bind="vm.job.tech_Stack"></span><br />
+        </div>
+        <br />
+        <br />
+        <!-- <label for="current-state">State: </label>
+        <div ng-controller="StatesController as statesCtrl">
+            <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">
+                  <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>
+            </select>
+        </div> -->
+
+        <input class="btn btn-info btn-md" type="submit" value="Edit Job">
+
+    </form>
+  </div>
+</div>
