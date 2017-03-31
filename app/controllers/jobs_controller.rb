@@ -13,9 +13,9 @@ class JobsController < ApplicationController
   def create
     # binding.pry
     job = Job.new(job_params)
-    if params[:create_checklist]
-      checklist = job.create_checklist
-    end
+    # if params[:create_checklist]
+    #   checklist = job.create_checklist
+    # end
     if job.save
       render json: { success: job, status: "success"}
     else

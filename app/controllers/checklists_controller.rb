@@ -1,7 +1,8 @@
 class ChecklistsController < ApplicationController
 
   def index
-    checklists = Checklist.all
+    # checklists = Checklist.all
+    checklists = Checklist.where(job_id: params[:job_id])
     # debugger
     render json: checklists
   end
@@ -13,6 +14,7 @@ class ChecklistsController < ApplicationController
 
   def create
     checklist = Checklist.new(checklist_params)
+    checklist.job_id = params[:id]
     if checklist.save
       render json: { success: checklist, status: "success"}
     else
