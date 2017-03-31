@@ -8,7 +8,7 @@
 
         //callable methods on the vm
         vm.test = "Here is the checklist!";
-        vm.createNote = createNote;
+        vm.createChecklist = createChecklist;
         activate();
         //defined methods on the vm
         function activate() {
