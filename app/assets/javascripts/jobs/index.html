@@ -1,18 +1,23 @@
-<h1>{{ vm.test }}</h1>
+<div class="container">
+  <div class=" well col-sm-10">
 
-<br />
-<a href="#" ui-sref="jobs.create">Add a Job</a>
-<br />
+    <h2>{{ vm.test }}</h2>
 
-<label for="search">Search: </label>
-<input ng-model="vm.search" ng-change="vm.refilter()" placeholder="Search by job title or company">
-<br />
+    <br />
+    <a href="#" ui-sref="jobs.create">Add a Job</a>
+    <br />
+
+    <label for="search">Search: </label>
+    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">
+    <br />
 
 
-<ul id="jobs-list" ng-click>
-  <li ng-repeat="job in vm.filteredList track by job.id" ng-bind="job.job_title + ', ' + job.company">
+    <ul id="jobs-list" ng-click>
+      <li ng-repeat="job in vm.filteredList track by job.id" ng-bind="job.job_title + ', ' + job.company">
 
-  </li>
+      </li>
 
-    <!-- <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a> -->
-</ul>
+        <!-- <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a> -->
+    </ul>
+  </div>
+</div>
