@@ -13,11 +13,9 @@
 
 
     <ul id="jobs-list" ng-click>
-      <li ng-repeat="job in vm.filteredList track by job.id" ng-bind="job.job_title + ', ' + job.company">
-
+      <li ng-repeat="job in vm.filteredList track by job.id">
+          <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
       </li>
-
-        <!-- <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a> -->
     </ul>
   </div>
 </div>
