@@ -34,12 +34,13 @@
 
     // define methods
     function activate() {
-      if ($state.current.name == "jobs.list") {
-        getJobs();
-      }
-      else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
-        getJob($state.params.id)
-      }
+      getJobs();
+      // if ($state.current.name == "jobs.list") {
+      //   getJobs();
+      // }
+      // else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
+      //   getJob($state.params.id)
+      // }
 
     }
 

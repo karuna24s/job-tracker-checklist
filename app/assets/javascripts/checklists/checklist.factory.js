@@ -12,7 +12,7 @@
     }
 
     function getChecklists() {
-      return $http.get('/jobs/' + $state.params.id + '/checklists')
+      return $http.get('/jobs/' + $state.param.id + '/checklists')
         .then(handleSuccess)
         .then(handleError)
     }
