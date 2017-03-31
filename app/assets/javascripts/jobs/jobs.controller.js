@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function JobsController(JobFactory, $state) {
+  function JobsController(JobFactory, $state, $filter) {
     var vm = this;
     console.log($state);
 
@@ -13,6 +13,7 @@
     vm.updateJob = updateJob;
     vm.destroyJob = destroyJob;
     vm.updateStatus = updateStatus;
+    vm.refilter = refilter;
 
     vm.statuses = [
       {id: 1, value: 'Discovered'},
@@ -42,7 +43,8 @@
 
     function getJobs() {
       return JobFactory.getJobs()
-            .then(setJobs);
+            .then(setJobs)
+            .then(setFilteredList)
     };
 
     function getJob(params) {
@@ -80,6 +82,14 @@
 
     function showJob(data) {
         $state.go('jobs.show', { jobId: data.id });
+    };
+
+    function setFilteredList(data) {
+      return vm.filteredList = data;
+    };
+
+    function refilter() {
+      return vm.filteredList = $filter('filter')(vm.jobs, vm.search);
     };
 
     function showJobs() {
