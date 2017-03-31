@@ -52385,84 +52385,84 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 //       .factory('ItemFactory', ItemFactory);
 //
 // }());
-(function(){
-
-  'use strict'
-
-  angular
-    .module('app')
-    .controller('ItemsController', ['ItemFactory', function(ItemFactory) {
-
-    var vm = this;
-
-    //callable methods on the vm
-    vm.test = "Here are the items!";
-    vm.createItem = createItem;
-    activate();
-
-    //defined methods on the vm
-    function activate() {
-      getItems();
-    }
-
-    function getItems() {
-      return ItemFactory.getItems()
-        .then(setItems)
-    }
-
-    function createItem() {
-      return ItemFactory.createItem(vm.Item)
-        .then(getItems())
-    }
-
-    function setItems(data) {
-        return vm.items = data;
-    }
-  }]);
-
-}())
-
-
-
 // (function(){
 //
-//     'use strict';
+//   'use strict'
 //
-//     function ItemsController(ItemFactory) {
+//   angular
+//     .module('app')
+//     .controller('ItemsController', ['ItemFactory', function(ItemFactory) {
 //
-//         var vm = this;
+//     var vm = this;
 //
-//         //callable methods on the vm
-//         vm.test = "Here are the items!";
-//         vm.createItem = createItem;
-//         activate();
-//         //defined methods on the vm
-//         function activate() {
-//             getItems();
-//         };
+//     //callable methods on the vm
+//     vm.test = "Here are the items!";
+//     vm.createItem = createItem;
+//     activate();
 //
-//         function getItems() {
-//             return ItemFactory.getItems()
-//                 .then(setItems);
-//         };
+//     //defined methods on the vm
+//     function activate() {
+//       getItems();
+//     }
 //
-//         function createItem() {
-//             return ItemFactory.createItem(vm.Item)
-//                 .then(getItems());
-//         };
+//     function getItems() {
+//       return ItemFactory.getItems()
+//         .then(setItems)
+//     }
 //
-//         function setItems(data) {
-//             return vm.items = data;
-//         };
+//     function createItem() {
+//       return ItemFactory.createItem(vm.Item)
+//         .then(getItems())
+//     }
+//
+//     function setItems(data) {
+//         return vm.items = data;
+//     }
+//   }]);
+//
+// }())
 //
 //
-//     };
 //
-//     angular
-//       .module('app')
-//       .controller('ItemsController', ItemsController);
-//
-// }());
+// // (function(){
+// //
+// //     'use strict';
+// //
+// //     function ItemsController(ItemFactory) {
+// //
+// //         var vm = this;
+// //
+// //         //callable methods on the vm
+// //         vm.test = "Here are the items!";
+// //         vm.createItem = createItem;
+// //         activate();
+// //         //defined methods on the vm
+// //         function activate() {
+// //             getItems();
+// //         };
+// //
+// //         function getItems() {
+// //             return ItemFactory.getItems()
+// //                 .then(setItems);
+// //         };
+// //
+// //         function createItem() {
+// //             return ItemFactory.createItem(vm.Item)
+// //                 .then(getItems());
+// //         };
+// //
+// //         function setItems(data) {
+// //             return vm.items = data;
+// //         };
+// //
+// //
+// //     };
+// //
+// //     angular
+// //       .module('app')
+// //       .controller('ItemsController', ItemsController);
+// //
+// // }());
 // Angular Rails Template
 // source: app/assets/javascripts/items/show.html
 
