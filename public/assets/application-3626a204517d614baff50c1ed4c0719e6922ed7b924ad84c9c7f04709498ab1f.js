@@ -52289,7 +52289,7 @@ function ngMessageDirectiveFactory() {
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", "<!-- {{ vm.test }} -->")
+  $templateCache.put("checklists/show.html", '<h2 class="md-title">Add a Checklist</h2>\n    <form ng-submit="vm.createChecklist()">\n        <label>Checklist</label>\n        <textarea ng-model="vm.checklist.item" rows="3" ></textarea>\n<!--item has to come here  -->\n      <div>\n        <input class="btn btn-primary btn-md" type="submit" value="Submit Checklist">\n      </div>\n    </form>')
 }]);
 
 (function() {
