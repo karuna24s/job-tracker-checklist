@@ -52304,6 +52304,13 @@ function ngMessageDirectiveFactory() {
 //       .controller('ChecklistsController', ChecklistsController);
 //
 // }());
+// Angular Rails Template
+// source: app/assets/javascripts/checklists/show.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("checklists/show.html", "{{ vm.test }}")
+}]);
+
 (function() {
   'use strict';
 
@@ -52498,6 +52505,13 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 //       .controller('ItemsController', ItemsController);
 //
 // }());
+// Angular Rails Template
+// source: app/assets/javascripts/items/show.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("items/show.html", "{{ vm.test }}")
+}]);
+
 (function() {
 
 
@@ -52776,9 +52790,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       if ($state.current.name == "jobs.list") {
         getJobs();
       }
-      else if  ($state.current.name == "jobs.show") {
+      else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
         getJob($state.params.id)
       }
+
     }
 
     function getJobs() {
@@ -52928,7 +52943,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.job.job_title }}<br />\n    Company: {{ vm.job.company }}<br />\n    Job Description: <br />{{ vm.job.job_description }}<br />\n    Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n    Date : {{ vm.job.date }}<br />\n    Status: {{ vm.job.status }}<br />\n    Point of Contact: {{ vm.job.point_of_contact }}<br />\n    Job Reference: {{ vm.job.job_reference }}<br />\n    Tech Stack: {{ vm.job.tech_stack }}<br />\n</div>\n\n<a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>\n<br />\n<a href="" ng-click="vm.destroyJob(vm.job.id )">Delete Job</a>')
+  $templateCache.put("jobs/show.html", '<div>\n  <h2>Job Show Page</h2>\n    Job Title: {{ vm.job.job_title }}<br />\n    Company: {{ vm.job.company }}<br />\n    Job Description: <br />{{ vm.job.job_description }}<br />\n    Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n    Date : {{ vm.job.date }}<br />\n    Status: {{ vm.job.status }}<br />\n    Point of Contact: {{ vm.job.point_of_contact }}<br />\n    Job Reference: {{ vm.job.job_reference }}<br />\n    Tech Stack: {{ vm.job.tech_stack }}<br />\n</div>\n<a href="" ui-sref="jobs.show.checklists({ jobId: vm.job.id })">Create Checklist</a>\n<br />\n<a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>\n<br />\n<a href="" ng-click="vm.destroyJob(vm.job.id )">Delete Job</a>')
 }]);
 
 (function(){
