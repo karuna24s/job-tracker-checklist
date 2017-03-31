@@ -52160,7 +52160,7 @@ function ngMessageDirectiveFactory() {
     }
 
     function getChecklists() {
-      return $http.get('/jobs/' + $state.params.id + '/checklists')
+      return $http.get('/jobs/' + $state.param.id + '/checklists')
         .then(handleSuccess)
         .then(handleError)
     }
@@ -52745,12 +52745,13 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     // define methods
     function activate() {
-      if ($state.current.name == "jobs.list") {
-        getJobs();
-      }
-      else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
-        getJob($state.params.id)
-      }
+      getJobs();
+      // if ($state.current.name == "jobs.list") {
+      //   getJobs();
+      // }
+      // else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
+      //   getJob($state.params.id)
+      // }
 
     }
 
