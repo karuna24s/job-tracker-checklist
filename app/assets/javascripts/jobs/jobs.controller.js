@@ -37,9 +37,10 @@
       if ($state.current.name == "jobs.list") {
         getJobs();
       }
-      else if  ($state.current.name == "jobs.show") {
+      else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
         getJob($state.params.id)
       }
+
     }
 
     function getJobs() {

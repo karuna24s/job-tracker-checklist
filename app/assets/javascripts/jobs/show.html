@@ -10,7 +10,8 @@
     Job Reference: {{ vm.job.job_reference }}<br />
     Tech Stack: {{ vm.job.tech_stack }}<br />
 </div>
-
+<a href="" ui-sref="jobs.show.checklists({ jobId: vm.job.id })">Create Checklist</a>
+<br />
 <a href="" ui-sref="jobs.edit({ jobId: vm.job.id })">Edit Job</a>
 <br />
 <a href="" ng-click="vm.destroyJob(vm.job.id )">Delete Job</a>
