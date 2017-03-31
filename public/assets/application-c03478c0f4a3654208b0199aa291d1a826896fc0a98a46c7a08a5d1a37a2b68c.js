@@ -52320,7 +52320,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", '<h1>Home View</h1>\n<div class="collapse navbar-collapse pull-right" ng-controller="NavbarController">\n    <ul class="nav navbar-nav">\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()"><a href="" ng-click="logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
+  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div>\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>\n        <li ng-show="signedIn()"><a href="" ng-click="logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
 }]);
 
 (function() {
