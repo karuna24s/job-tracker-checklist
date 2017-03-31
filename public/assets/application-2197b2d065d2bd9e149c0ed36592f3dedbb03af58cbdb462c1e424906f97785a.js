@@ -52228,39 +52228,39 @@ function ngMessageDirectiveFactory() {
 //       .factory('ChecklistFactory', ChecklistFactory);
 //
 // }());
-(function(){
-
-  'use strict'
-
-  angular
-    .module('app')
-    .controller('ChecklistsController', ['ChecklistFactory', function(ChecklistFactory) {
-    var vm = this;
-
-    vm.createChecklist = createChecklist;
-
-    activate();
-
-    function activate() {
-      getChecklists();
-    }
-
-    function getChecklists() {
-      return ChecklistFactory.getChecklists()
-        .then(setChecklists)
-    }
-
-    function createChecklist() {
-      return ChecklistFactory.createChecklist(vm.newChecklist)
-      .then(getChecklists())
-    }
-
-    function setChecklists(data) {
-      return vm.checklists = data;
-    }
-  }]);
-
-}())
+// (function(){
+//
+//   'use strict'
+//
+//   angular
+//     .module('app')
+//     .controller('ChecklistsController', ['ChecklistFactory', function(ChecklistFactory) {
+//     var vm = this;
+//
+//     vm.createChecklist = createChecklist;
+//
+//     activate();
+//
+//     function activate() {
+//       getChecklists();
+//     }
+//
+//     function getChecklists() {
+//       return ChecklistFactory.getChecklists()
+//         .then(setChecklists)
+//     }
+//
+//     function createChecklist() {
+//       return ChecklistFactory.createChecklist(vm.newChecklist)
+//       .then(getChecklists())
+//     }
+//
+//     function setChecklists(data) {
+//       return vm.checklists = data;
+//     }
+//   }]);
+//
+// }())
 ;
 // Angular Rails Template
 // source: app/assets/javascripts/checklists/show.html
@@ -52745,13 +52745,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     // define methods
     function activate() {
-      getJobs();
-      // if ($state.current.name == "jobs.list") {
-      //   getJobs();
-      // }
-      // else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
-      //   getJob($state.params.id)
-      // }
+      if ($state.current.name == "jobs.list") {
+        getJobs();
+      }
+      else if  ($state.current.name == "jobs.show" || $state.current.name == "jobs.show.checklists") {
+        getJob($state.params.id)
+      }
 
     }
 
