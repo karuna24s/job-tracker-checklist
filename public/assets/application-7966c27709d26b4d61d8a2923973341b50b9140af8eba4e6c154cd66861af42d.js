@@ -52465,7 +52465,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="jobs.create">Add a Job</a>\n<br />\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.jobs">\n    <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n  </li>\n</ul>')
+  $templateCache.put("jobs/index.html", '<h1>{{ vm.test }}</h1>\n\n<br />\n<a href="#" ui-sref="jobs.create">Add a Job</a>\n<br />\n\n<label for="search">Search: </label>\n<input ng-model="vm.search" ng-change="vm.refilter()" placeholder="Search by job title or company">\n<br />\n\n\n<ul id="jobs-list" ng-click>\n  <li ng-repeat="job in vm.filteredList track by job.id" ng-bind="job.job_title + \', \' + job.company">\n\n  </li>\n\n    <!-- <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a> -->\n</ul>')
 }]);
 
 (function() {
@@ -52678,7 +52678,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 (function() {
   'use strict';
 
-  function JobsController(JobFactory, $state) {
+  function JobsController(JobFactory, $state, $filter) {
     var vm = this;
     console.log($state);
 
@@ -52690,6 +52690,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     vm.updateJob = updateJob;
     vm.destroyJob = destroyJob;
     vm.updateStatus = updateStatus;
+    vm.refilter = refilter;
 
     vm.statuses = [
       {id: 1, value: 'Discovered'},
@@ -52719,7 +52720,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     function getJobs() {
       return JobFactory.getJobs()
-            .then(setJobs);
+            .then(setJobs)
+            .then(setFilteredList)
     };
 
     function getJob(params) {
@@ -52757,6 +52759,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     function showJob(data) {
         $state.go('jobs.show', { jobId: data.id });
+    };
+
+    function setFilteredList(data) {
+      return vm.filteredList = data;
+    };
+
+    function refilter() {
+      return vm.filteredList = $filter('filter')(vm.jobs, vm.search);
     };
 
     function showJobs() {
