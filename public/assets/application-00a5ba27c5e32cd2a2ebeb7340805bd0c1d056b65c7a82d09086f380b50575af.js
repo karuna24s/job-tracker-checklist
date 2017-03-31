@@ -52146,88 +52146,106 @@ function ngMessageDirectiveFactory() {
 
 
 }).call(this);
-(function() {
-
-  'use strict'
-
-  angular
-    .module('app')
-    .factory('ChecklistFactory', ['$http', '$state', function($http, $state) {
-
-    return {
-      getChecklists: getChecklists,
-      createChecklist: createChecklist
-    }
-
-    function getChecklists() {
-      return $http.get('/jobs/' + $state.param.id + '/checklists')
-        .then(handleSuccess)
-        .then(handleError)
-    }
-
-    function createChecklist(checklist) {
-      var req = {
-        method: 'POST',
-        url: '/jobs/' + $state.params.id + '/checklists',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: {
-            checklist: checklist
-        }
-      }
-
-      return $http(req)
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function handleSuccess(response) {
-      console.log(response);
-      return response.data;
-    }
-
-    function handleError(error) {
-      console.log(error);
-    }
-  }]);
-
-}())
-
-
-
-// (function(){
+// (function() {
 //
-//     'use strict';
-//
-//     function ChecklistFactory($http) {
-//
-//         return {
-//             getChecklists: getChecklists
-//         }
-//
-//         function getChecklists() {
-//             return $http.get('/checklists')
-//                 .then(handleSuccess)
-//                 .catch(handleError)
-//         };
-//
-//         function handleSuccess(response) {
-//             console.log(response);
-//             return response.data;
-//         };
-//
-//         function handleError(error) {
-//             console.log(error);
-//         };
-//
-//     };
+//   'use strict'
 //
 //   angular
-//       .module('app')
-//       .factory('ChecklistFactory', ChecklistFactory);
+//     .module('app')
+//     .factory('ChecklistFactory', ['$http', '$state', function($http, $state) {
 //
-// }());
+//     return {
+//       getChecklists: getChecklists,
+//       createChecklist: createChecklist
+//     }
+//
+//     function getChecklists() {
+//       return $http.get('/jobs/' + $state.param.id + '/checklists')
+//         .then(handleSuccess)
+//         .then(handleError)
+//     }
+//
+//     function createChecklist(checklist) {
+//       var req = {
+//         method: 'POST',
+//         url: '/jobs/' + $state.params.id + '/checklists',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         data: {
+//             checklist: checklist
+//         }
+//       }
+//
+//       return $http(req)
+//         .then(handleSuccess)
+//         .catch(handleError)
+//     }
+//
+//     function handleSuccess(response) {
+//       console.log(response);
+//       return response.data;
+//     }
+//
+//     function handleError(error) {
+//       console.log(error);
+//     }
+//   }]);
+//
+// }())
+
+
+
+(function(){
+
+    'use strict';
+
+    function ChecklistFactory($http, $state) {
+
+        return {
+            getChecklists: getChecklists,
+            createChecklist: createChecklist
+        }
+
+        function getChecklists() {
+            return $http.get('/jobs/' + $state.params.id + '/checklists')
+                .then(handleSuccess)
+                .catch(handleError)
+        };
+
+        function createChecklist(checklist) {
+          var req = {
+              method: 'POST',
+              url: '/jobs/' + $state.params.id + '/checklists',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              data: {
+                  checklist: checklist
+              }
+          };
+
+          return $http(req)
+                     .then(handleSuccess)
+                     .catch(handleError)
+        };
+
+        function handleSuccess(response) {
+            console.log(response);
+            return response.data;
+        };
+
+        function handleError(error) {
+            console.log(error);
+        };
+
+    };
+
+  angular
+      .module('app')
+      .factory('ChecklistFactory', ChecklistFactory);
+
+}());
 (function(){
 
     'use strict';
@@ -52309,87 +52327,139 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 
 }).call(this);
-(function() {
+(function(){
 
-  'use strict'
+    'use strict';
+
+    function ItemFactory($http, $state) {
+
+        return {
+            getItems: getItems,
+            createItem: createItem
+        }
+
+        function getItems() {
+            return $http.get('/jobs/' + $state.params.id + '/checklists' + '/items/')
+                .then(handleSuccess)
+                .catch(handleError)
+        };
+
+        function createItem(item) {
+          var req = {
+              method: 'POST',
+              url: '/jobs/' + $state.params.id + '/checklists' + '/items/',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              data: {
+                  item: item
+              }
+          };
+
+          return $http(req)
+                     .then(handleSuccess)
+                     .catch(handleError)
+        };
+
+        function handleSuccess(response) {
+            console.log(response);
+            return response.data;
+        };
+
+        function handleError(error) {
+            console.log(error);
+        };
+
+    };
 
   angular
-    .module('app')
-    .factory('ItemFactory', ['$http', '$state', function($http, $state) {
+      .module('app')
+      .factory('ItemFactory', ItemFactory);
 
-    return {
-      getItems: getItems,
-      createItem: createItem
-    }
-
-    function getItems() {
-      return $http.get('/jobs/' + $state.params.id + '/checklists' + '/items')
-        .then(handleSuccess)
-        .then(handleError)
-    }
-
-    function createItem(item) {
-      var req = {
-        method: 'POST',
-        url: '/jobs/' + $state.params.id + '/checklists' + '/items',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: {
-            item: item
-        }
-      }
-
-      return $http(req)
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function handleSuccess(response) {
-      console.log(response);
-      return response.data;
-    }
-
-    function handleError(error) {
-      console.log(error);
-    }
-  }]);
-
-}())
+}());
 
 
-// (function(){
+// (function() {
 //
-//     'use strict';
-//
-//     function ItemFactory($http) {
-//
-//         return {
-//             getItems: getItems
-//         }
-//
-//         function getItems() {
-//             return $http.get('/items')
-//                 .then(handleSuccess)
-//                 .catch(handleError)
-//         };
-//
-//         function handleSuccess(response) {
-//             console.log(response);
-//             return response.data;
-//         };
-//
-//         function handleError(error) {
-//             console.log(error);
-//         };
-//
-//     };
+//   'use strict'
 //
 //   angular
-//       .module('app')
-//       .factory('ItemFactory', ItemFactory);
+//     .module('app')
+//     .factory('ItemFactory', ['$http', '$state', function($http, $state) {
 //
-// }());
+//     return {
+//       getItems: getItems,
+//       createItem: createItem
+//     }
+//
+//     function getItems() {
+//       return $http.get('/jobs/' + $state.params.id + '/checklists' + '/items')
+//         .then(handleSuccess)
+//         .then(handleError)
+//     }
+//
+//     function createItem(item) {
+//       var req = {
+//         method: 'POST',
+//         url: '/jobs/' + $state.params.id + '/checklists' + '/items',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         data: {
+//             item: item
+//         }
+//       }
+//
+//       return $http(req)
+//         .then(handleSuccess)
+//         .catch(handleError)
+//     }
+//
+//     function handleSuccess(response) {
+//       console.log(response);
+//       return response.data;
+//     }
+//
+//     function handleError(error) {
+//       console.log(error);
+//     }
+//   }]);
+//
+// }())
+//
+//
+// // (function(){
+// //
+// //     'use strict';
+// //
+// //     function ItemFactory($http) {
+// //
+// //         return {
+// //             getItems: getItems
+// //         }
+// //
+// //         function getItems() {
+// //             return $http.get('/items')
+// //                 .then(handleSuccess)
+// //                 .catch(handleError)
+// //         };
+// //
+// //         function handleSuccess(response) {
+// //             console.log(response);
+// //             return response.data;
+// //         };
+// //
+// //         function handleError(error) {
+// //             console.log(error);
+// //         };
+// //
+// //     };
+// //
+// //   angular
+// //       .module('app')
+// //       .factory('ItemFactory', ItemFactory);
+// //
+// // }());
 (function(){
 
     'use strict';
@@ -52468,115 +52538,15 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
   $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="jobs.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id" ng-bind="job.job_title + \', \' + job.company">\n\n      </li>\n\n        <!-- <a href="" ui-sref="jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a> -->\n    </ul>\n  </div>\n</div>')
 }]);
 
-(function() {
-
-  'use strict'
-
-  angular
-    .module('app')
-    .factory('JobFactory', ['$http', '$state', function($http, $state) {
-
-    //callable methods on JobFactory
-    return {
-      getJobs: getJobs,
-      getJob: getJob,
-      createJob: createJob,
-      updateJob: updateJob,
-      updateStatus: updateStatus,
-      destroyJob: destroyJob
-    }
-
-    //define methods
-    function getJobs() {
-      return $http.get('/jobs')
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function getJob(id) {
-      return $http.get('/jobs/' + id)
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function createJob(job) {
-      var req = {
-        method: 'POST',
-        url: '/jobs',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          job: job
-        }
-      }
-      return $http(req)
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function updateJob(job) {
-      var req = {
-        method: 'PATCH',
-        url: '/jobs/' + job.id,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          job: job
-        }
-      }
-      return $http(req)
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function updateStatus(id, status) {
-      var req = {
-        method: 'PATCH',
-        url: '/jobs/' + id,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          status: status
-        }
-      }
-      return $http(req)
-        .then(handleSuccess)
-        .catch(handleError)
-    }
-
-    function destroyJob(id) {
-      return $http.delete('/jobs/' + id)
-              .then(handleSuccess)
-              .catch(handleError)
-    }
-
-    function handleSuccess(response) {
-      //$http requests return a promise which needs to be parsed for its .data attribute
-      //print to console to confirm visually
-      console.log(response);
-      //return to controller
-      return response.data;
-    }
-
-    function handleError(error) {
-      //print to console to confirm visually
-      console.log(error);
-    }
-    
-  }]);
-
-}())
-
-
-
 // (function() {
 //
-//   'use strict';
+//   'use strict'
 //
-//   function JobFactory($http) {
+//   angular
+//     .module('app')
+//     .factory('JobFactory', ['$http', '$state', function($http, $state) {
+//
+//     //callable methods on JobFactory
 //     return {
 //       getJobs: getJobs,
 //       getJob: getJob,
@@ -52586,74 +52556,72 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 //       destroyJob: destroyJob
 //     }
 //
+//     //define methods
 //     function getJobs() {
 //       return $http.get('/jobs')
 //         .then(handleSuccess)
-//         .catch(handleError);
-//     };
+//         .catch(handleError)
+//     }
 //
 //     function getJob(id) {
 //       return $http.get('/jobs/' + id)
 //         .then(handleSuccess)
 //         .catch(handleError)
-//     };
+//     }
 //
 //     function createJob(job) {
 //       var req = {
-//           method: 'POST',
-//           url: '/jobs',
-//           headers: {
-//               'Content-Type': 'application/json'
-//           },
-//           data: {
-//               job: job
-//           }
-//       };
-//
+//         method: 'POST',
+//         url: '/jobs',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         data: {
+//           job: job
+//         }
+//       }
 //       return $http(req)
-//                  .then(handleSuccess)
-//                  .catch(handleError)
-//     };
+//         .then(handleSuccess)
+//         .catch(handleError)
+//     }
 //
 //     function updateJob(job) {
-//          var req = {
-//              method: 'PATCH',
-//              url: '/jobs/' + job.id,
-//              headers: {
-//                  'Content-Type': 'application/json'
-//              },
-//              data: {
-//                job: job
-//              }
-//          };
-//
-//          return $http(req)
-//                     .then(handleSuccess)
-//                     .catch(handleError)
-//     };
+//       var req = {
+//         method: 'PATCH',
+//         url: '/jobs/' + job.id,
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         data: {
+//           job: job
+//         }
+//       }
+//       return $http(req)
+//         .then(handleSuccess)
+//         .catch(handleError)
+//     }
 //
 //     function updateStatus(id, status) {
-//          var req = {
-//              method: 'PATCH',
-//              url: '/jobs/' + id,
-//              headers: {
-//                'Content-Type': 'application/json'
-//              },
-//              data: {
-//                status: status
-//              }
-//          };
-//
+//       var req = {
+//         method: 'PATCH',
+//         url: '/jobs/' + id,
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         data: {
+//           status: status
+//         }
+//       }
 //       return $http(req)
-//                  .then(handleSuccess)
-//                  .catch(handleError)
-//     };
+//         .then(handleSuccess)
+//         .catch(handleError)
+//     }
 //
 //     function destroyJob(id) {
 //       return $http.delete('/jobs/' + id)
 //               .then(handleSuccess)
 //               .catch(handleError)
-//     };
+//     }
 //
 //     function handleSuccess(response) {
 //       //$http requests return a promise which needs to be parsed for its .data attribute
@@ -52661,20 +52629,122 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 //       console.log(response);
 //       //return to controller
 //       return response.data;
-//     };
+//     }
 //
 //     function handleError(error) {
 //       //print to console to confirm visually
 //       console.log(error);
-//     };
+//     }
 //
-//   };
+//   }]);
 //
-//   angular
-//     .module('app')
-//     .factory('JobFactory', JobFactory);
+// }())
 //
-// }());
+//
+//
+(function() {
+
+  'use strict';
+
+  function JobFactory($http, $state) {
+    return {
+      getJobs: getJobs,
+      getJob: getJob,
+      createJob: createJob,
+      updateJob: updateJob,
+      updateStatus: updateStatus,
+      destroyJob: destroyJob
+    }
+
+    function getJobs() {
+      return $http.get('/jobs')
+        .then(handleSuccess)
+        .catch(handleError);
+    };
+
+    function getJob(id) {
+      return $http.get('/jobs/' + id)
+        .then(handleSuccess)
+        .catch(handleError)
+    };
+
+    function createJob(job) {
+      var req = {
+          method: 'POST',
+          url: '/jobs',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          data: {
+              job: job
+          }
+      };
+
+      return $http(req)
+                 .then(handleSuccess)
+                 .catch(handleError)
+    };
+
+    function updateJob(job) {
+         var req = {
+             method: 'PATCH',
+             url: '/jobs/' + job.id,
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             data: {
+               job: job
+             }
+         };
+
+         return $http(req)
+                    .then(handleSuccess)
+                    .catch(handleError)
+    };
+
+    function updateStatus(id, status) {
+         var req = {
+             method: 'PATCH',
+             url: '/jobs/' + id,
+             headers: {
+               'Content-Type': 'application/json'
+             },
+             data: {
+               status: status
+             }
+         };
+
+      return $http(req)
+                 .then(handleSuccess)
+                 .catch(handleError)
+    };
+
+    function destroyJob(id) {
+      return $http.delete('/jobs/' + id)
+              .then(handleSuccess)
+              .catch(handleError)
+    };
+
+    function handleSuccess(response) {
+      //$http requests return a promise which needs to be parsed for its .data attribute
+      //print to console to confirm visually
+      console.log(response);
+      //return to controller
+      return response.data;
+    };
+
+    function handleError(error) {
+      //print to console to confirm visually
+      console.log(error);
+    };
+
+  };
+
+  angular
+    .module('app')
+    .factory('JobFactory', JobFactory);
+
+}());
 (function() {
   'use strict';
 
