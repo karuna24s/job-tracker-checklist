@@ -52228,87 +52228,87 @@ function ngMessageDirectiveFactory() {
 //       .factory('ChecklistFactory', ChecklistFactory);
 //
 // }());
-// (function(){
-//
-//   'use strict'
-//
-//   angular
-//     .module('app')
-//     .controller('ChecklistsController', ['ChecklistFactory', function(ChecklistFactory) {
-//
-//     var vm = this;
-//
-//     //callable methods on the vm
-//     vm.test = "Here is the checklist!";
-//     vm.createChecklist = createChecklist;
-//     activate();
-//
-//     //defined methods on the vm
-//     function activate() {
-//       getChecklists();
-//     }
-//
-//     function getChecklists() {
-//       return ChecklistFactory.getChecklists()
-//         .then(setChecklists)
-//     }
-//
-//     function createChecklist() {
-//       return ChecklistFactory.createChecklist(vm.Checklist)
-//         .then(getChecklists())
-//     }
-//
-//     function setChecklists(data) {
-//         return vm.checklists = data;
-//     }
-//   }]);
-//
-// }())
-
 (function(){
 
-    'use strict';
+  'use strict'
 
-    function ChecklistsController(ChecklistFactory) {
+  angular
+    .module('app')
+    .controller('ChecklistsController', ['ChecklistFactory', function(ChecklistFactory) {
 
-        var vm = this;
+    var vm = this;
 
-        //callable methods on the vm
-        vm.test = "Here is the checklist!";
-        vm.createNote = createNote;
-        activate();
-        //defined methods on the vm
-        function activate() {
-            getChecklists();
-        };
+    //callable methods on the vm
+    vm.test = "Here is the checklist!";
+    vm.createChecklist = createChecklist;
+    activate();
 
-        function getChecklists() {
-            return ChecklistFactory.getChecklists()
-                .then(setChecklists);
-        };
+    //defined methods on the vm
+    function activate() {
+      getChecklists();
+    }
 
-        function createChecklist() {
-            return ChecklistFactory.createChecklist(vm.Checklist)
-                .then(getChecklists());
-        };
+    function getChecklists() {
+      return ChecklistFactory.getChecklists()
+        .then(setChecklists)
+    }
 
-        function setChecklists(data) {
-            return vm.checklists = data;
-        };
+    function createChecklist() {
+      return ChecklistFactory.createChecklist(vm.Checklist)
+        .then(getChecklists())
+    }
 
+    function setChecklists(data) {
+        return vm.checklists = data;
+    }
+  }]);
 
-    };
+}())
 
-    angular
-      .module('app')
-      .controller('ChecklistsController', ChecklistsController);
-
-}());
+// (function(){
+//
+//     'use strict';
+//
+//     function ChecklistsController(ChecklistFactory) {
+//
+//         var vm = this;
+//
+//         //callable methods on the vm
+//         vm.test = "Here is the checklist!";
+//         vm.createNote = createNote;
+//         activate();
+//         //defined methods on the vm
+//         function activate() {
+//             getChecklists();
+//         };
+//
+//         function getChecklists() {
+//             return ChecklistFactory.getChecklists()
+//                 .then(setChecklists);
+//         };
+//
+//         function createChecklist() {
+//             return ChecklistFactory.createChecklist(vm.Checklist)
+//                 .then(getChecklists());
+//         };
+//
+//         function setChecklists(data) {
+//             return vm.checklists = data;
+//         };
+//
+//
+//     };
+//
+//     angular
+//       .module('app')
+//       .controller('ChecklistsController', ChecklistsController);
+//
+// }());
 // Angular Rails Template
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", "{{ vm.test }}")
+  $templateCache.put("checklists/show.html", "<!-- {{ vm.test }} -->")
 }]);
 
 (function() {
