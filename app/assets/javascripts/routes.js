@@ -32,7 +32,7 @@
           }
         })
         .state('home.jobs', {
-          url: 'jobs',
+          url: '/jobs',
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })
