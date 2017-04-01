@@ -51538,6 +51538,8 @@ function ngMessageDirectiveFactory() {
 
     function AuthController($scope, $state, Auth) {
 
+        var vm = this;
+
         //callable methods on the vm
         vm.login = login;
         vm.register = register;
@@ -51561,7 +51563,7 @@ function ngMessageDirectiveFactory() {
 
     angular
         .module('app')
-        .controller('authController', AuthController);
+        .controller('AuthController', AuthController);
 }());
 // Angular Rails Template
 // source: app/assets/javascripts/auth/login.html
@@ -52387,7 +52389,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div ng-controller="HomeController as vm">\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>\n        <li ng-show="signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
+  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div ng-controller="HomeController as vm">\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="home.login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="home.register">Register</a></li>\n\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>\n        <li ng-show="signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
 }]);
 
 (function() {
@@ -52935,6 +52937,26 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           url: '/',
           templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
+        })
+        .state('home.login', {
+          url:'/login',
+          templateUrl: 'auth/login.html',
+          controller: 'AuthController as vm',
+          onEnter: function($state, Auth) {
+            Auth.currentUser().then(function(){
+                $state.go('home.jobs');
+            });
+          }
+        })
+        .state('home.register', {
+          url:'/register',
+          templateUrl: 'auth/register.html',
+          controller: 'AuthController as vm',
+          onEnter: function($state, Auth) {
+            Auth.currentUser().then(function(){
+                $state.go('home.jobs');
+            });
+          }
         })
         .state('home.jobs', {
           url: '/jobs',
