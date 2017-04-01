@@ -1,3 +1,16 @@
+/* line 1, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/forms.css.scss.erb */
+div.form {
+  font-family: 'Helvetica', sans-serif;
+  background-color: #fafafa;
+}
+/* line 4, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/forms.css.scss.erb */
+div.form h1 {
+  text-align: center;
+}
+/* line 7, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/forms.css.scss.erb */
+div.form div[ng-message="required"] {
+  color: red;
+}
 @charset "UTF-8";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
