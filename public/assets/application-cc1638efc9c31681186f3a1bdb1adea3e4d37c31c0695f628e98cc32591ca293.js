@@ -52293,22 +52293,44 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 }]);
 
 (function() {
+  
   'use strict';
 
-  function HomeController() {
+  function HomeController(Auth) {
     var vm = this;
 
     // callable methods on the vm
-    // vm.name = 'Karuna'
-    // vm.test = "Let's see if this shows!";
+    vm.signedIn = Auth.isAuthenticated;
+    vm.logout = Auth.logout;
 
     //instantiated info
     activate();
 
     //defined methods on the vm
     function activate() {
-
+        getCurrentUser();
     };
+
+    function getCurrentUser() {
+        return Auth.currentUser()
+                   .then(setCurrentUser);
+    };
+
+    function setCurrentUser(user) {
+        console.log(user);
+        return vm.user = user;
+    };
+
+    //event listeners for user authentication and logout
+    $scope.$on('devise:new-registration', function(e, user){
+        return vm.user = user;
+    });
+    $scope.$on('devise:login', function(e, user){
+        return vm.user = user;
+    });
+    $scope.$on('devise:logout', function(e, user){
+        return vm.user = {};
+    });
 
   };
 
@@ -52320,7 +52342,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div>\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>\n        <li ng-show="signedIn()"><a href="" ng-click="logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
+  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div ng-controller="HomeController as vm">\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="register">Register</a></li>\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>\n        <li ng-show="signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
 }]);
 
 (function() {
