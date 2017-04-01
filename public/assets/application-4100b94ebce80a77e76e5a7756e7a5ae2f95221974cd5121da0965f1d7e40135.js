@@ -52389,7 +52389,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div ng-controller="HomeController as vm">\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="signedIn()"><a href="" ui-sref="home.login">Log In</a></li>\n        <li ng-hide="signedIn()"><a href="" ui-sref="home.register">Register</a></li>\n\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>\n        <li ng-show="signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
+  $templateCache.put("home/home.html", '<h1>Job Tracker Checklist</h1>\n<div ng-controller="HomeController as vm">\n    <ul>\n        <li><a href="" ui-sref="home">Home</a></li>\n        <li><a href="" ui-sref="home.jobs">Jobs</a></li>\n\n        <!-- will not show when signedIn() is true -->\n        <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.login">Log In</a></li>\n        <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.register">Register</a></li>\n\n        <!-- will only show when signedIn() is true -->\n        <li ng-show="vm.signedIn()">Signed In as: {{ vm.user.username }}</li>\n        <li ng-show="vm.signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n    </ul>\n</div>\n<ui-view></ui-view>')
 }]);
 
 (function() {
@@ -52849,10 +52849,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     //defined methods on the vm
     function activate() {
-      if ($state.current.name == "jobs.list") {
+      if ($state.current.name == "home.jobs.list") {
         getJobs();
       }
-      else if  ($state.current.name == "jobs.show") {
+      else if  ($state.current.name == "home.jobs.show") {
         getJob($state.params.id)
       }
     };
@@ -52897,7 +52897,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function showJob(data) {
-        $state.go('jobs.show', { jobId: data.id });
+        $state.go('home.jobs.show', { jobId: data.id });
     };
 
     function setFilteredList(data) {
@@ -52909,7 +52909,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function showJobs() {
-        $state.go('jobs.list');
+        $state.go('home.jobs.list');
     };
 
   };
@@ -52939,7 +52939,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           controller: 'HomeController as vm'
         })
         .state('home.login', {
-          url:'/login',
+          url:'login',
           templateUrl: 'auth/login.html',
           controller: 'AuthController as vm',
           onEnter: function($state, Auth) {
@@ -52949,7 +52949,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           }
         })
         .state('home.register', {
-          url:'/register',
+          url:'register',
           templateUrl: 'auth/register.html',
           controller: 'AuthController as vm',
           onEnter: function($state, Auth) {
@@ -52959,7 +52959,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           }
         })
         .state('home.jobs', {
-          url: '/jobs',
+          url: 'jobs',
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })

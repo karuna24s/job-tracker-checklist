@@ -5,12 +5,12 @@
         <li><a href="" ui-sref="home.jobs">Jobs</a></li>
 
         <!-- will not show when signedIn() is true -->
-        <li ng-hide="signedIn()"><a href="" ui-sref="home.login">Log In</a></li>
-        <li ng-hide="signedIn()"><a href="" ui-sref="home.register">Register</a></li>
+        <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.login">Log In</a></li>
+        <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.register">Register</a></li>
 
         <!-- will only show when signedIn() is true -->
-        <li ng-show="signedIn()">Signed In as: {{ user.username }}</li>
-        <li ng-show="signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>
+        <li ng-show="vm.signedIn()">Signed In as: {{ vm.user.username }}</li>
+        <li ng-show="vm.signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>
     </ul>
 </div>
 <ui-view></ui-view>
