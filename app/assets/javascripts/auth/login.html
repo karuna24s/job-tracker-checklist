@@ -1,0 +1,15 @@
+<div>
+    <h1>Log In</h1>
+</div>
+
+<form ng-submit="vm.login()">
+      <div>
+          <input type="email" placeholder="Email" ng-model="vm.user.email">
+      </div>
+      <br />
+      <div>
+          <input type="password" placeholder="Password" ng-model="vm.user.password">
+      </div>
+      <br />
+      <input type="submit" value="Log In">
+</form>
