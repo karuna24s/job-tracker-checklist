@@ -11,6 +11,43 @@ div.form h1 {
 div.form div[ng-message="required"] {
   color: red;
 }
+/* line 1, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/home.css.scss.erb */
+body,
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* line 26, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/home.css.scss.erb */
+div#main-container div#definition {
+  text-align: center;
+}
+/* line 29, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/home.css.scss.erb */
+div#main-container div#title {
+  text-align: center;
+}
+
+/* line 38, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/home.css.scss.erb */
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -100px;
+}
+
+/* line 43, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/home.css.scss.erb */
+.footer, .push {
+  height: 75px;
+}
+/* line 8, /Users/karuna/job-tracker-checklist/app/assets/stylesheets/nav.css.scss.erb */
+#main-navbar li span.user {
+  color: #777;
+  position: relative;
+  display: block;
+  padding: 15px 15px;
+}
 @charset "UTF-8";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
