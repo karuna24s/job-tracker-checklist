@@ -12,7 +12,7 @@
           controller: 'HomeController as vm'
         })
         .state('home.login', {
-          url:'/login',
+          url:'login',
           templateUrl: 'auth/login.html',
           controller: 'AuthController as vm',
           onEnter: function($state, Auth) {
@@ -22,7 +22,7 @@
           }
         })
         .state('home.register', {
-          url:'/register',
+          url:'register',
           templateUrl: 'auth/register.html',
           controller: 'AuthController as vm',
           onEnter: function($state, Auth) {
@@ -32,7 +32,7 @@
           }
         })
         .state('home.jobs', {
-          url: '/jobs',
+          url: 'jobs',
           templateUrl: 'jobs/home.html',
           controller: 'JobsController as vm'
         })

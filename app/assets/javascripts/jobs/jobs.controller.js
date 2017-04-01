@@ -33,10 +33,10 @@
 
     //defined methods on the vm
     function activate() {
-      if ($state.current.name == "jobs.list") {
+      if ($state.current.name == "home.jobs.list") {
         getJobs();
       }
-      else if  ($state.current.name == "jobs.show") {
+      else if  ($state.current.name == "home.jobs.show") {
         getJob($state.params.id)
       }
     };
@@ -81,7 +81,7 @@
     };
 
     function showJob(data) {
-        $state.go('jobs.show', { jobId: data.id });
+        $state.go('home.jobs.show', { jobId: data.id });
     };
 
     function setFilteredList(data) {
@@ -93,7 +93,7 @@
     };
 
     function showJobs() {
-        $state.go('jobs.list');
+        $state.go('home.jobs.list');
     };
 
   };
