@@ -4,6 +4,8 @@
 
     function AuthController($scope, $state, Auth) {
 
+        var vm = this;
+
         //callable methods on the vm
         vm.login = login;
         vm.register = register;
@@ -27,5 +29,5 @@
 
     angular
         .module('app')
-        .controller('authController', AuthController);
+        .controller('AuthController', AuthController);
 }());

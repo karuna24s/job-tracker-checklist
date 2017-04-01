@@ -11,6 +11,26 @@
           templateUrl: 'home/home.html',
           controller: 'HomeController as vm'
         })
+        .state('home.login', {
+          url:'/login',
+          templateUrl: 'auth/login.html',
+          controller: 'AuthController as vm',
+          onEnter: function($state, Auth) {
+            Auth.currentUser().then(function(){
+                $state.go('home.jobs');
+            });
+          }
+        })
+        .state('home.register', {
+          url:'/register',
+          templateUrl: 'auth/register.html',
+          controller: 'AuthController as vm',
+          onEnter: function($state, Auth) {
+            Auth.currentUser().then(function(){
+                $state.go('home.jobs');
+            });
+          }
+        })
         .state('home.jobs', {
           url: '/jobs',
           templateUrl: 'jobs/home.html',
