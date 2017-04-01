@@ -51544,12 +51544,12 @@ function ngMessageDirectiveFactory() {
 
         //defined methods on the vm
         function login() {
-            Auth.login($scope.user)
+            Auth.login(vm.user)
                 .then(goToJobs);
         };
 
         function register() {
-            Auth.register($scope.user)
+            Auth.register(vm.user)
                 .then(goToJobs);
         };
 
@@ -51563,6 +51563,20 @@ function ngMessageDirectiveFactory() {
         .module('app')
         .controller('authController', AuthController);
 }());
+// Angular Rails Template
+// source: app/assets/javascripts/auth/login.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/login.html", '<div>\n    <h1>Log In</h1>\n</div>\n\n<form ng-submit="vm.login()">\n      <div>\n          <input type="email" placeholder="Email" ng-model="vm.user.email">\n      </div>\n      <br />\n      <div>\n          <input type="password" placeholder="Password" ng-model="vm.user.password">\n      </div>\n      <br />\n      <input type="submit" value="Log In">\n</form>')
+}]);
+
+// Angular Rails Template
+// source: app/assets/javascripts/auth/register.html
+
+angular.module("templates").run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/register.html", '<div>\n    <h1>Register</h1>\n</div>\n\n<form ng-submit="vm.register()">\n      <div>\n          <input type="email" placeholder="Email" ng-model="vm.user.email">\n      </div>\n      <br />\n      <div>\n          <input type="text" placeholder="Username" ng-model="vm.user.username">\n      </div>\n      <br />\n      <div>\n          <input type="password" placeholder="Password" ng-model="vm.user.password">\n      </div>\n      <br />\n      <input type="submit" value="Register">\n</form>')
+}]);
+
 (function() {
   (function() {
     (function() {
@@ -52324,10 +52338,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 }]);
 
 (function() {
-  
+
   'use strict';
 
-  function HomeController(Auth) {
+  function HomeController($scope, Auth) {
     var vm = this;
 
     // callable methods on the vm
