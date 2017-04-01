@@ -32,27 +32,27 @@
           }
         })
         .state('home.jobs', {
-          url: '/jobs',
-          templateUrl: 'jobs/home.html',
-          controller: 'JobsController as vm'
-        })
-        .state('home.jobs.list', {
-          url: '/list',
+          url: 'jobs',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.create', {
-          url: '/create',
+        // .state('home.jobs.list', {
+        //   url: '/list',
+        //   templateUrl: 'jobs/index.html',
+        //   controller: 'JobsController as vm'
+        // })
+        .state('home.create', {
+          url: 'create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.edit', {
-          url: '/edit/:jobId',
+        .state('home.edit', {
+          url: 'edit/:jobId',
           templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.show', {
-          url: '/show/:jobId',
+        .state('home.show', {
+          url: 'show/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
