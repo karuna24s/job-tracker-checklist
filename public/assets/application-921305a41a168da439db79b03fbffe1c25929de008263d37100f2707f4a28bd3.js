@@ -52389,7 +52389,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("home/home.html", '<div class="wrapper">\n    <nav id="main-navbar" class="navbar navbar-default" ng-controller="HomeController as vm">\n          <div class="container-fluid">\n            <!-- Brand and toggle get grouped for better mobile display -->\n            <div class="navbar-header">\n              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n              </button>\n              <a class="navbar-brand" href="/">JobTrackerChecklist</a>\n            </div>\n\n            <!-- Collect the nav links, forms, and other content for toggling -->\n            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n              <ul class="nav navbar-nav navbar-right">\n                  <li><a href="" ui-sref="home">Home</a></li>\n                  <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.login">Log In</a></li>\n                  <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.register">Register</a></li>\n                  <!-- will only show when signedIn() is true -->\n                  <li ng-show="vm.signedIn()"><span class="user">Signed in <i class="fa fa-user" aria-hidden="true"></i> : {{ vm.user.username }}</span></li>\n                  <li ng-show="vm.signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n              </ul>\n            </div><!-- /.navbar-collapse -->\n          </div><!-- /.container-fluid -->\n    </nav>\n\n    <div id="main-container" class="container">\n        <ui-view id="main-ui-view">\n          <!-- all app views nested from \'home\' state -->\n            <div >\n              <div class="row">\n                <div id="title" class="col-md-8 col-md-offset-2">\n                    <h2 class="header-h2">JobTrackerChecklist</h2>\n                    <br />\n                    <h4 class="header-h4">Keep track of the jobs you are interested in and your job search process.</h4>\n                      <br />\n                        <div class="row">\n                          <div class="col-md-6">\n                            <a href="" ng-hide="vm.signedIn()" ui-sref="home.login"><button type="button" class="btn btn-outline btn-lg">Login</button></a>\n                            <p ng-show="vm.signedIn()">View your Jobs List:</p>\n                            <a href="" ng-show="vm.signedIn()" ui-sref="home.jobs.list"><button type="button" class="btn btn-outline btn-lg">JobsList</button></a>\n                          </div>\n                          <div class="col-md-6">\n                            <a href="" ng-hide="vm.signedIn()" ui-sref="home.register"><button type="button" class="btn btn-outline btn-lg">Register</button></a>\n                            <p ng-show="vm.signedIn()">Add a Job:</p>\n                            <a href="" ng-show="vm.signedIn()" ui-sref="home.jobs.create"><button type="button" class="btn btn-outline btn-lg">Add a Job</button></a>\n                          </div>\n                        </div>\n                </div>\n              </div>\n              <br />\n            </div> <!-- /#definition -->\n        </ui-view>\n    </div>\n  <div class="push"></div>\n</div>\n\n<hr />\n\n<footer class="container">\n  <div class="container-fluid">\n        <div class="row">\n          <div class="col-md-6">\n              <span class="copyright">Copyright &copy; <a href="http://karunasehgal.com/" target="_blank">Karuna Sehgal</a> 2017</span>\n          </div>\n          <div class="col-md-6">\n          <span>Powered by <a href="https://angularjs.org/" target="_blank">Angular</a>, <a href="http://rubyonrails.org/" target="_blank">Rails</a>, and education from <a href="https://flatironschool.com/" target="_blank">The Flatiron School</a></span>\n          </div>\n        </div>\n    </div>\n</footer>')
+  $templateCache.put("home/home.html", '<div class="wrapper">\n    <nav id="main-navbar" class="navbar navbar-default" ng-controller="HomeController as vm">\n          <div class="container-fluid">\n            <!-- Brand and toggle get grouped for better mobile display -->\n            <div class="navbar-header">\n              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">\n                <span class="sr-only">Toggle navigation</span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n                <span class="icon-bar"></span>\n              </button>\n              <a class="navbar-brand" href="/">JobTrackerChecklist</a>\n            </div>\n\n            <!-- Collect the nav links, forms, and other content for toggling -->\n            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\n              <ul class="nav navbar-nav navbar-right">\n                  <li><a href="" ui-sref="home">Home</a></li>\n                  <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.login">Log In</a></li>\n                  <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.register">Register</a></li>\n                  <!-- will only show when signedIn() is true -->\n                  <li ng-show="vm.signedIn()"><span class="user">Signed in <i class="fa fa-user" aria-hidden="true"></i> : {{ vm.user.username }}</span></li>\n                  <li ng-show="vm.signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>\n              </ul>\n            </div><!-- /.navbar-collapse -->\n          </div><!-- /.container-fluid -->\n    </nav>\n\n    <div id="main-container" class="container">\n        <ui-view id="main-ui-view">\n          <!-- all app views nested from \'home\' state -->\n            <div >\n              <div class="row">\n                <div id="title" class="col-md-8 col-md-offset-2">\n                    <h2 class="header-h2">JobTrackerChecklist</h2>\n                    <br />\n                    <h4 class="header-h4">Keep track of the jobs you are interested in and your job search process.</h4>\n                      <br />\n                        <div class="row">\n                          <div class="col-md-6">\n                            <a href="" ng-hide="vm.signedIn()" ui-sref="home.login"><button type="button" class="btn btn-outline btn-lg">Login</button></a>\n                            <p ng-show="vm.signedIn()">View your Jobs List:</p>\n                            <a href="" ng-show="vm.signedIn()" ui-sref="home.jobs"><button type="button" class="btn btn-outline btn-lg">Jobs</button></a>\n                          </div>\n                          <div class="col-md-6">\n                            <a href="" ng-hide="vm.signedIn()" ui-sref="home.register"><button type="button" class="btn btn-outline btn-lg">Register</button></a>\n                            <p ng-show="vm.signedIn()">Add a Job:</p>\n                            <a href="" ng-show="vm.signedIn()" ui-sref="home.create"><button type="button" class="btn btn-outline btn-lg">Add a Job</button></a>\n                          </div>\n                        </div>\n                </div>\n              </div>\n              <br />\n            </div> <!-- /#definition -->\n        </ui-view>\n    </div>\n  <div class="push"></div>\n</div>\n\n<hr />\n\n<footer class="container">\n  <div class="container-fluid">\n        <div class="row">\n          <div class="col-md-6">\n              <span class="copyright">Copyright &copy; <a href="http://karunasehgal.com/" target="_blank">Karuna Sehgal</a> 2017</span>\n          </div>\n          <div class="col-md-6">\n          <span>Powered by <a href="https://angularjs.org/" target="_blank">Angular</a>, <a href="http://rubyonrails.org/" target="_blank">Rails</a>, and education from <a href="https://flatironschool.com/" target="_blank">The Flatiron School</a></span>\n          </div>\n        </div>\n    </div>\n</footer>')
 }]);
 
 (function() {
@@ -52597,14 +52597,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/home.html", '<h1>Jobs Main Page</h1>\n<a href="" ui-sref="home.jobs.list">Jobs</a>\n<a href="" ui-sref="home.jobs.create">Add a Job</a>\n<ui-view></ui-view>')
+  $templateCache.put("jobs/home.html", '<!-- <h1>Jobs Main Page</h1>\n<a href="" ui-sref="home.jobs">Jobs</a>\n<a href="" ui-sref="home.jobs.create">Add a Job</a>\n<ui-view></ui-view> -->')
 }]);
 
 // Angular Rails Template
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="home.jobs.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="home.jobs.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
+  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="home.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
 }]);
 
 // (function() {
@@ -52849,10 +52849,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     //defined methods on the vm
     function activate() {
-      if ($state.current.name == "home.jobs.list") {
+      if ($state.current.name == "home.jobs") {
         getJobs();
       }
-      else if  ($state.current.name == "home.jobs.show") {
+      else if  ($state.current.name == "home.show") {
         getJob($state.params.id)
       }
     };
@@ -52897,7 +52897,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function showJob(data) {
-        $state.go('home.jobs.show', { jobId: data.id });
+        $state.go('home.show', { jobId: data.id });
     };
 
     function setFilteredList(data) {
@@ -52909,7 +52909,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function showJobs() {
-        $state.go('home.jobs.list');
+        $state.go('home.jobs');
     };
 
   };
@@ -52922,7 +52922,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/show.html", '<div class="container">\n  <div class=" well col-sm-6">\n    <h2>Job Show Page</h2><br>\n      Job Title: {{ vm.job.job_title }}<br />\n      Company: {{ vm.job.company }}<br />\n      Job Description: <br />{{ vm.job.job_description }}<br />\n      Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n      Date : {{ vm.job.date }}<br />\n      Status: {{ vm.job.status }}<br />\n      Point of Contact: {{ vm.job.point_of_contact }}<br />\n      Job Reference: {{ vm.job.job_reference }}<br />\n      Tech Stack: {{ vm.job.tech_stack }}<br /><br />\n    <a href="" ui-sref="home.jobs.show.checklists({ jobId: vm.job.id })" class="btn btn-primary btn-sm">Create Checklist</a>\n    <br />\n    <br />\n    <a href="" ui-sref="home.jobs.edit({ jobId: vm.job.id })" class="btn btn-info btn-sm">Edit Job</a>\n    <br />\n    </br/>\n    <a href="" ng-click="vm.destroyJob(vm.job.id )" class="btn btn-warning btn-sm ">Delete Job</a>\n\n  </div>\n</div>')
+  $templateCache.put("jobs/show.html", '<div class="container">\n  <div class=" well col-sm-6">\n    <h2>Job Show Page</h2><br>\n      Job Title: {{ vm.job.job_title }}<br />\n      Company: {{ vm.job.company }}<br />\n      Job Description: <br />{{ vm.job.job_description }}<br />\n      Company URL: <a href="{{ vm.job.company_url }}" target="_blank">{{ vm.job.company_url }}</a><br />\n      Date : {{ vm.job.date }}<br />\n      Status: {{ vm.job.status }}<br />\n      Point of Contact: {{ vm.job.point_of_contact }}<br />\n      Job Reference: {{ vm.job.job_reference }}<br />\n      Tech Stack: {{ vm.job.tech_stack }}<br /><br />\n    <a href="" ui-sref="home.jobs.show.checklists({ jobId: vm.job.id })" class="btn btn-primary btn-sm">Create Checklist</a>\n    <br />\n    <br />\n    <a href="" ui-sref="home.edit({ jobId: vm.job.id })" class="btn btn-info btn-sm">Edit Job</a>\n    <br />\n    </br/>\n    <a href="" ng-click="vm.destroyJob(vm.job.id )" class="btn btn-warning btn-sm ">Delete Job</a>\n\n  </div>\n</div>')
 }]);
 
 (function(){
@@ -52959,27 +52959,27 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           }
         })
         .state('home.jobs', {
-          url: '/jobs',
-          templateUrl: 'jobs/home.html',
-          controller: 'JobsController as vm'
-        })
-        .state('home.jobs.list', {
-          url: '/list',
+          url: 'jobs',
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.create', {
-          url: '/create',
+        // .state('home.jobs.list', {
+        //   url: '/list',
+        //   templateUrl: 'jobs/index.html',
+        //   controller: 'JobsController as vm'
+        // })
+        .state('home.create', {
+          url: 'create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.edit', {
-          url: '/edit/:jobId',
+        .state('home.edit', {
+          url: 'edit/:jobId',
           templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.show', {
-          url: '/show/:jobId',
+        .state('home.show', {
+          url: 'show/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
