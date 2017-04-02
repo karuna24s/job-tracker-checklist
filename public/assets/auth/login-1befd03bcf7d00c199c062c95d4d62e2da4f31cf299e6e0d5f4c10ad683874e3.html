@@ -2,18 +2,13 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-header">
-                <h1>Register</h1>
+                  <h2>Log In</h2>
             </div>
             <div class="panel-body">
-                <form ng-submit="vm.register()">
+                <form ng-submit="vm.login()">
                       <div class="form-group">
                           Email:
                           <input class="form-control" type="email" placeholder="Email" ng-model="vm.user.email">
-                      </div>
-                      <br />
-                      <div class="form-group">
-                          Username:
-                          <input class="form-control" type="text" placeholder="Username" ng-model="vm.user.username">
                       </div>
                       <br />
                       <div class="form-group">
@@ -21,14 +16,13 @@
                           <input class="form-control" type="password" placeholder="Password" ng-model="vm.user.password">
                       </div>
                       <br />
-                      <input class="btn btn-secondary" type="submit" value="Register">
+                      <input class="btn btn-secondary" type="submit" value="Log In">
                       <br />
                 </form>
             </div>
             <div class="panel-footer">
-              Already signed up? <a href="" ui-sref="home.login">Log in here</a>
+              Not yet signed up? <a href="" ui-sref="home.register">Register here</a>
             </div>
-            </div>
-        </div> <!-- /. panel -->
+        </div><!-- /.panel -->
     </div><!-- /.col -->
 </div><!-- /.row -->

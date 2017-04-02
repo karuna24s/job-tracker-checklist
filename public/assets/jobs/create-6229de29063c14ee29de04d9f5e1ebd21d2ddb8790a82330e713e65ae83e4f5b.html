@@ -1,0 +1,52 @@
+<div class="row form">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-header">
+        <h2>Let's Make a Job</h2>
+      </div>
+      <div class="panel-body">
+        <form name="newJob" ng-submit="vm.createJob()">
+            <label form="job_title">Job Title: </label>
+            <input type="text" required name="job_title" ng-model="vm.job.job_title" class="form-control"/>
+            <div ng-messages="newJob.job_title.$error" ng-show="newJob.job_title.$touched || newJob.$submitted">
+              <div ng-message="required">Job Title is required.</div>
+            </div>
+            <br />
+            <label form="company">Company: </label>
+            <input type="text" required name="company" ng-model="vm.job.company" class="form-control"/>
+            <div ng-messages="newJob.company.$error" ng-show="newJob.company.$touched || newJob.$submitted">
+              <div ng-message="required">Company is required.</div>
+            </div>
+            <br />
+            <label form="job_description">Job Description: </label>
+            <textarea ng-model="vm.job.job_description" class="form-control"></textarea>
+            <br />
+            <label form="company_url">Company URL: </label>
+            <textarea ng-model="vm.job.company_url" class="form-control"></textarea>
+            <br />
+            <label form="date">Date: </label>
+            <input type="text" ng-model="vm.job.date" class="form-control" />
+            <br />
+            <label form="status">Status: </label>
+            <select name="status" required name="status" ng-model="vm.job.status" class="form-control">
+                  <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>
+            </select>
+            <div ng-messages="newJob.status.$error" ng-show="newJob.status.$touched || newJob.$submitted">
+              <div ng-message="required">Status is required.</div>
+            </div>
+            <br />
+            <label form="point_of_contact">Point of Contact: </label>
+            <input type="text" ng-model="vm.job.point_of_contact" class="form-control"/>
+            <br />
+            <label form="job_reference">Job Reference: </label>
+            <input type="text" ng-model="vm.job.job_reference" class="form-control"/>
+            <br />
+            <label form="tech_stack">Tech Stack: </label>
+            <input type="text" ng-model="vm.job.tech_stack" class="form-control"/>
+            <br />
+            <input class="btn btn-md btn-primary" type="submit" value="Add Job">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
