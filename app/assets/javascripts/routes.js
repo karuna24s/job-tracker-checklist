@@ -56,13 +56,13 @@
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
-        .state('home.jobs.show.checklists', {
-          url: '/checklists',
+        .state('home.checklists', {
+          url: 'checklists',
           templateUrl: 'checklists/show.html',
           controller: 'ChecklistsController as vm'
         })
-        .state('home.jobs.show.checklists.items', {
-          url: '/items',
+        .state('home.items', {
+          url: 'items',
           templateUrl: 'items/show.html',
           controller: 'ItemsController as vm'
         });
