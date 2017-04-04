@@ -52336,7 +52336,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<h2 class="md-title">Add a Checklist</h2>\n    <form ng-submit="vm.createChecklist()">\n        <label>Checklist</label>\n        <textarea ng-model="vm.checklist.item" rows="3" ></textarea>\n<!--item has to come here  -->\n      <div>\n        <input class="btn btn-primary btn-md" type="submit" value="Submit Checklist">\n      </div>\n    </form>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Create a Checklist</h2>\n      </div>\n      <div class="panel-body">\n        <form name="newChecklist" ng-submit="vm.createChecklist()">\n          <label>Checklist</label><br />\n          <!-- <textarea ng-model="vm.checklist.item" rows="3" ></textarea> -->\n  <!--item has to come here  -->\n          <a href="" ui-sref="home.items({ jobId: vm.job.id })" class="btn btn-info btn-sm">Add an item</a><br /><br />\n        <div>\n          <input class="btn btn-primary btn-md" type="submit" value="Submit Checklist">\n        </div>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
