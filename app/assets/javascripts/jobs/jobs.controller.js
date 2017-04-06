@@ -3,10 +3,7 @@
 
   function JobsController(JobFactory, $state, $filter) {
     var vm = this;
-    console.log($state);
 
-    // callable methods on the vm
-    vm.test = "View the jobs!";
     vm.getJobs = getJobs;
     vm.createJob = createJob;
     vm.getJob = getJob;
@@ -28,17 +25,11 @@
     ];
 
 
-    //instantiated info
     activate();
 
-    //defined methods on the vm
+
     function activate() {
-      if ($state.current.name == "home.jobs") {
         getJobs();
-      }
-      else if  ($state.current.name == "home.show") {
-        getJob($state.params.id)
-      }
     };
 
     function getJobs() {
@@ -47,13 +38,12 @@
             .then(setFilteredList)
     };
 
-    function getJob(params) {
-      return JobFactory.getJob(params)
+    function getJob(id) {
+      return JobFactory.getJob(id)
             .then(setJob);
     };
 
     function createJob() {
-      // debugger;
       return JobFactory.createJob(vm.Job)
              .then(showJobs)
     };
@@ -73,6 +63,7 @@
     }
 
     function setJobs(data) {
+
       return vm.jobs = data;
     };
 
@@ -81,6 +72,7 @@
     };
 
     function showJob(data) {
+
         $state.go('home.show', { jobId: data.id });
     };
 
@@ -88,7 +80,7 @@
       return vm.filteredList = data;
     };
 
-    function refilter() {
+  function refilter() {
       return vm.filteredList = $filter('filter')(vm.jobs, vm.search);
     };
 
@@ -97,6 +89,8 @@
     };
 
   };
+
+  JobsController.$inject = ['JobFactory', '$filter', '$state'];
 
   angular
     .module('app')

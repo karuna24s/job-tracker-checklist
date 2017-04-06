@@ -1,49 +1,55 @@
 class JobsController < ApplicationController
+  before_action :get_job, only: [:show, :update]
 
   def index
-    jobs = Job.all
-    render json: jobs
+    @jobs = Job.where(user: current_user)
+    if @jobs
+      render json: @jobs, status: 201
+    else
+      render json: {errors: @jobs.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def show
-    job = Job.find(params[:id])
-    render json: job
+    if @job
+      render json: @job, status: 201
+    else
+      render json:'', status: 404
+    end
   end
 
   def create
-    # binding.pry
-    job = Job.new(job_params)
-    # if params[:create_checklist]
-    #   checklist = job.create_checklist
-    # end
-    if job.save
-      render json: { success: job, status: "success"}
+    @job = Job.new(job_params)
+    @job.user = current_user
+    if @job.save
+      render json: @job, status: 201
     else
-      render json: { errors: job.errors.full_messages,
-                     status: "error" }
+      render json: {errors: @job.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def update
-    job = Job.find(params[:id])
-    if job.save(job_params)
-      render json: { success: job, status: "success"}
+    if @job.update(job_params)
+      render json: @job, status: 201
     else
-      render json: { errors: job.errors.full_messages,
-                    status: "error" }
+      render json: {errors: @job.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def destroy
-    job = Job.find(params[:id])
-    job.destroy
+    @job = Job.find_by(id: params[:id], user: current_user)
+    @job.destroy
   end
 
   private
 
+  def get_job
+    @job = Job.find_by(id: params[:id], user: current_user)
+  end
+
   def job_params
     params.require(:job).permit(:job_title, :company, :job_description, :company_url, :date, :status,
-     :point_of_contact, :job_reference, :tech_stack, :user_id)
+     :point_of_contact, :job_reference, :user_id,  :tech_stack)
   end
 
 end

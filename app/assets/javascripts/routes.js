@@ -42,17 +42,17 @@
         //   controller: 'JobsController as vm'
         // })
         .state('home.create', {
-          url: 'create',
+          url: 'jobs/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
         .state('home.edit', {
-          url: 'edit/:jobId',
+          url: 'jobs/edit/:jobId',
           templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
         .state('home.show', {
-          url: 'show/:jobId',
+          url: 'jobs/show/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
