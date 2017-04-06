@@ -52607,110 +52607,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
   $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="home.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
 }]);
 
-// (function() {
-//
-//   'use strict'
-//
-//   angular
-//     .module('app')
-//     .factory('JobFactory', ['$http', '$state', function($http, $state) {
-//
-//     //callable methods on JobFactory
-//     return {
-//       getJobs: getJobs,
-//       getJob: getJob,
-//       createJob: createJob,
-//       updateJob: updateJob,
-//       updateStatus: updateStatus,
-//       destroyJob: destroyJob
-//     }
-//
-//     //define methods
-//     function getJobs() {
-//       return $http.get('/jobs')
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function getJob(id) {
-//       return $http.get('/jobs/' + id)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function createJob(job) {
-//       var req = {
-//         method: 'POST',
-//         url: '/jobs',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         data: {
-//           job: job
-//         }
-//       }
-//       return $http(req)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function updateJob(job) {
-//       var req = {
-//         method: 'PATCH',
-//         url: '/jobs/' + job.id,
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         data: {
-//           job: job
-//         }
-//       }
-//       return $http(req)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function updateStatus(id, status) {
-//       var req = {
-//         method: 'PATCH',
-//         url: '/jobs/' + id,
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         data: {
-//           status: status
-//         }
-//       }
-//       return $http(req)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function destroyJob(id) {
-//       return $http.delete('/jobs/' + id)
-//               .then(handleSuccess)
-//               .catch(handleError)
-//     }
-//
-//     function handleSuccess(response) {
-//       //$http requests return a promise which needs to be parsed for its .data attribute
-//       //print to console to confirm visually
-//       console.log(response);
-//       //return to controller
-//       return response.data;
-//     }
-//
-//     function handleError(error) {
-//       //print to console to confirm visually
-//       console.log(error);
-//     }
-//
-//   }]);
-//
-// }())
-//
-//
-//
 (function() {
 
   'use strict';
@@ -52771,7 +52667,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
                     .catch(handleError)
     };
 
-    function updateStatus(id, status) {
+    function updateStatus(job, status) {
          var req = {
              method: 'PATCH',
              url: '/jobs/' + id,
@@ -52795,19 +52691,17 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function handleSuccess(response) {
-      //$http requests return a promise which needs to be parsed for its .data attribute
-      //print to console to confirm visually
       console.log(response);
-      //return to controller
       return response.data;
     };
 
     function handleError(error) {
-      //print to console to confirm visually
       console.log(error);
     };
 
   };
+
+  JobFactory.$inject = ['$http', '$state' ];
 
   angular
     .module('app')
@@ -52819,10 +52713,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
   function JobsController(JobFactory, $state, $filter) {
     var vm = this;
-    console.log($state);
 
-    // callable methods on the vm
-    vm.test = "View the jobs!";
     vm.getJobs = getJobs;
     vm.createJob = createJob;
     vm.getJob = getJob;
@@ -52844,17 +52735,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     ];
 
 
-    //instantiated info
     activate();
 
-    //defined methods on the vm
+
     function activate() {
-      if ($state.current.name == "home.jobs") {
         getJobs();
-      }
-      else if  ($state.current.name == "home.show") {
-        getJob($state.params.id)
-      }
     };
 
     function getJobs() {
@@ -52863,13 +52748,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
             .then(setFilteredList)
     };
 
-    function getJob(params) {
-      return JobFactory.getJob(params)
+    function getJob(id) {
+      return JobFactory.getJob(id)
             .then(setJob);
     };
 
     function createJob() {
-      // debugger;
       return JobFactory.createJob(vm.Job)
              .then(showJobs)
     };
@@ -52889,6 +52773,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     }
 
     function setJobs(data) {
+
       return vm.jobs = data;
     };
 
@@ -52897,6 +52782,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function showJob(data) {
+
         $state.go('home.show', { jobId: data.id });
     };
 
@@ -52904,7 +52790,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       return vm.filteredList = data;
     };
 
-    function refilter() {
+  function refilter() {
       return vm.filteredList = $filter('filter')(vm.jobs, vm.search);
     };
 
@@ -52913,6 +52799,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
   };
+
+  JobsController.$inject = ['JobFactory', '$filter', '$state'];
 
   angular
     .module('app')
@@ -52969,17 +52857,17 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         //   controller: 'JobsController as vm'
         // })
         .state('home.create', {
-          url: 'create',
+          url: 'jobs/create',
           templateUrl: 'jobs/create.html',
           controller: 'JobsController as vm'
         })
         .state('home.edit', {
-          url: 'edit/:jobId',
+          url: 'jobs/edit/:jobId',
           templateUrl: 'jobs/edit.html',
           controller: 'JobsController as vm'
         })
         .state('home.show', {
-          url: 'show/:jobId',
+          url: 'jobs/show/:jobId',
           templateUrl: 'jobs/show.html',
           controller: 'JobsController as vm'
         })
