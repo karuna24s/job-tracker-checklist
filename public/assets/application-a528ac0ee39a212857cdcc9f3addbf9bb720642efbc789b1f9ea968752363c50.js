@@ -52604,7 +52604,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>{{ vm.test }}</h2>\n\n    <br />\n    <a href="#" ui-sref="home.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
+  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>Jobs List</h2>\n\n    <br />\n    <a href="#" ui-sref="home.create">Add a Job</a>\n    <br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList track by job.id">\n          <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n  </div>\n</div>')
 }]);
 
 (function() {
