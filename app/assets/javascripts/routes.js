@@ -36,11 +36,6 @@
           templateUrl: 'jobs/index.html',
           controller: 'JobsController as vm'
         })
-        // .state('home.jobs.list', {
-        //   url: '/list',
-        //   templateUrl: 'jobs/index.html',
-        //   controller: 'JobsController as vm'
-        // })
         .state('home.create', {
           url: 'jobs/create',
           templateUrl: 'jobs/create.html',

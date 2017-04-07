@@ -26,10 +26,16 @@
 
 
     activate();
-
+    console.log($state)
 
     function activate() {
+      console.log($state.current)
+      if ($state.current.name == "home.jobs") {
         getJobs();
+      }
+      else if  ($state.current.name == "home.show" || $state.current.name == "home.checklists") {
+        getJob($state.params.id)
+      }
     };
 
     function getJobs() {
@@ -38,9 +44,11 @@
             .then(setFilteredList)
     };
 
-    function getJob(id) {
-      return JobFactory.getJob(id)
-            .then(setJob);
+    function getJob(params) {
+      console.log(params)
+      // debugger;
+      return JobFactory.getJob(params)
+            .then(setJobs);
     };
 
     function createJob() {
