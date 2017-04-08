@@ -4,11 +4,10 @@
   function JobsController(JobFactory, $state, $filter) {
     var vm = this;
 
+    // callable methods on the vm
+
     vm.getJobs = getJobs;
     vm.createJob = createJob;
-    vm.getJob = getJob;
-    vm.updateJob = updateJob;
-    vm.destroyJob = destroyJob;
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
 
@@ -25,17 +24,13 @@
     ];
 
 
+    //instantiated info
     activate();
-    console.log($state)
+    console.log($state);
 
+    //defined methods on the vm
     function activate() {
-      console.log($state.current)
-      if ($state.current.name == "home.jobs") {
-        getJobs();
-      }
-      else if  ($state.current.name == "home.show" || $state.current.name == "home.checklists") {
-        getJob($state.params.id)
-      }
+      getJobs();
     };
 
     function getJobs() {
@@ -44,26 +39,9 @@
             .then(setFilteredList)
     };
 
-    function getJob(params) {
-      console.log(params)
-      // debugger;
-      return JobFactory.getJob(params)
-            .then(setJobs);
-    };
-
     function createJob() {
       return JobFactory.createJob(vm.Job)
-             .then(showJobs)
-    };
-
-    function updateJob() {
-      return JobFactory.updateJob(vm.Job)
-            .then(showJob);
-    };
-
-    function destroyJob(id) {
-      return JobFactory.destroyJob(id)
-            .then(showJobs);
+            .then(showJob)
     };
 
     function updateStatus(jobId, jobStatus) {
@@ -71,34 +49,25 @@
     }
 
     function setJobs(data) {
-
       return vm.jobs = data;
-    };
-
-    function setJob(data) {
-      return vm.showJob = data;
-    };
-
-    function showJob(data) {
-
-        $state.go('home.show', { jobId: data.id });
     };
 
     function setFilteredList(data) {
       return vm.filteredList = data;
     };
 
-  function refilter() {
+    function refilter() {
       return vm.filteredList = $filter('filter')(vm.jobs, vm.search);
     };
 
-    function showJobs() {
-        $state.go('home.jobs');
+    function showJob(data) {
+        $state.go('home.show', { jobId: data.id });
     };
+
 
   };
 
-  JobsController.$inject = ['JobFactory', '$filter', '$state'];
+  JobsController.$inject = ['JobFactory', '$state', '$filter'];
 
   angular
     .module('app')

@@ -44,12 +44,12 @@
         .state('home.edit', {
           url: 'jobs/edit/:jobId',
           templateUrl: 'jobs/edit.html',
-          controller: 'JobsController as vm'
+          controller: 'JobsShowController as vm'
         })
         .state('home.show', {
           url: 'jobs/show/:jobId',
           templateUrl: 'jobs/show.html',
-          controller: 'JobsController as vm'
+          controller: 'JobsShowController as vm'
         })
         .state('home.checklists', {
           url: 'checklists',
