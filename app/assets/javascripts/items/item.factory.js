@@ -10,7 +10,7 @@
         }
 
         function getItems() {
-            return $http.get('/jobs/' + $state.params.id + '/checklists' + '/items/')
+            return $http.get('/checklists/' + $state.params.id + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
@@ -18,7 +18,7 @@
         function createItem(item) {
           var req = {
               method: 'POST',
-              url: '/jobs/' + $state.params.id + '/checklists' + '/items/',
+              url: '/checklists/' + $state.params.id  + '/items/',
               headers: {
                   'Content-Type': 'application/json'
               },
