@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  function JobsController(JobFactory, $state, $filter) {
+  function JobsController(JobFactory, $state, $filter, Auth) {
     var vm = this;
 
     // callable methods on the vm
-
     vm.getJobs = getJobs;
     vm.createJob = createJob;
+    vm.signedIn = Auth.isAuthenticated();
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
 
@@ -40,8 +40,14 @@
     };
 
     function createJob() {
-      return JobFactory.createJob(vm.Job)
-            .then(showJob)
+      if (vm.signedIn) {
+                return JobFactory.createJob(vm.job)
+                       .then(showJob)
+            } else {
+                alert("Whoops. You need to be signed in to create a Job.");
+                $state.go('home.login')
+            }
+
     };
 
     function updateStatus(jobId, jobStatus) {
@@ -67,7 +73,7 @@
 
   };
 
-  JobsController.$inject = ['JobFactory', '$state', '$filter'];
+  JobsController.$inject = ['JobFactory', '$state', '$filter', 'Auth'];
 
   angular
     .module('app')

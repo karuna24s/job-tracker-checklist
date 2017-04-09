@@ -47,8 +47,15 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         };
 
         function updateJob() {
-          return JobFactory.updateJob(vm.job)
+          if (vm.signedIn) {
+                return JobFactory.updateJob(vm.job)
                        .then(showJob);
+            } else {
+                alert("Whoops. You need to sign in and be an admin to edit a Job.");
+                $state.go('home.login')
+            }
+          // return JobFactory.updateJob(vm.job)
+          //              .then(showJob);
         };
 
         function updateStatus(jobId, jobStatus) {

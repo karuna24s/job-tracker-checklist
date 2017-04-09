@@ -2,7 +2,7 @@
 
   'use strict';
 
-  function JobFactory($http, $state) {
+  function JobFactory($http) {
     return {
       getJobs: getJobs,
       getJob: getJob,
@@ -92,7 +92,7 @@
 
   };
 
-  JobFactory.$inject = ['$http', '$state' ];
+  JobFactory.$inject = ['$http'];
 
   angular
     .module('app')
