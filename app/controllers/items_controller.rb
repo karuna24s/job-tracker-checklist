@@ -29,7 +29,6 @@ class ItemsController < ApplicationController
     #   render json: { errors: item.errors.full_messages,
     #                  status: "error" }
     # end
-  end
 
   def update
     @item = @Item.find(params[:id])
