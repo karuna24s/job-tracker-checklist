@@ -52611,7 +52611,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
   'use strict';
 
-  function JobFactory($http, $state) {
+  function JobFactory($http) {
     return {
       getJobs: getJobs,
       getJob: getJob,
@@ -52701,7 +52701,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
   };
 
-  JobFactory.$inject = ['$http', '$state' ];
+  JobFactory.$inject = ['$http'];
 
   angular
     .module('app')
@@ -52711,13 +52711,13 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 (function() {
   'use strict';
 
-  function JobsController(JobFactory, $state, $filter) {
+  function JobsController(JobFactory, $state, $filter, Auth) {
     var vm = this;
 
     // callable methods on the vm
-
     vm.getJobs = getJobs;
     vm.createJob = createJob;
+    vm.signedIn = Auth.isAuthenticated();
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
 
@@ -52750,8 +52750,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     };
 
     function createJob() {
-      return JobFactory.createJob(vm.Job)
-            .then(showJob)
+      if (vm.signedIn) {
+                return JobFactory.createJob(vm.job)
+                       .then(showJob)
+            } else {
+                alert("Whoops. You need to be signed in to create a Job.");
+                $state.go('home.login')
+            }
+
     };
 
     function updateStatus(jobId, jobStatus) {
@@ -52777,7 +52783,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
   };
 
-  JobsController.$inject = ['JobFactory', '$state', '$filter'];
+  JobsController.$inject = ['JobFactory', '$state', '$filter', 'Auth'];
 
   angular
     .module('app')
@@ -52832,8 +52838,15 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         };
 
         function updateJob() {
-          return JobFactory.updateJob(vm.job)
+          if (vm.signedIn) {
+                return JobFactory.updateJob(vm.job)
                        .then(showJob);
+            } else {
+                alert("Whoops. You need to sign in and be an admin to edit a Job.");
+                $state.go('home.login')
+            }
+          // return JobFactory.updateJob(vm.job)
+          //              .then(showJob);
         };
 
         function updateStatus(jobId, jobStatus) {
