@@ -1,41 +1,41 @@
 class ChecklistsController < ApplicationController
 
   def index
-    # checklists = Checklist.all
-    checklists = Checklist.where(job_id: params[:job_id])
-    # debugger
-    render json: checklists
+    @checklists = Checklist.where(job_id: params[:job_id])
+    if @checklists
+      render json: @checklists, status: 201
+    end
   end
 
   def show
-    checklist = Checklist.find(params[:id])
-    render json: checklist
+    @checklist = Checklist.find(params[:id])
+    render json: @checklist
   end
 
   def create
-    checklist = Checklist.new(checklist_params)
-    checklist.job_id = params[:id]
-    if checklist.save
-      render json: { success: checklist, status: "success"}
+    @checklist = Checklist.new(checklist_params)
+    @checklist.job_id = params[:id]
+    if @checklist.save
+      render json: { success: @checklist, status: "success"}
     else
-      render json: { errors: checklist.errors.full_messages,
+      render json: { errors: @checklist.errors.full_messages,
                      status: "error" }
     end
   end
 
   def update
-    checklist = Checklist.find(params[:id])
-    if checklist.save(checklist_params)
-      render json: { success: checklist, status: "success"}
+    @checklist = Checklist.find(params[:id])
+    if @checklist.save(checklist_params)
+      render json: { success: @checklist, status: "success"}
     else
-      render json: { errors: checklist.errors.full_messages,
+      render json: { errors: @checklist.errors.full_messages,
                     status: "error" }
     end
   end
 
   def destroy
-    checklist = Checklist.find(params[:id])
-    checklist.destroy
+    @checklist = Checklist.find(params[:id])
+    @checklist.destroy
   end
 
   private
