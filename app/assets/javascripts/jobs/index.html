@@ -5,17 +5,28 @@
 
     <br />
     <a href="#" ui-sref="home.create">Add a Job</a>
-    <br />
+    <br /><br />
 
     <label for="search">Search: </label>
-    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">
+    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job name or title">
     <br />
 
+    <label>Or Search by </label><br /><br />
+
+    <label>Job Status</label>
+    <select ng-model="vm.jobs.jobs.status">
+        <option value="">View All</option>
+        <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>
+    </select>
+    <br />
 
     <ul id="jobs-list" ng-click>
-      <li ng-repeat="job in vm.filteredList track by job.id">
-          <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
+      <li ng-repeat="job in vm.filteredList | filter: vm.search | filter: {status: vm.jobs.jobs.status} track by job.id">
+        <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
       </li>
     </ul>
+
+
+
   </div>
 </div>
