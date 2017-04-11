@@ -1,74 +1,24 @@
-// (function() {
-//
-//   'use strict'
-//
-//   angular
-//     .module('app')
-//     .factory('ChecklistFactory', ['$http', '$state', function($http, $state) {
-//
-//     return {
-//       getChecklists: getChecklists,
-//       createChecklist: createChecklist
-//     }
-//
-//     function getChecklists() {
-//       return $http.get('/jobs/' + $state.param.id + '/checklists')
-//         .then(handleSuccess)
-//         .then(handleError)
-//     }
-//
-//     function createChecklist(checklist) {
-//       var req = {
-//         method: 'POST',
-//         url: '/jobs/' + $state.params.id + '/checklists',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         data: {
-//             checklist: checklist
-//         }
-//       }
-//
-//       return $http(req)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function handleSuccess(response) {
-//       console.log(response);
-//       return response.data;
-//     }
-//
-//     function handleError(error) {
-//       console.log(error);
-//     }
-//   }]);
-//
-// }())
-
-
-
 (function(){
 
     'use strict';
 
-    function ChecklistFactory($http, $state) {
+    function ChecklistFactory($http) {
 
         return {
             getChecklists: getChecklists,
             createChecklist: createChecklist
         }
 
-        function getChecklists() {
-            return $http.get('/jobs/' + $state.params.id + '/checklists')
+        function getChecklists(jobId) {
+            return $http.get('/jobs/' + jobId + '/checklists')
                 .then(handleSuccess)
                 .catch(handleError)
         };
 
-        function createChecklist(checklist) {
+        function createChecklist(checklist, jobId) {
           var req = {
               method: 'POST',
-              url: '/jobs/' + $state.params.id + '/checklists',
+              url: '/jobs/' + jobId + '/checklists',
               headers: {
                   'Content-Type': 'application/json'
               },
@@ -93,7 +43,9 @@
 
     };
 
-  angular
+    ChecklistFactory.$inject = ['$http'];
+
+    angular
       .module('app')
       .factory('ChecklistFactory', ChecklistFactory);
 

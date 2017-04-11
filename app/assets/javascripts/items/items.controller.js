@@ -2,7 +2,7 @@
 
     'use strict';
 
-    function ItemsController(ItemFactory) {
+    function ItemsController(ItemFactory, $state) {
 
         var vm = this;
 
@@ -16,13 +16,13 @@
         };
 
         function getItems() {
-            return ItemFactory.getItems()
+            return ItemFactory.getItems($state.params.id)
                 .then(setItems);
         };
 
         function createItem() {
-            return ItemFactory.createItem(vm.Item)
-                .then(getItems());
+            return ItemFactory.createItem(vm.item, $state.params.id)
+                .then(item => vm.items.push(item));
         };
 
         function setItems(data) {
@@ -31,6 +31,8 @@
 
 
     };
+
+    ItemsController.$inject = ['ItemFactory', '$state'];
 
     angular
       .module('app')

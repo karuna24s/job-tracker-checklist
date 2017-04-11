@@ -3,7 +3,7 @@ class ChecklistsController < ApplicationController
   def index
     @checklists = Checklist.where(job_id: params[:job_id])
     if @checklists
-      render json: @checklists, status: 201
+      render json: @checklists, status: 200
     end
   end
 
