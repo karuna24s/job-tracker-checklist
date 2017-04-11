@@ -52193,77 +52193,27 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 
 }).call(this);
-// (function() {
-//
-//   'use strict'
-//
-//   angular
-//     .module('app')
-//     .factory('ChecklistFactory', ['$http', '$state', function($http, $state) {
-//
-//     return {
-//       getChecklists: getChecklists,
-//       createChecklist: createChecklist
-//     }
-//
-//     function getChecklists() {
-//       return $http.get('/jobs/' + $state.param.id + '/checklists')
-//         .then(handleSuccess)
-//         .then(handleError)
-//     }
-//
-//     function createChecklist(checklist) {
-//       var req = {
-//         method: 'POST',
-//         url: '/jobs/' + $state.params.id + '/checklists',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         data: {
-//             checklist: checklist
-//         }
-//       }
-//
-//       return $http(req)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function handleSuccess(response) {
-//       console.log(response);
-//       return response.data;
-//     }
-//
-//     function handleError(error) {
-//       console.log(error);
-//     }
-//   }]);
-//
-// }())
-
-
-
 (function(){
 
     'use strict';
 
-    function ChecklistFactory($http, $state) {
+    function ChecklistFactory($http) {
 
         return {
             getChecklists: getChecklists,
             createChecklist: createChecklist
         }
 
-        function getChecklists() {
-            return $http.get('/jobs/' + $state.params.id + '/checklists')
+        function getChecklists(jobId) {
+            return $http.get('/jobs/' + jobId + '/checklists')
                 .then(handleSuccess)
                 .catch(handleError)
         };
 
-        function createChecklist(checklist) {
+        function createChecklist(checklist, jobId) {
           var req = {
               method: 'POST',
-              url: '/jobs/' + $state.params.id + '/checklists',
+              url: '/jobs/' + jobId + '/checklists',
               headers: {
                   'Content-Type': 'application/json'
               },
@@ -52288,7 +52238,9 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     };
 
-  angular
+    ChecklistFactory.$inject = ['$http'];
+
+    angular
       .module('app')
       .factory('ChecklistFactory', ChecklistFactory);
 
@@ -52297,26 +52249,28 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     'use strict';
 
-    function ChecklistsController(ChecklistFactory) {
+    function ChecklistsController(ChecklistFactory, ItemFactory, $state) {
 
         var vm = this;
 
         //callable methods on the vm
         vm.test = "Here is the checklist!";
         vm.createChecklist = createChecklist;
+        vm.createItem= createItem;
         activate();
         //defined methods on the vm
         function activate() {
             getChecklists();
+            getItems();
         };
 
         function getChecklists() {
-            return ChecklistFactory.getChecklists()
+            return ChecklistFactory.getChecklists($state.params.id)
                 .then(setChecklists);
         };
 
         function createChecklist() {
-            return ChecklistFactory.createChecklist(vm.Checklist)
+            return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
                 .then(getChecklists());
         };
 
@@ -52324,8 +52278,25 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
             return vm.checklists = data;
         };
 
+        function getItems() {
+            return ItemFactory.getItems($state.params.id)
+                .then(setItems);
+        };
+
+        function createItem(item) {
+            return ItemFactory.createItem(vm.item, $state.params.id)
+                .then(item => vm.items.push(item));
+        };
+
+        function setItems(data) {
+            return vm.items = data;
+        };
+
+
 
     };
+
+    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state'];
 
     angular
       .module('app')
@@ -52336,7 +52307,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body">\n        <form name="checklist" ng-submit="vm.createChecklist()">\n          <label>Items</label><br />\n          <!-- <textarea ng-model="vm.checklist.item" rows="3" ></textarea> -->\n  <!--item has to come here  -->\n          <a href="" ui-sref="home.items({ jobId: vm.job.id })" class="btn btn-info btn-sm">Add an item</a><br /><br />\n          <!-- see previous items on checklist -->\n        <!-- <div>\n          <input class="btn btn-primary btn-md" type="submit" value="Submit Checklist">\n        </div> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" ng-controller="ItemsController as vm">\n        <!-- see previous items on checklist -->\n        <label>Items:</label>\n        <ul id="items-list" ng-repeat="item in vm.items track by item.id">\n          <ol>{{ vm.item.task }}</ol>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <a href="" ui-sref="home.items({ jobId: vm.job.id })" class="btn btn-info btn-sm">Add an item</a>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52400,23 +52371,23 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     'use strict';
 
-    function ItemFactory($http, $state) {
+    function ItemFactory($http) {
 
         return {
             getItems: getItems,
             createItem: createItem
         }
 
-        function getItems() {
-            return $http.get('/checklists/' + $state.params.id + '/items/')
+        function getItems(checklistId) {
+            return $http.get('/checklists/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
 
-        function createItem(item) {
+        function createItem(item, checklistId) {
           var req = {
               method: 'POST',
-              url: '/checklists/' + $state.params.id  + '/items/',
+              url: '/checklists/' + checklistId  + '/items/',
               headers: {
                   'Content-Type': 'application/json'
               },
@@ -52441,99 +52412,18 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     };
 
-  angular
+    ItemFactory.$inject = ['$http'];
+
+    angular
       .module('app')
       .factory('ItemFactory', ItemFactory);
 
 }());
-
-
-// (function() {
-//
-//   'use strict'
-//
-//   angular
-//     .module('app')
-//     .factory('ItemFactory', ['$http', '$state', function($http, $state) {
-//
-//     return {
-//       getItems: getItems,
-//       createItem: createItem
-//     }
-//
-//     function getItems() {
-//       return $http.get('/jobs/' + $state.params.id + '/checklists' + '/items')
-//         .then(handleSuccess)
-//         .then(handleError)
-//     }
-//
-//     function createItem(item) {
-//       var req = {
-//         method: 'POST',
-//         url: '/jobs/' + $state.params.id + '/checklists' + '/items',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         data: {
-//             item: item
-//         }
-//       }
-//
-//       return $http(req)
-//         .then(handleSuccess)
-//         .catch(handleError)
-//     }
-//
-//     function handleSuccess(response) {
-//       console.log(response);
-//       return response.data;
-//     }
-//
-//     function handleError(error) {
-//       console.log(error);
-//     }
-//   }]);
-//
-// }())
-//
-//
-// // (function(){
-// //
-// //     'use strict';
-// //
-// //     function ItemFactory($http) {
-// //
-// //         return {
-// //             getItems: getItems
-// //         }
-// //
-// //         function getItems() {
-// //             return $http.get('/items')
-// //                 .then(handleSuccess)
-// //                 .catch(handleError)
-// //         };
-// //
-// //         function handleSuccess(response) {
-// //             console.log(response);
-// //             return response.data;
-// //         };
-// //
-// //         function handleError(error) {
-// //             console.log(error);
-// //         };
-// //
-// //     };
-// //
-// //   angular
-// //       .module('app')
-// //       .factory('ItemFactory', ItemFactory);
-// //
-// // }());
 (function(){
 
     'use strict';
 
-    function ItemsController(ItemFactory) {
+    function ItemsController(ItemFactory, $state) {
 
         var vm = this;
 
@@ -52547,13 +52437,13 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         };
 
         function getItems() {
-            return ItemFactory.getItems()
+            return ItemFactory.getItems($state.params.id)
                 .then(setItems);
         };
 
         function createItem() {
-            return ItemFactory.createItem(vm.Item)
-                .then(getItems());
+            return ItemFactory.createItem(vm.item, $state.params.id)
+                .then(item => vm.items.push(item));
         };
 
         function setItems(data) {
@@ -52562,6 +52452,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
 
     };
+
+    ItemsController.$inject = ['ItemFactory', '$state'];
 
     angular
       .module('app')
