@@ -54,8 +54,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
                 alert("Whoops. You need to sign in and be an admin to edit a Job.");
                 $state.go('home.login')
             }
-          // return JobFactory.updateJob(vm.job)
-          //              .then(showJob);
         };
 
         function updateStatus(jobId, jobStatus) {

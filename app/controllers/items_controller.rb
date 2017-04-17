@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.all
+    @items = Item.where(checklist_id: params[:checklist_id])
     if @items
       render json: @items, status: 200
     end
@@ -16,19 +16,11 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.checklist_id = params[:id]
     if @item.save
-      render json: @item,  status: 200
+      render json: @item,  status: 201
     else
       render status: 400
     end
   end
-
-    # item = Item.new(item_params)
-    # if item.save
-    #   render json: { success: item, status: "success"}
-    # else
-    #   render json: { errors: item.errors.full_messages,
-    #                  status: "error" }
-    # end
 
   def update
     @item = @Item.find(params[:id])

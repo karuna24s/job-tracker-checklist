@@ -4,7 +4,7 @@
       <div class="panel-header">
         <h2>Your Checklist</h2>
       </div>
-      <div class="panel-body" ng-controller="ItemsController as vm">
+      <div class="panel-body" ng-controller="ChecklistsShowController as vm">
         <!-- see previous items on checklist -->
         <label>Items:</label>
         <ul id="items-list" ng-repeat="item in vm.items track by item.id">
@@ -15,7 +15,7 @@
           <label>Add an item</label><br />
           <input type="text" ng-model="vm.item.task" class="form-control" /><br />
           <!-- newitem can be added here -->
-          <a href="" ui-sref="home.items({ jobId: vm.job.id })" class="btn btn-info btn-sm">Add an item</a>
+          <a href="" ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm">Add item</a>
         </form>
       </div>
     </div>

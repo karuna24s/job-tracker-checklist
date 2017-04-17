@@ -6,13 +6,21 @@
 
         return {
             getChecklists: getChecklists,
+            getChecklist: getChecklist,
             createChecklist: createChecklist
         }
 
         function getChecklists(jobId) {
+            //console.log('inside getchecklists factory', jobId)
             return $http.get('/jobs/' + jobId + '/checklists')
                 .then(handleSuccess)
                 .catch(handleError)
+        };
+
+        function getChecklist(id) {
+          return $http.get('/checklists/' + id)
+            .then(handleSuccess)
+            .catch(handleError)
         };
 
         function createChecklist(checklist, jobId) {

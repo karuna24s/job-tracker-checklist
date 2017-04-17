@@ -2,15 +2,17 @@
 
     'use strict';
 
-    function ChecklistsController(ChecklistFactory, ItemFactory, $state) {
+    function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams) {
 
         var vm = this;
 
         //callable methods on the vm
-        vm.test = "Here is the checklist!";
+        vm.getChecklists = getChecklists;
+        vm.getItems = getItems;
         vm.createChecklist = createChecklist;
-        vm.createItem= createItem;
+
         activate();
+        // console.log($state);
         //defined methods on the vm
         function activate() {
             getChecklists();
@@ -18,11 +20,14 @@
         };
 
         function getChecklists() {
-            return ChecklistFactory.getChecklists($state.params.id)
+            // debugger;
+            console.log($state.params.jobId)
+            return ChecklistFactory.getChecklists($state.params.jobId)
                 .then(setChecklists);
         };
 
         function createChecklist() {
+            // debugger;
             return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
                 .then(getChecklists());
         };
@@ -32,13 +37,9 @@
         };
 
         function getItems() {
+           //debugger;
             return ItemFactory.getItems($state.params.id)
                 .then(setItems);
-        };
-
-        function createItem(item) {
-            return ItemFactory.createItem(vm.item, $state.params.id)
-                .then(item => vm.items.push(item));
         };
 
         function setItems(data) {
@@ -49,7 +50,7 @@
 
     };
 
-    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state'];
+    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state', '$stateParams'];
 
     angular
       .module('app')

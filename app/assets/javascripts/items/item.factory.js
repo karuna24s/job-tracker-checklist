@@ -6,6 +6,7 @@
 
         return {
             getItems: getItems,
+            getItem: getItem,
             createItem: createItem
         }
 
@@ -13,6 +14,12 @@
             return $http.get('/checklists/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
+        };
+
+        function getItem(itemId) {
+          return $http.get('/items/' + itemId)
+            .then(handleSuccess)
+            .catch(handleError)
         };
 
         function createItem(item, checklistId) {
