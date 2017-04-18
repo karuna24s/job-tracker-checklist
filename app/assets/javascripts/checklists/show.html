@@ -6,9 +6,9 @@
       </div>
       <div class="panel-body" ng-controller="ChecklistsShowController as vm">
         <!-- see previous items on checklist -->
-        <label>Items:</label>
-        <ul id="items-list" ng-repeat="item in vm.items track by item.id">
-          <ol>{{ vm.item.task }}</ol>
+        <label>Items: </label>
+        <ul id="items-list" ng-repeat="item in ctrl.items track by item.id">
+          <ol>{{ item.task }}</ol>
         </ul>
         <hr />
         <form name="item" ng-submit="vm.createItem()">

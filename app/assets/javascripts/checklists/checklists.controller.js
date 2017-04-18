@@ -8,7 +8,7 @@
 
         //callable methods on the vm
         vm.getChecklists = getChecklists;
-        vm.getItems = getItems;
+        // vm.getItems = getItems;
         vm.createChecklist = createChecklist;
 
         activate();
@@ -16,12 +16,11 @@
         //defined methods on the vm
         function activate() {
             getChecklists();
-            getItems();
+            // getItems();
         };
 
         function getChecklists() {
             // debugger;
-            console.log($state.params.jobId)
             return ChecklistFactory.getChecklists($state.params.jobId)
                 .then(setChecklists);
         };
@@ -33,18 +32,19 @@
         };
 
         function setChecklists(data) {
+            vm.items = data[0].items
             return vm.checklists = data;
         };
 
-        function getItems() {
-           //debugger;
-            return ItemFactory.getItems($state.params.id)
-                .then(setItems);
-        };
-
-        function setItems(data) {
-            return vm.items = data;
-        };
+        // function getItems() {
+        //     return ItemFactory.getItems($state.params.jobId)
+        //         .then(setItems);
+        // };
+        //
+        // function setItems(data) {
+        //   console.log(data)
+        //     return vm.items = data;
+        // };
 
 
 
