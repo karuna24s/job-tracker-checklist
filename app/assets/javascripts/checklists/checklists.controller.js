@@ -21,24 +21,26 @@
 
         function getChecklists() {
             // debugger;
-            console.log($state.params.jobId)
+            // console.log($state.params.jobId)
             return ChecklistFactory.getChecklists($state.params.jobId)
                 .then(setChecklists);
         };
 
-        function createChecklist() {
+        function createChecklist(checklist) {
             // debugger;
             return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
                 .then(getChecklists());
         };
 
         function setChecklists(data) {
+            vm.items = data[0].items
             return vm.checklists = data;
         };
 
         function getItems() {
            //debugger;
-            return ItemFactory.getItems($state.params.id)
+            // console.log($state.params.checklistId)
+            return ItemFactory.getItems($state.params.checklistId)
                 .then(setItems);
         };
 

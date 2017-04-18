@@ -54,10 +54,10 @@
         .state('home.checklists', {
           url: 'checklists/:jobId',
           templateUrl: 'checklists/show.html',
-          controller: 'ChecklistsController as vm'
+          controller: 'ChecklistsController as ctrl'
         })
         .state('home.items', {
-          url: 'items',
+          url: 'items/:checklistId',
           templateUrl: 'items/show.html',
           controller: 'ChecklistsShowController as vm'
         });

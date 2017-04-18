@@ -40,7 +40,6 @@
         };
 
         function handleSuccess(response) {
-            console.log(response);
             return response.data;
         };
 
