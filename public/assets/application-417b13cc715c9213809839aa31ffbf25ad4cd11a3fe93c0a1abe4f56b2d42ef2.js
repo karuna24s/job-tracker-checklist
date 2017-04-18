@@ -52276,24 +52276,26 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
         function getChecklists() {
             // debugger;
-            console.log($state.params.jobId)
+            // console.log($state.params.jobId)
             return ChecklistFactory.getChecklists($state.params.jobId)
                 .then(setChecklists);
         };
 
-        function createChecklist() {
+        function createChecklist(checklist) {
             // debugger;
             return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
                 .then(getChecklists());
         };
 
         function setChecklists(data) {
+            vm.items = data[0].items
             return vm.checklists = data;
         };
 
         function getItems() {
            //debugger;
-            return ItemFactory.getItems($state.params.id)
+            // console.log($state.params.checklistId)
+            return ItemFactory.getItems($state.params.checklistId)
                 .then(setItems);
         };
 
@@ -52378,7 +52380,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" ng-controller="ChecklistsShowController as vm">\n        <!-- see previous items on checklist -->\n        <label>Items:</label>\n        <ul id="items-list" ng-repeat="item in vm.items track by item.id">\n          <ol>{{ vm.item.task }}</ol>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <a href="" ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm">Add item</a>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" ng-controller="ChecklistsShowController as vm">\n        <!-- see previous items on checklist -->\n        <label>Items:</label>\n        <ul id="items-list" ng-repeat="item in ctrl.items track by item.id">\n          <ol>{{ item.task }}</ol>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <a href="" ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm">Add item</a>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52480,7 +52482,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         };
 
         function handleSuccess(response) {
-            console.log(response);
             return response.data;
         };
 
@@ -52907,10 +52908,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         .state('home.checklists', {
           url: 'checklists/:jobId',
           templateUrl: 'checklists/show.html',
-          controller: 'ChecklistsController as vm'
+          controller: 'ChecklistsController as ctrl'
         })
         .state('home.items', {
-          url: 'items',
+          url: 'items/:checklistId',
           templateUrl: 'items/show.html',
           controller: 'ChecklistsShowController as vm'
         });
