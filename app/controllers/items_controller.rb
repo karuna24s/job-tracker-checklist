@@ -1,13 +1,15 @@
 class ItemsController < ApplicationController
 
   def index
-    @items = Item.where(checklist_id: params[:checklist_id])
+    # binding.pry
+    @items = Item.where(checklist_id: params[:id])
     if @items
       render json: @items, status: 200
     end
   end
 
   def show
+    # binding.pry
     @item = Item.find(params[:id])
     render json: @item
   end
@@ -15,8 +17,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.checklist_id = params[:id]
+    # @item.checklist = @checklist
     if @item.save
-      render json: @item,  status: 201
+      render json: @item,  status: 200
     else
       render status: 400
     end

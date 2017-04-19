@@ -2,17 +2,19 @@ class JobsController < ApplicationController
   before_action :get_job, only: [:show, :update]
 
   def index
+    # binding.pry
     @jobs = Job.where(user: current_user)
     if @jobs
-      render json: @jobs, status: 201
+      render json: @jobs, status: 200
     else
       render json: {errors: @jobs.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
   def show
+    # binding.pry
     if @job
-      render json: @job, status: 201
+      render json: @job, status: 200
     else
       render json:'', status: 404
     end
@@ -22,7 +24,7 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
     @job.user = current_user
     if @job.save
-      render json: @job, status: 201
+      render json: @job, status: 200
     else
       render json: {errors: @job.errors.full_messages}, status: :unprocessable_entity
     end
@@ -30,7 +32,7 @@ class JobsController < ApplicationController
 
   def update
     if @job.update(job_params)
-      render json: @job, status: 201
+      render json: @job, status: 200
     else
       render json: {errors: @job.errors.full_messages}, status: :unprocessable_entity
     end

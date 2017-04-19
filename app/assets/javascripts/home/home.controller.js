@@ -23,7 +23,6 @@
     };
 
     function setCurrentUser(user) {
-        console.log(user);
         return vm.user = user;
     };
 

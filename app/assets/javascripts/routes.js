@@ -44,7 +44,7 @@
         .state('home.edit', {
           url: 'jobs/edit/:jobId',
           templateUrl: 'jobs/edit.html',
-          controller: 'JobsShowController as vm'
+          controller: 'JobsController as vm'
         })
         .state('home.show', {
           url: 'jobs/show/:jobId',
@@ -54,12 +54,7 @@
         .state('home.checklists', {
           url: 'checklists/:jobId',
           templateUrl: 'checklists/show.html',
-          controller: 'ChecklistsController as ctrl'
-        })
-        .state('home.items', {
-          url: 'items/:checklistId',
-          templateUrl: 'items/show.html',
-          controller: 'ChecklistsShowController as vm'
+          controller: 'ChecklistsController as vm'
         });
       $urlRouterProvider.otherwise('/')
     })

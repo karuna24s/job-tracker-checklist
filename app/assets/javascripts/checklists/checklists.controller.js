@@ -5,48 +5,85 @@
     function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams) {
 
         var vm = this;
-
         //callable methods on the vm
-        vm.getChecklists = getChecklists;
-        vm.getItems = getItems;
+        vm.getChecklist = getChecklist;
+        // vm.getItems = getItems;
         vm.createChecklist = createChecklist;
+        // vm.createItem = createItem;
 
         activate();
-        // console.log($state);
+        console.log($state);
         //defined methods on the vm
         function activate() {
-            getChecklists();
-            getItems();
+          getChecklist();
+          // getItems();
+            // if ($state.params.jobId) {
+            //   getChecklist();
+            // } else if ($state.params.checklistId) {
+            //   // get something else
+            // } else {
+            //   // default
+            // }
+            //
+            // // getItems();
         };
 
-        function getChecklists() {
-            // debugger;
-            // console.log($state.params.jobId)
-            return ChecklistFactory.getChecklists($state.params.jobId)
-                .then(setChecklists);
+        function getChecklist() {
+            //debugger;
+            //console.log($state.params.jobId)
+            return ChecklistFactory.getChecklist($state.params.jobId)
+                .then(setChecklist);
         };
 
-        function createChecklist(checklist) {
+        function createChecklist() {
             // debugger;
+            console.log($state.params.id)
             return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
-                .then(getChecklists());
+                .then(getChecklist());
         };
 
-        function setChecklists(data) {
-            vm.items = data[0].items
-            return vm.checklists = data;
+        function setChecklist(data) {
+          // debugger;
+            return vm.checklist = data;
         };
 
-        function getItems() {
-           //debugger;
-            // console.log($state.params.checklistId)
-            return ItemFactory.getItems($state.params.checklistId)
-                .then(setItems);
-        };
+        // function getItems() {
+        //   //  debugger;
+        //   //  console.log($state.params.checklistId)
+        //     return ItemFactory.getItems($state.params.checklistId)
+        //         .then(setItems);
+        // };
+        //
+        // function createItem() {
+        //     //debugger;
+        //     return ItemFactory.createItem(vm.item)
+        //         .then(item => vm.checklist.items.push(item));
+        // };
+        //
+        // function setItems(data) {
+        //     return vm.items = data;
+        // };
+        //
+        // function showItem(data) {
+        //   // debugger
+        //     $state.go('home.checklists', { itemId: data.id });
+        // };
 
-        function setItems(data) {
-            return vm.items = data;
-        };
+        // function addItem(task) {
+        //   return itemFactory(task, checklistId)
+        //
+        // }
+
+        // function getItems() {
+        //    //debugger;
+        //     // console.log($state.params.checklistId)
+        //     return ItemFactory.getItems($state.params.checklistId)
+        //         .then(setItems);
+        // };
+        //
+        // function setItems(data) {
+        //     return vm.items = data;
+        // };
 
 
 
