@@ -52213,8 +52213,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         //         .catch(handleError)
         // };
 
-        function getChecklist(id) {
-          return $http.get('/checklists/' + id)
+        function getChecklist(jobId) {
+          return $http.get('/jobs/' + jobId + '/checklist')
             .then(handleSuccess)
             .catch(handleError)
         };
@@ -52224,7 +52224,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           // console.log('inside createchecklists factory', jobId)
           var req = {
               method: 'POST',
-              url: '/jobs/' + jobId + '/checklists',
+              url: '/jobs/' + jobId + '/checklist',
               headers: {
                   'Content-Type': 'application/json'
               },
@@ -52259,43 +52259,50 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     'use strict';
 
-    function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams) {
+    function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams, $scope) {
 
         var vm = this;
         //callable methods on the vm
         vm.getChecklist = getChecklist;
         // vm.getItems = getItems;
         vm.createChecklist = createChecklist;
-        // vm.createItem = createItem;
+        vm.createItem = createItem;
 
         activate();
-        console.log($state);
+        // console.log($state);
+        // console.log($scope);
         //defined methods on the vm
         function activate() {
+          // debugger;
           getChecklist();
-          // getItems();
             // if ($state.params.jobId) {
             //   getChecklist();
-            // } else if ($state.params.checklistId) {
-            //   // get something else
-            // } else {
+            // } else if ($state.params.id) {
+            //   createChecklist();
+            //  }
+            //  else {
             //   // default
             // }
-            //
+
             // // getItems();
         };
 
         function getChecklist() {
-            //debugger;
-            //console.log($state.params.jobId)
+            // console.log($state.params.jobId)
             return ChecklistFactory.getChecklist($state.params.jobId)
+                // .then(functions(data) => {
+                //   if(data){
+                //     return data;
+                //   }
+                //   return createChecklist();
+                // })
                 .then(setChecklist);
         };
 
         function createChecklist() {
             // debugger;
-            console.log($state.params.id)
-            return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
+            // console.log($scope)
+            return ChecklistFactory.createChecklist(vm.checklist)
                 .then(getChecklist());
         };
 
@@ -52311,11 +52318,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         //         .then(setItems);
         // };
         //
-        // function createItem() {
-        //     //debugger;
-        //     return ItemFactory.createItem(vm.item)
-        //         .then(item => vm.checklist.items.push(item));
-        // };
+        function createItem() {
+            // debugger;
+            return ItemFactory.createItem(vm.item)
+                .then(item => vm.checklist.items.push(item));
+        };
         //
         // function setItems(data) {
         //     return vm.items = data;
@@ -52346,80 +52353,80 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     };
 
-    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state', '$stateParams'];
+    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state', '$stateParams', '$scope'];
 
     angular
       .module('app')
       .controller('ChecklistsController', ChecklistsController);
 
 }());
-(function(){
-
-    'use strict';
-
-    function ChecklistsShowController(ChecklistFactory, ItemFactory, $stateParams, $state) {
-
-        var vm = this;
-
-        //callable methods on the vm
-        // vm.getChecklist = getChecklist;
-        vm.getItem = getItem;
-        vm.createItem = createItem;
-        activate();
-
-        //defined methods on the vm
-        function activate() {
-            // getChecklist($stateParams.checklistId);
-            getItem($stateParams.itemId);
-        };
-
-        // function getChecklist(id) {
-        //    //debugger;
-        //     return ChecklistFactory.getChecklist(id)
-        //         .then(setChecklist);
-        // };
-
-        // function getItem(id) {
-        //    //debugger;
-        //     return ItemFactory.getItem(id)
-        //         .then(setItem);
-        // };
-
-        function createItem(item, id) {
-            //debugger;
-            return ItemFactory.createItem(vm.item, id)
-                .then(showItem);
-        };
-
-        // function setChecklist(data) {
-        //     return vm.checklist = data;
-        // };
-        //
-        function setItem(data) {
-            return vm.item = data;
-        };
-
-        function showItem(data) {
-          debugger
-            $state.go('home.checklists', { itemId: data.id });
-        };
-
-
-
-    };
-
-    ChecklistsShowController.$inject = ['ChecklistFactory', 'ItemFactory', '$stateParams', '$state'];
-
-    angular
-      .module('app')
-      .controller('ChecklistsShowController', ChecklistsShowController);
-
-}());
+// (function(){
+//
+//     'use strict';
+//
+//     function ChecklistsShowController(ChecklistFactory, ItemFactory, $stateParams, $state) {
+//
+//         var vm = this;
+//
+//         //callable methods on the vm
+//         // vm.getChecklist = getChecklist;
+//         vm.getItem = getItem;
+//         vm.createItem = createItem;
+//         activate();
+//
+//         //defined methods on the vm
+//         function activate() {
+//             // getChecklist($stateParams.checklistId);
+//             getItem($stateParams.itemId);
+//         };
+//
+//         // function getChecklist(id) {
+//         //    //debugger;
+//         //     return ChecklistFactory.getChecklist(id)
+//         //         .then(setChecklist);
+//         // };
+//
+//         // function getItem(id) {
+//         //    //debugger;
+//         //     return ItemFactory.getItem(id)
+//         //         .then(setItem);
+//         // };
+//
+//         function createItem(item, id) {
+//             //debugger;
+//             return ItemFactory.createItem(vm.item, id)
+//                 .then(showItem);
+//         };
+//
+//         // function setChecklist(data) {
+//         //     return vm.checklist = data;
+//         // };
+//         //
+//         function setItem(data) {
+//             return vm.item = data;
+//         };
+//
+//         function showItem(data) {
+//           debugger
+//             $state.go('home.checklists', { itemId: data.id });
+//         };
+//
+//
+//
+//     };
+//
+//     ChecklistsShowController.$inject = ['ChecklistFactory', 'ItemFactory', '$stateParams', '$state'];
+//
+//     angular
+//       .module('app')
+//       .controller('ChecklistsShowController', ChecklistsShowController);
+//
+// }());
 // Angular Rails Template
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body">\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list">\n          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <a href="" ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm">Add item</a>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list">\n          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n            <input class="btn btn-info btn-sm" type="submit" value="Add item">\n          <!-- <input ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm" type="submit" value="Add Item" /> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52491,7 +52498,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         }
 
         function getItems(checklistId) {
-            return $http.get('/checklists/' + checklistId + '/items/')
+            return $http.get('/checklist/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
@@ -52503,9 +52510,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         };
 
         function createItem(item, checklistId) {
+          // debugger;
           var req = {
               method: 'POST',
-              url: '/checklists/' + checklistId  + '/items/',
+              url: '/checklist/' + checklistId  + '/items/',
               headers: {
                   'Content-Type': 'application/json'
               },
@@ -52866,6 +52874,7 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         };
 
         function setJob(data) {
+          // debugger;
             return vm.job = data;
         };
 
@@ -52944,7 +52953,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
           controller: 'JobsShowController as vm'
         })
         .state('home.checklists', {
-          url: 'checklists/:jobId',
+          url: 'jobs/:jobId/checklist',
           templateUrl: 'checklists/show.html',
           controller: 'ChecklistsController as vm'
         });
