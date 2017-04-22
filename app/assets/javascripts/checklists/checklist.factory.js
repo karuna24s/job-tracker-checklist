@@ -18,8 +18,8 @@
         //         .catch(handleError)
         // };
 
-        function getChecklist(id) {
-          return $http.get('/checklists/' + id)
+        function getChecklist(jobId) {
+          return $http.get('/jobs/' + jobId + '/checklist')
             .then(handleSuccess)
             .catch(handleError)
         };
@@ -29,7 +29,7 @@
           // console.log('inside createchecklists factory', jobId)
           var req = {
               method: 'POST',
-              url: '/jobs/' + jobId + '/checklists',
+              url: '/jobs/' + jobId + '/checklist',
               headers: {
                   'Content-Type': 'application/json'
               },

@@ -52,7 +52,7 @@
           controller: 'JobsShowController as vm'
         })
         .state('home.checklists', {
-          url: 'checklists/:jobId',
+          url: 'jobs/:jobId/checklist',
           templateUrl: 'checklists/show.html',
           controller: 'ChecklistsController as vm'
         });

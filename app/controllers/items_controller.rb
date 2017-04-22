@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def create
+    # binding.pry
     @item = Item.new(item_params)
     @item.checklist_id = params[:id]
     # @item.checklist = @checklist
@@ -25,20 +26,20 @@ class ItemsController < ApplicationController
     end
   end
 
-  def update
-    @item = @Item.find(params[:id])
-    if @item.save(item_params)
-      render json: { success: @item, status: "success"}
-    else
-      render json: { errors: @item.errors.full_messages,
-                    status: "error" }
-    end
-  end
-
-  def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
-  end
+  # def update
+  #   @item = @Item.find(params[:id])
+  #   if @item.save(item_params)
+  #     render json: { success: @item, status: "success"}
+  #   else
+  #     render json: { errors: @item.errors.full_messages,
+  #                   status: "error" }
+  #   end
+  # end
+  #
+  # def destroy
+  #   @item = Item.find(params[:id])
+  #   @item.destroy
+  # end
 
   private
 

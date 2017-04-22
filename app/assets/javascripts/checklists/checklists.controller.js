@@ -2,43 +2,50 @@
 
     'use strict';
 
-    function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams) {
+    function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams, $scope) {
 
         var vm = this;
         //callable methods on the vm
         vm.getChecklist = getChecklist;
         // vm.getItems = getItems;
         vm.createChecklist = createChecklist;
-        // vm.createItem = createItem;
+        vm.createItem = createItem;
 
         activate();
-        console.log($state);
+        // console.log($state);
+        // console.log($scope);
         //defined methods on the vm
         function activate() {
+          // debugger;
           getChecklist();
-          // getItems();
             // if ($state.params.jobId) {
             //   getChecklist();
-            // } else if ($state.params.checklistId) {
-            //   // get something else
-            // } else {
+            // } else if ($state.params.id) {
+            //   createChecklist();
+            //  }
+            //  else {
             //   // default
             // }
-            //
+
             // // getItems();
         };
 
         function getChecklist() {
-            //debugger;
-            //console.log($state.params.jobId)
+            // console.log($state.params.jobId)
             return ChecklistFactory.getChecklist($state.params.jobId)
+                // .then(functions(data) => {
+                //   if(data){
+                //     return data;
+                //   }
+                //   return createChecklist();
+                // })
                 .then(setChecklist);
         };
 
         function createChecklist() {
             // debugger;
-            console.log($state.params.id)
-            return ChecklistFactory.createChecklist(vm.checklist, $state.params.id)
+            // console.log($scope)
+            return ChecklistFactory.createChecklist(vm.checklist)
                 .then(getChecklist());
         };
 
@@ -54,11 +61,11 @@
         //         .then(setItems);
         // };
         //
-        // function createItem() {
-        //     //debugger;
-        //     return ItemFactory.createItem(vm.item)
-        //         .then(item => vm.checklist.items.push(item));
-        // };
+        function createItem() {
+            // debugger;
+            return ItemFactory.createItem(vm.item)
+                .then(item => vm.checklist.items.push(item));
+        };
         //
         // function setItems(data) {
         //     return vm.items = data;
@@ -89,7 +96,7 @@
 
     };
 
-    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state', '$stateParams'];
+    ChecklistsController.$inject = ['ChecklistFactory', 'ItemFactory','$state', '$stateParams', '$scope'];
 
     angular
       .module('app')

@@ -66,6 +66,7 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         };
 
         function setJob(data) {
+          // debugger;
             return vm.job = data;
         };
 

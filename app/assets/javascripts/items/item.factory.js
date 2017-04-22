@@ -11,7 +11,7 @@
         }
 
         function getItems(checklistId) {
-            return $http.get('/checklists/' + checklistId + '/items/')
+            return $http.get('/checklist/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
@@ -23,9 +23,10 @@
         };
 
         function createItem(item, checklistId) {
+          // debugger;
           var req = {
               method: 'POST',
-              url: '/checklists/' + checklistId  + '/items/',
+              url: '/checklist/' + checklistId  + '/items/',
               headers: {
                   'Content-Type': 'application/json'
               },

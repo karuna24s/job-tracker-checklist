@@ -9,17 +9,13 @@ Rails.application.routes.draw do
   patch 'jobs/:id' => 'jobs#update'
   delete 'jobs/:id' => 'jobs#destroy'
 
-  get 'jobs/:id/checklists' => 'checklists#index'
-  get 'checklists/:id' => 'checklists#show'
-  post 'jobs/:id/checklists' => 'checklists#create'
-  patch 'jobs/:id/checklists' => 'checklists#update'
-  delete 'jobs/:id/checklists' => 'checklists#destroy'
+  get 'jobs/:job_id/checklist' => 'checklists#show'
 
-  get 'checklists/:id/items' => 'items#index'
+  get 'checklist/:id/items' => 'items#index'
   get 'items/:id' => 'items#show'
-  post 'checklists/:id/items' => 'items#create'
-  patch 'checklists/:id/items' => 'items#update'
-  delete 'checklists/:id/items' => 'items#destroy'
+  post 'checklist/:id/items' => 'items#create'
+  patch 'checklist/:id/items' => 'items#update'
+  delete 'checklist/:id/items' => 'items#destroy'
 
   # get 'jobs/:id/notes' => 'notes#index'
   # get 'jobs/:id' => 'jobs#show'
