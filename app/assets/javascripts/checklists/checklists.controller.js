@@ -8,7 +8,7 @@
         //callable methods on the vm
         vm.getChecklist = getChecklist;
         // vm.getItems = getItems;
-        vm.createChecklist = createChecklist;
+        // vm.createChecklist = createChecklist;
         vm.createItem = createItem;
 
         activate();
@@ -62,9 +62,12 @@
         // };
         //
         function createItem() {
-            // debugger;
-            return ItemFactory.createItem(vm.item)
-                .then(item => vm.checklist.items.push(item));
+            // console.log(vm.checklist.item.task)
+            return ItemFactory.createItem(vm.checklist.item, vm.checklist.id)
+                .then(item => {
+                  vm.checklist.items.push(item)
+                  vm.checklist.item.task = "";
+                });
         };
         //
         // function setItems(data) {
