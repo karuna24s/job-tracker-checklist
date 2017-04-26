@@ -52265,7 +52265,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         //callable methods on the vm
         vm.getChecklist = getChecklist;
         // vm.getItems = getItems;
-        vm.createChecklist = createChecklist;
+        // vm.createChecklist = createChecklist;
         vm.createItem = createItem;
 
         activate();
@@ -52319,9 +52319,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         // };
         //
         function createItem() {
-            // debugger;
-            return ItemFactory.createItem(vm.item)
-                .then(item => vm.checklist.items.push(item));
+            // console.log(vm.checklist.item.task)
+            return ItemFactory.createItem(vm.checklist.item, vm.checklist.id)
+                .then(item => {
+                  vm.checklist.items.push(item)
+                  vm.checklist.item.task = "";
+                });
         };
         //
         // function setItems(data) {
@@ -52426,7 +52429,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list">\n          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n            <input class="btn btn-info btn-sm" type="submit" value="Add item">\n          <!-- <input ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm" type="submit" value="Add Item" /> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list">\n          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <input class="btn btn-info btn-sm" type="submit" value="Add item">\n          <!-- <input ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm" type="submit" value="Add Item" /> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52498,12 +52501,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         }
 
         function getItems(checklistId) {
+          // debugger;
             return $http.get('/checklist/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
 
         function getItem(itemId) {
+          // debugger;
           return $http.get('/items/' + itemId)
             .then(handleSuccess)
             .catch(handleError)
@@ -52544,47 +52549,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       .factory('ItemFactory', ItemFactory);
 
 }());
-// (function(){
-//
-//     'use strict';
-//
-//     function ItemsController(ItemFactory, $state) {
-//
-//         var vm = this;
-//
-//         //callable methods on the vm
-//         vm.test = "Here are the items!";
-//         vm.createItem = createItem;
-//         activate();
-//         //defined methods on the vm
-//         function activate() {
-//             getItems();
-//         };
-//
-//         function getItems() {
-//             return ItemFactory.getItems($state.params.id)
-//                 .then(setItems);
-//         };
-//
-//         function createItem() {
-//             return ItemFactory.createItem(vm.item, $state.params.id)
-//                 .then(item => vm.items.push(item));
-//         };
-//
-//         function setItems(data) {
-//             return vm.items = data;
-//         };
-//
-//
-//     };
-//
-//     ItemsController.$inject = ['ItemFactory', '$state'];
-//
-//     angular
-//       .module('app')
-//       .controller('ItemsController', ItemsController);
-//
-// }());
 // Angular Rails Template
 // source: app/assets/javascripts/items/show.html
 
