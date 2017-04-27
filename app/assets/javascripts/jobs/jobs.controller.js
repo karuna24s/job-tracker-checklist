@@ -7,7 +7,7 @@
     // callable methods on the vm
     vm.getJobs = getJobs;
     vm.createJob = createJob;
-    // vm.signedIn = Auth.isAuthenticated();
+    vm.signedIn = Auth.isAuthenticated();
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
 
@@ -40,8 +40,14 @@
     };
 
     function createJob() {
-      return JobFactory.createJob(vm.job)
+      if (vm.signedIn) {
+                return JobFactory.createJob(vm.job)
                        .then(showJob)
+            } else {
+                alert("Whoops. You need to be signed in to create a Job.");
+                $state.go('home.login')
+            }
+
     };
 
     function updateStatus(jobId, jobStatus) {
