@@ -52200,18 +52200,9 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     function ChecklistFactory($http) {
 
         return {
-            // getChecklists: getChecklists,
             getChecklist: getChecklist,
             createChecklist: createChecklist
         }
-
-        // function getChecklists(jobId) {
-        //   // debugger;
-        //   // console.log('inside getchecklists factory', jobId)
-        //     return $http.get('/jobs/' + jobId + '/checklists')
-        //         .then(handleSuccess)
-        //         .catch(handleError)
-        // };
 
         function getChecklist(jobId) {
           return $http.get('/jobs/' + jobId + '/checklist')
@@ -52220,8 +52211,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         };
 
         function createChecklist(checklist, jobId) {
-          // debugger;
-          // console.log('inside createchecklists factory', jobId)
           var req = {
               method: 'POST',
               url: '/jobs/' + jobId + '/checklist',
@@ -52264,94 +52253,36 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         var vm = this;
         //callable methods on the vm
         vm.getChecklist = getChecklist;
-        // vm.getItems = getItems;
-        // vm.createChecklist = createChecklist;
         vm.createItem = createItem;
 
         activate();
-        // console.log($state);
-        // console.log($scope);
+
         //defined methods on the vm
         function activate() {
-          // debugger;
           getChecklist();
-            // if ($state.params.jobId) {
-            //   getChecklist();
-            // } else if ($state.params.id) {
-            //   createChecklist();
-            //  }
-            //  else {
-            //   // default
-            // }
-
-            // // getItems();
         };
 
         function getChecklist() {
-            // console.log($state.params.jobId)
             return ChecklistFactory.getChecklist($state.params.jobId)
-                // .then(functions(data) => {
-                //   if(data){
-                //     return data;
-                //   }
-                //   return createChecklist();
-                // })
                 .then(setChecklist);
         };
 
         function createChecklist() {
-            // debugger;
-            // console.log($scope)
             return ChecklistFactory.createChecklist(vm.checklist)
                 .then(getChecklist());
         };
 
         function setChecklist(data) {
-          // debugger;
             return vm.checklist = data;
         };
 
-        // function getItems() {
-        //   //  debugger;
-        //   //  console.log($state.params.checklistId)
-        //     return ItemFactory.getItems($state.params.checklistId)
-        //         .then(setItems);
-        // };
-        //
         function createItem() {
-            // console.log(vm.checklist.item.task)
             return ItemFactory.createItem(vm.checklist.item, vm.checklist.id)
                 .then(item => {
                   vm.checklist.items.push(item)
                   vm.checklist.item.task = "";
                 });
         };
-        //
-        // function setItems(data) {
-        //     return vm.items = data;
-        // };
-        //
-        // function showItem(data) {
-        //   // debugger
-        //     $state.go('home.checklists', { itemId: data.id });
-        // };
-
-        // function addItem(task) {
-        //   return itemFactory(task, checklistId)
-        //
-        // }
-
-        // function getItems() {
-        //    //debugger;
-        //     // console.log($state.params.checklistId)
-        //     return ItemFactory.getItems($state.params.checklistId)
-        //         .then(setItems);
-        // };
-        //
-        // function setItems(data) {
-        //     return vm.items = data;
-        // };
-
 
 
     };
@@ -52363,73 +52294,11 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       .controller('ChecklistsController', ChecklistsController);
 
 }());
-// (function(){
-//
-//     'use strict';
-//
-//     function ChecklistsShowController(ChecklistFactory, ItemFactory, $stateParams, $state) {
-//
-//         var vm = this;
-//
-//         //callable methods on the vm
-//         // vm.getChecklist = getChecklist;
-//         vm.getItem = getItem;
-//         vm.createItem = createItem;
-//         activate();
-//
-//         //defined methods on the vm
-//         function activate() {
-//             // getChecklist($stateParams.checklistId);
-//             getItem($stateParams.itemId);
-//         };
-//
-//         // function getChecklist(id) {
-//         //    //debugger;
-//         //     return ChecklistFactory.getChecklist(id)
-//         //         .then(setChecklist);
-//         // };
-//
-//         // function getItem(id) {
-//         //    //debugger;
-//         //     return ItemFactory.getItem(id)
-//         //         .then(setItem);
-//         // };
-//
-//         function createItem(item, id) {
-//             //debugger;
-//             return ItemFactory.createItem(vm.item, id)
-//                 .then(showItem);
-//         };
-//
-//         // function setChecklist(data) {
-//         //     return vm.checklist = data;
-//         // };
-//         //
-//         function setItem(data) {
-//             return vm.item = data;
-//         };
-//
-//         function showItem(data) {
-//           debugger
-//             $state.go('home.checklists', { itemId: data.id });
-//         };
-//
-//
-//
-//     };
-//
-//     ChecklistsShowController.$inject = ['ChecklistFactory', 'ItemFactory', '$stateParams', '$state'];
-//
-//     angular
-//       .module('app')
-//       .controller('ChecklistsShowController', ChecklistsShowController);
-//
-// }());
 // Angular Rails Template
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list">\n          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <input class="btn btn-info btn-sm" type="submit" value="Add item">\n          <!-- <input ui-sref="home.checklists({ checklistId: vm.checklist.id })" class="btn btn-info btn-sm" type="submit" value="Add Item" /> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list">\n          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <input class="btn btn-info btn-sm" type="submit" value="Add item">\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52501,21 +52370,18 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         }
 
         function getItems(checklistId) {
-          // debugger;
             return $http.get('/checklist/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
 
         function getItem(itemId) {
-          // debugger;
           return $http.get('/items/' + itemId)
             .then(handleSuccess)
             .catch(handleError)
         };
 
         function createItem(item, checklistId) {
-          // debugger;
           var req = {
               method: 'POST',
               url: '/checklist/' + checklistId  + '/items/',
@@ -52549,13 +52415,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       .factory('ItemFactory', ItemFactory);
 
 }());
-// Angular Rails Template
-// source: app/assets/javascripts/items/show.html
-
-angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("items/show.html", "{{ vm.test }}")
-}]);
-
 (function() {
 
 
@@ -52571,14 +52430,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/edit.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/edit.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Let\'s Edit a Job</h2>\n      </div>\n      <div class="panel-body">\n        <form name="editJob" ng-submit="vm.updateJob()">\n            <label form="job_title">Job Title: </label>\n            <input type="text" required name="job_title" ng-model="vm.job.job_title" class="form-control" />\n            <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">\n              <div ng-message="required">Job Title is required.</div>\n            </div>\n            <br />\n            <label form="company">Company: </label>\n            <input type="text" required name="company" ng-model="vm.job.company" class="form-control" />\n            <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">\n              <div ng-message="required">Company is required.</div>\n            </div>\n            <br />\n            <label form="job_description">Job Description: </label>\n            <textarea ng-model="vm.job.job_description" class="form-control" ></textarea>\n            <br />\n            <label form="company_url">Company URL: </label>\n            <textarea ng-model="vm.job.company_url" class="form-control" ></textarea>\n            <br />\n            <label form="date">Date: </label>\n            <input type="text" ng-model="vm.job.date" class="form-control" />\n            <br />\n            <label form="status">Status: </label>\n            <select name="status" required name="status" ng-model="vm.job.status" class="form-control" >\n                  <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n            </select>\n            <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">\n              <div ng-message="required">Status is required.</div>\n            </div>\n            <br />\n            <label form="point_of_contact">Point of Contact: </label>\n            <input type="text" ng-model="vm.job.point_of_contact" class="form-control" />\n            <br />\n            <label form="job_reference">Job Reference: </label>\n            <input type="text" ng-model="vm.job.job_reference" class="form-control" />\n            <br />\n            <label form="tech_stack">Tech Stack: </label>\n            <input type="text" ng-model="vm.job.tech_stack" class="form-control" />\n            <br />\n            <br />\n\n            <div>After updates the information will be:\n              <br /><br />\n              Job Title: <span ng-bind="vm.job.job_title"></span><br />\n              Company: <span ng-bind="vm.job.company"></span><br />\n              Job Description: <span ng-bind="vm.job.job_description"></span><br />\n              Company URL: <span ng-bind="vm.job.company_url"></span><br />\n              Date: <span ng-bind="vm.job.date"></span><br />\n              <!-- Status: <span ng-bind="vm.job.status"></span><br /> -->\n              Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />\n              Job Reference: <span ng-bind="vm.job.job_reference"></span><br />\n              Tech Stack: <span ng-bind="vm.job.tech_stack"></span><br />\n            </div>\n            <br />\n            <br />\n            <!-- <label for="current-state">State: </label>\n            <div ng-controller="StatesController as statesCtrl">\n                <select ng-options="state.id*1 as state.name for state in statesCtrl.states" ng-model="breweriesShowCtrl.brewery.state_id">\n                      <option name="current-state" label="{{ breweriesShowCtrl.brewery.state.name }}" ng-bind="breweriesShowCtrl.brewery.state.id"></option>\n                </select>\n            </div> -->\n\n            <input class="btn btn-info btn-md" type="submit" value="Edit Job">\n\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
-}]);
-
-// Angular Rails Template
-// source: app/assets/javascripts/jobs/home.html
-
-angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/home.html", '<!-- <h1>Jobs Main Page</h1>\n<a href="" ui-sref="home.jobs">Jobs</a>\n<a href="" ui-sref="home.jobs.create">Add a Job</a>\n<ui-view></ui-view> -->')
+  $templateCache.put("jobs/edit.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Let\'s Edit a Job</h2>\n      </div>\n      <div class="panel-body">\n        <form name="editJob" ng-submit="vm.updateJob()">\n            <label form="job_title">Job Title: </label>\n            <input type="text" required name="job_title" ng-model="vm.job.job_title" class="form-control" />\n            <div ng-messages="editJob.job_title.$error" ng-show="editJob.job_title.$touched || editJob.$submitted">\n              <div ng-message="required">Job Title is required.</div>\n            </div>\n            <br />\n            <label form="company">Company: </label>\n            <input type="text" required name="company" ng-model="vm.job.company" class="form-control" />\n            <div ng-messages="editJob.company.$error" ng-show="editJob.company.$touched || editJob.$submitted">\n              <div ng-message="required">Company is required.</div>\n            </div>\n            <br />\n            <label form="job_description">Job Description: </label>\n            <textarea ng-model="vm.job.job_description" class="form-control" ></textarea>\n            <br />\n            <label form="company_url">Company URL: </label>\n            <textarea ng-model="vm.job.company_url" class="form-control" ></textarea>\n            <br />\n            <label form="date">Date: </label>\n            <input type="text" ng-model="vm.job.date" class="form-control" />\n            <br />\n            <label form="status">Status: </label>\n            <select name="status" required name="status" ng-model="vm.job.status" class="form-control" >\n                  <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n            </select>\n            <div ng-messages="editJob.status.$error" ng-show="editJob.status.$touched || editJob.$submitted">\n              <div ng-message="required">Status is required.</div>\n            </div>\n            <br />\n            <label form="point_of_contact">Point of Contact: </label>\n            <input type="text" ng-model="vm.job.point_of_contact" class="form-control" />\n            <br />\n            <label form="job_reference">Job Reference: </label>\n            <input type="text" ng-model="vm.job.job_reference" class="form-control" />\n            <br />\n            <label form="tech_stack">Tech Stack: </label>\n            <input type="text" ng-model="vm.job.tech_stack" class="form-control" />\n            <br />\n            <br />\n\n            <div>After updates the information will be:\n              <br /><br />\n              Job Title: <span ng-bind="vm.job.job_title"></span><br />\n              Company: <span ng-bind="vm.job.company"></span><br />\n              Job Description: <span ng-bind="vm.job.job_description"></span><br />\n              Company URL: <span ng-bind="vm.job.company_url"></span><br />\n              Date: <span ng-bind="vm.job.date"></span><br />\n              <!-- Status: <span ng-bind="vm.job.status"></span><br /> -->\n              Point of Contact: <span ng-bind="vm.job.point_of_contact"></span><br />\n              Job Reference: <span ng-bind="vm.job.job_reference"></span><br />\n              Tech Stack: <span ng-bind="vm.job.tech_stack"></span><br />\n            </div>\n            <br />\n            <br />\n            <input class="btn btn-info btn-md" type="submit" value="Edit Job">\n\n        </form>\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 // Angular Rails Template
@@ -52717,7 +52569,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 
     //instantiated info
     activate();
-    console.log($state);
 
     //defined methods on the vm
     function activate() {
@@ -52799,7 +52650,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
 
         //defined methods on the vm
         function activate() {
-          // console.log
           getJob($stateParams.jobId);
           getCurrentUser();
         };
@@ -52810,7 +52660,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         }
 
         function setCurrentUser(user) {
-            // console.log(user);
             return vm.user = user;
         }
 
@@ -52839,7 +52688,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         };
 
         function setJob(data) {
-          // debugger;
             return vm.job = data;
         };
 
