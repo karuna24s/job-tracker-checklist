@@ -35,7 +35,7 @@ $ rails server
 
 ### Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/karuna24s/food-travels-rails-app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/karuna24s/job-tracker-checklist. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 ## License
 
