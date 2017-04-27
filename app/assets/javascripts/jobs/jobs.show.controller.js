@@ -27,6 +27,7 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
 
         //defined methods on the vm
         function activate() {
+          // console.log
           getJob($stateParams.jobId);
           getCurrentUser();
         };
@@ -37,7 +38,7 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         }
 
         function setCurrentUser(user) {
-            console.log(user);
+            // console.log(user);
             return vm.user = user;
         }
 
@@ -51,7 +52,7 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
                 return JobFactory.updateJob(vm.job)
                        .then(showJob);
             } else {
-                alert("Whoops. You need to sign in and be an admin to edit a Job.");
+                alert("Whoops. You need to sign in to edit a Job.");
                 $state.go('home.login')
             }
         };
