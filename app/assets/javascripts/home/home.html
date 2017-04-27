@@ -38,11 +38,13 @@
                       <br />
                         <div class="row">
                           <div class="col-md-6">
+                            <p ng-hide="vm.signedIn()">Login here:</p>
                             <a href="" ng-hide="vm.signedIn()" ui-sref="home.login"><button type="button" class="btn btn-outline btn-lg">Login</button></a>
                             <p ng-show="vm.signedIn()">View your Jobs List:</p>
                             <a href="" ng-show="vm.signedIn()" ui-sref="home.jobs"><button type="button" class="btn btn-outline btn-lg">Jobs</button></a>
                           </div>
                           <div class="col-md-6">
+                            <p ng-hide="vm.signedIn()">Register here:</p>
                             <a href="" ng-hide="vm.signedIn()" ui-sref="home.register"><button type="button" class="btn btn-outline btn-lg">Register</button></a>
                             <p ng-show="vm.signedIn()">Add a Job:</p>
                             <a href="" ng-show="vm.signedIn()" ui-sref="home.create"><button type="button" class="btn btn-outline btn-lg">Add a Job</button></a>
