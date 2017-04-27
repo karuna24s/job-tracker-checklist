@@ -26,7 +26,6 @@
 
     //instantiated info
     activate();
-    console.log($state);
 
     //defined methods on the vm
     function activate() {

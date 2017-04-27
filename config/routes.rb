@@ -14,7 +14,5 @@ Rails.application.routes.draw do
   get 'checklist/:checklist_id/items' => 'items#index'
   get 'items/:id' => 'items#show'
   post 'checklist/:checklist_id/items' => 'items#create'
-  # patch 'checklist/:id/items' => 'items#update'
-  # delete 'checklist/:id/items' => 'items#destroy'
 
 end

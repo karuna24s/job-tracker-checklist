@@ -8,7 +8,6 @@ class Job < ApplicationRecord
   private
 
   def add_checklist
-    # binding.pry
     self.create_checklist!
   end
 

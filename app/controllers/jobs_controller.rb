@@ -2,7 +2,6 @@ class JobsController < ApplicationController
   before_action :get_job, only: [:show, :update]
 
   def index
-    # binding.pry
     @jobs = Job.where(user: current_user)
     if @jobs
       render json: @jobs, status: 200
@@ -12,7 +11,6 @@ class JobsController < ApplicationController
   end
 
   def show
-    # binding.pry
     if @job
       render json: @job, status: 200
     else

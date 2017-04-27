@@ -5,18 +5,9 @@
     function ChecklistFactory($http) {
 
         return {
-            // getChecklists: getChecklists,
             getChecklist: getChecklist,
             createChecklist: createChecklist
         }
-
-        // function getChecklists(jobId) {
-        //   // debugger;
-        //   // console.log('inside getchecklists factory', jobId)
-        //     return $http.get('/jobs/' + jobId + '/checklists')
-        //         .then(handleSuccess)
-        //         .catch(handleError)
-        // };
 
         function getChecklist(jobId) {
           return $http.get('/jobs/' + jobId + '/checklist')
@@ -25,8 +16,6 @@
         };
 
         function createChecklist(checklist, jobId) {
-          // debugger;
-          // console.log('inside createchecklists factory', jobId)
           var req = {
               method: 'POST',
               url: '/jobs/' + jobId + '/checklist',

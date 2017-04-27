@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
 
   def index
-    # binding.pry
     @items = Item.where(checklist_id: params[:id])
     if @items
       render json: @items, status: 200
@@ -9,7 +8,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @item = Item.find(params[:id])
     render json: @item
   end

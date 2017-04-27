@@ -11,21 +11,18 @@
         }
 
         function getItems(checklistId) {
-          // debugger;
             return $http.get('/checklist/' + checklistId + '/items/')
                 .then(handleSuccess)
                 .catch(handleError)
         };
 
         function getItem(itemId) {
-          // debugger;
           return $http.get('/items/' + itemId)
             .then(handleSuccess)
             .catch(handleError)
         };
 
         function createItem(item, checklistId) {
-          // debugger;
           var req = {
               method: 'POST',
               url: '/checklist/' + checklistId  + '/items/',

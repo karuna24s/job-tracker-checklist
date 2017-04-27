@@ -27,7 +27,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
 
         //defined methods on the vm
         function activate() {
-          // console.log
           getJob($stateParams.jobId);
           getCurrentUser();
         };
@@ -38,7 +37,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         }
 
         function setCurrentUser(user) {
-            // console.log(user);
             return vm.user = user;
         }
 
@@ -67,7 +65,6 @@ function JobsShowController(JobFactory, $stateParams, $state, Auth) {
         };
 
         function setJob(data) {
-          // debugger;
             return vm.job = data;
         };
 
