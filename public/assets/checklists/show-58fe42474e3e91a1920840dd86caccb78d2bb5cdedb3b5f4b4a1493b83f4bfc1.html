@@ -7,8 +7,8 @@
       <div class="panel-body" >
         <!-- see previous items on checklist -->
         <label>Items: </label>
-        <ul id="items-list">
-          <li ng-repeat="item in vm.checklist.items track by item.id">{{ item.task }}</li>
+        <ul id="items-list" ng-repeat="item in vm.checklist.items track by item.id">
+          <input type="checkbox" ng-model="items[item]" /> {{ item.task }}
         </ul>
         <hr />
         <form name="item" ng-submit="vm.createItem()">
