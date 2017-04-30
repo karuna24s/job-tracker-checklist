@@ -8,6 +8,7 @@
             getItems: getItems,
             getItem: getItem,
             createItem: createItem
+            // destroyItem: destroyItem
         }
 
         function getItems(checklistId) {
@@ -38,6 +39,12 @@
                      .then(handleSuccess)
                      .catch(handleError)
         };
+
+        // function destroyItem(checklistId) {
+        //   return $http.delete('/checklist/' + checklistId  + '/items/')
+        //           .then(handleSuccess)
+        //           .catch(handleError)
+        // };
 
         function handleSuccess(response) {
             return response.data;

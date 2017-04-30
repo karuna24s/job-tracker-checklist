@@ -22,6 +22,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  # def destroy
+  #   @checklist = Checklist.find(params[:checklist_id])
+  #   @item = @checklist.items.destroy(item_params)
+  #   if @item.save
+  #     render json: @item,  status: 200
+  #   else
+  #     render status: 400
+  #   end
+  # end
+
   private
 
   def item_params
