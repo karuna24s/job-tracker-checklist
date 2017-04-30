@@ -19,6 +19,7 @@
                   <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.login">Log In</a></li>
                   <li ng-hide="vm.signedIn()"><a href="" ui-sref="home.register">Register</a></li>
                   <!-- will only show when signedIn() is true -->
+                  <li ng-show="vm.signedIn()"><a href="" ui-sref="home.jobs">Jobs List</a></li>
                   <li ng-show="vm.signedIn()"><span class="user">Signed in <i class="fa fa-user" aria-hidden="true"></i> : {{ vm.user.username }}</span></li>
                   <li ng-show="vm.signedIn()"><a href="" ng-click="vm.logout()">Log Out</a></li>
               </ul>
