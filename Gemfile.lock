@@ -218,7 +218,7 @@ DEPENDENCIES
   pg (= 0.18.4)
   pry-rails
   puma (~> 3.0)
-  rails (~> 5.0.1)
+  rails (~> 5.0.2)
   responders
   sass-rails (~> 5.0)
   spring
@@ -229,4 +229,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.14.4
+   1.14.6
