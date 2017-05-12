@@ -23,7 +23,10 @@
     <ul id="jobs-list" ng-click>
       <li ng-repeat="job in vm.filteredList | filter: vm.search | filter: {status: vm.jobs.jobs.status} track by job.id">
         <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
+        <!--up vote -->
+        <button ng-click="vm.voteJob(job)">Vote</button>{{job.counter}}
       </li>
+
     </ul>
 
 

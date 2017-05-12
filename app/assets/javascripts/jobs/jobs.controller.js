@@ -10,6 +10,9 @@
     vm.signedIn = Auth.isAuthenticated();
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
+    vm.voteJob = voteJob;
+
+    // vm.counter = 0;
 
     vm.statuses = [
       {id: 1, value: 'Discovered'},
@@ -23,7 +26,7 @@
       {id: 9, value: 'Job Offer Declined'}
     ];
 
-
+//
     //instantiated info
     activate();
 
@@ -68,6 +71,18 @@
     function showJob(data) {
         $state.go('home.show', { jobId: data.id });
     };
+
+    function voteJob(job) {
+      // console.log($state);
+      // if (!job.counter) {
+      //   job.counter = job.counter || 0;
+      // }
+      job.counter = job.counter || 0;
+      job.counter++;
+
+      // vm.counter++;
+    };
+
 
 
   };
