@@ -7,8 +7,8 @@
         return {
             getItems: getItems,
             getItem: getItem,
-            createItem: createItem
-            // destroyItem: destroyItem
+            createItem: createItem,
+            destroyItems: destroyItems
         }
 
         function getItems(checklistId) {
@@ -40,11 +40,23 @@
                      .catch(handleError)
         };
 
-        // function destroyItem(checklistId) {
-        //   return $http.delete('/checklist/' + checklistId  + '/items/')
-        //           .then(handleSuccess)
-        //           .catch(handleError)
-        // };
+        function destroyItems(checklistId, itemIds) {
+          var req = {
+              method: 'DELETE',
+              url: '/checklist/' + checklistId  + '/items/',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              data: {
+                  itemIds: itemIds
+              }
+          };
+
+          return $http(req)
+                     .then(handleSuccess)
+                     .catch(handleError)
+
+        };
 
         function handleSuccess(response) {
             return response.data;

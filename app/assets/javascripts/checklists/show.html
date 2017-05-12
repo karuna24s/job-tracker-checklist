@@ -8,7 +8,7 @@
         <!-- see previous items on checklist -->
         <label>Items: </label>
         <ul id="items-list" ng-repeat="item in vm.checklist.items track by item.id">
-          <input type="checkbox" ng-model="items[item]" /> {{ item.task }}
+          <input type="checkbox" ng-click="vm.selectItem(item)" /> {{ item.task }}
         </ul>
         <hr />
         <form name="item" ng-submit="vm.createItem()">
@@ -18,8 +18,8 @@
           <input class="btn btn-info btn-sm" type="submit" value="Add item">
         </form>
         <!-- item can be removed here -->
-        <!-- <br/>
-        <input class="btn btn-info btn-sm" ng-click="vm.destroyItem()" type="submit" value="Remove item"> -->
+        <br/>
+        <input class="btn btn-info btn-sm" ng-click="vm.destroyItems()" type="submit" value="Remove item">
 
       </div>
     </div>

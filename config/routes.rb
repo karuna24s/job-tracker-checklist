@@ -8,14 +8,16 @@ Rails.application.routes.draw do
   post 'jobs' => 'jobs#create'
   patch 'jobs/:id' => 'jobs#update'
   delete 'jobs/:id' => 'jobs#destroy'
+  post 'jobs/:id/votes' => 'votes#create'
 
   get 'jobs/:job_id/checklist' => 'checklists#show'
 
   get 'checklist/:checklist_id/items' => 'items#index'
   get 'items/:id' => 'items#show'
   post 'checklist/:checklist_id/items' => 'items#create'
+  delete 'checklist/:checklist_id/items' => 'items#destroy'
 
-  post 'jobs/:id/votes' => 'votes#create'
-  # delete 'checklist/:checklist_id/items' => 'items#destroy'
+
+
 
 end
