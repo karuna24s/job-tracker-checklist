@@ -9,7 +9,8 @@
       createJob: createJob,
       updateJob: updateJob,
       updateStatus: updateStatus,
-      destroyJob: destroyJob
+      destroyJob: destroyJob,
+      voteJob: voteJob
     }
 
     function getJobs() {
@@ -77,6 +78,12 @@
 
     function destroyJob(id) {
       return $http.delete('/jobs/' + id)
+              .then(handleSuccess)
+              .catch(handleError)
+    };
+
+    function voteJob(id) {
+      return $http.post('/jobs/' + id + '/votes')
               .then(handleSuccess)
               .catch(handleError)
     };

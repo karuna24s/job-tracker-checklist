@@ -72,15 +72,17 @@
         $state.go('home.show', { jobId: data.id });
     };
 
-    function voteJob(job) {
-      // console.log($state);
-      // if (!job.counter) {
-      //   job.counter = job.counter || 0;
-      // }
-      job.counter = job.counter || 0;
-      job.counter++;
+    function voteJob(jobId) {
+      return JobFactory.voteJob(jobId)
+            .then(updateVote);
+    };
 
-      // vm.counter++;
+    function updateVote(data) {
+      for (var i = 0; i < vm.jobs.length; i++) {
+        if (vm.jobs[i].id == data.id) {
+          vm.jobs[i].vote_count = data.vote_count;
+        }
+      }
     };
 
 
