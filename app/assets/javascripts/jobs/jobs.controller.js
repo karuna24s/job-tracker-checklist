@@ -10,9 +10,10 @@
     vm.signedIn = Auth.isAuthenticated();
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
-    vm.voteJob = voteJob;
 
     // vm.counter = 0;
+
+
 
     vm.statuses = [
       {id: 1, value: 'Discovered'},
@@ -72,18 +73,34 @@
         $state.go('home.show', { jobId: data.id });
     };
 
-    function voteJob(jobId) {
-      return JobFactory.voteJob(jobId)
-            .then(updateVote);
-    };
-
-    function updateVote(data) {
-      for (var i = 0; i < vm.jobs.length; i++) {
-        if (vm.jobs[i].id == data.id) {
-          vm.jobs[i].vote_count = data.vote_count;
-        }
-      }
-    };
+    // function voteJob(jobId) {
+    //   return JobFactory.voteJob(jobId)
+    //         .then(updateVote);
+    // };
+    //
+    // // sort the votes
+    // function sortVotes() {
+    //   vm.filteredList.sort(function(a, b) {
+    //     if (a.vote_count < b.vote_count) {
+    //       return -1;
+    //     }
+    //     else if (a.vote_count > b.vote_count) {
+    //       return +1;
+    //     }
+    //     else {
+    //       return 0;
+    //     }
+    //   })
+    //   console.log(vm.filteredList);
+    // }
+    //
+    // function updateVote(data) {
+    //   for (var i = 0; i < vm.jobs.length; i++) {
+    //     if (vm.jobs[i].id == data.id) {
+    //       vm.jobs[i].vote_count = data.vote_count;
+    //     }
+    //   }
+    // };
 
 
 
