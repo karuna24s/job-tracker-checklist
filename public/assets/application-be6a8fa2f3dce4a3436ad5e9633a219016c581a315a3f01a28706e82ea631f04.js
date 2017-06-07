@@ -52251,10 +52251,12 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     function ChecklistsController(ChecklistFactory, ItemFactory, $state, $stateParams, $scope) {
 
         var vm = this;
+        vm.selectedItems = [];
         //callable methods on the vm
         vm.getChecklist = getChecklist;
         vm.createItem = createItem;
-        // vm.destroyItem = destroyItem;
+        vm.selectItem = selectItem;
+        vm.destroyItems = destroyItems;
         activate();
         // console.log($state);
         //defined methods on the vm
@@ -52285,24 +52287,32 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
                 });
         };
 
-        // function destroyItem() {
-        //     return ItemFactory.destroyItem(vm.checklist.id)
-        //                .then(item => {
-        //                  vm.checklist.items.splice(item)
-        //                  vm.checklist.item.task = "";
-        //                });
-        // }
+        function selectItem(item) {
+          vm.selectedItems.push(item.id);
+        }
 
-        // $scope.removeSelected = function() {
-        //   var i = $scope.phonelist.length;
-        //   // reversed loop because you change the array
-        //   while (i--) {
-        //     var phone = $scope.phonelist[i];
-        //     if (phone.checked) {
-        //       $scope.phonelist.splice(i, 1);
-        //     }
-        //   }
-        // }
+        function destroyItems() {
+            return ItemFactory.destroyItems(vm.checklist.id, vm.selectedItems)
+                       .then(function() {
+                         vm.checklist.items = vm.checklist.items.filter(function(item) {
+                           return vm.selectedItems.indexOf(item.id) == -1;
+                         });
+                        //  vm.checklist.items = vm.checklist.items.map(function(item){
+                        //    if (vm.selectedItems.indexOf(item.id) == -1) {
+                        //      return item;
+                        //    }
+                        //  })
+                        //  var items = [];
+                        //  vm.checklist.items.forEach(function(item) {
+                        //    if (vm.selectedItems.indexOf(item.id) == -1) {
+                        //      items.push(item);
+                        //    }
+                        //  })
+                        //  vm.checklist.items = items;
+
+                       });
+        }
+
 
 
     };
@@ -52318,7 +52328,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/checklists/show.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list" ng-repeat="item in vm.checklist.items track by item.id">\n          <input type="checkbox" ng-model="items[item]" /> {{ item.task }}\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <input class="btn btn-info btn-sm" type="submit" value="Add item">\n        </form>\n        <!-- item can be removed here -->\n        <!-- <br/>\n        <input class="btn btn-info btn-sm" ng-click="vm.destroyItem()" type="submit" value="Remove item"> -->\n\n      </div>\n    </div>\n  </div>\n</div>')
+  $templateCache.put("checklists/show.html", '<div class="row form">\n  <div class="col-md-10 col-md-offset-1">\n    <div class="panel panel-default">\n      <div class="panel-header">\n        <h2>Your Checklist</h2>\n      </div>\n      <div class="panel-body" >\n        <!-- see previous items on checklist -->\n        <label>Items: </label>\n        <ul id="items-list" ng-repeat="item in vm.checklist.items track by item.id">\n          <input type="checkbox" ng-click="vm.selectItem(item)" /> {{ item.task }}\n        </ul>\n        <hr />\n        <form name="item" ng-submit="vm.createItem()">\n          <label>Add an item</label><br />\n          <input type="text" ng-model="vm.checklist.item.task" class="form-control" /><br />\n          <!-- newitem can be added here -->\n          <input class="btn btn-info btn-sm" type="submit" value="Add item">\n        </form>\n        <!-- item can be removed here -->\n        <br/>\n        <input class="btn btn-info btn-sm" ng-click="vm.destroyItems()" type="submit" value="Remove item">\n\n      </div>\n    </div>\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52386,8 +52396,8 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
         return {
             getItems: getItems,
             getItem: getItem,
-            createItem: createItem
-            // destroyItem: destroyItem
+            createItem: createItem,
+            destroyItems: destroyItems
         }
 
         function getItems(checklistId) {
@@ -52419,11 +52429,23 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
                      .catch(handleError)
         };
 
-        // function destroyItem(checklistId) {
-        //   return $http.delete('/checklist/' + checklistId  + '/items/')
-        //           .then(handleSuccess)
-        //           .catch(handleError)
-        // };
+        function destroyItems(checklistId, itemIds) {
+          var req = {
+              method: 'DELETE',
+              url: '/checklist/' + checklistId  + '/items/',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              data: {
+                  itemIds: itemIds
+              }
+          };
+
+          return $http(req)
+                     .then(handleSuccess)
+                     .catch(handleError)
+
+        };
 
         function handleSuccess(response) {
             return response.data;
@@ -52464,7 +52486,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/javascripts/jobs/index.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>Jobs List</h2>\n\n    <br />\n    <a href="#" ui-sref="home.create">Add a Job</a>\n    <br /><br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n    <label>Or Search by </label><br /><br />\n\n    <label>Job Status</label>\n    <select ng-model="vm.jobs.jobs.status">\n        <option value="">View All</option>\n        <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n    </select>\n    <br />\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList | filter: vm.search | filter: {status: vm.jobs.jobs.status} track by job.id">\n        <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n      </li>\n    </ul>\n\n\n\n  </div>\n</div>')
+  $templateCache.put("jobs/index.html", '<div class="container">\n  <div class=" well col-sm-10">\n\n    <h2>Jobs List</h2>\n\n    <br />\n    <a href="#" ui-sref="home.create">Add a Job</a>\n    <br /><br />\n\n    <label for="search">Search: </label>\n    <input ng-model="vm.search" ng-change="vm.refilter()" class="form-control" placeholder="Search by job title or company">\n    <br />\n\n    <label>Or Search by </label><br /><br />\n\n    <label>Job Status</label>\n    <select ng-model="vm.jobs.jobs.status">\n        <option value="">View All</option>\n        <option ng-repeat="status in vm.statuses" ng-value="status.id">{{status.value}}</option>\n    </select>\n    <br />\n\n\n    <br />\n\n    <ul id="jobs-list" ng-click>\n      <li ng-repeat="job in vm.filteredList | filter: vm.search | filter: {status: vm.jobs.jobs.status} track by job.id">\n        <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>\n        \n      </li>\n\n    </ul>\n\n\n\n  </div>\n</div>')
 }]);
 
 (function() {
@@ -52581,6 +52603,10 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     vm.updateStatus = updateStatus;
     vm.refilter = refilter;
 
+    // vm.counter = 0;
+
+
+
     vm.statuses = [
       {id: 1, value: 'Discovered'},
       {id: 2, value: 'Application in Progress'},
@@ -52593,7 +52619,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
       {id: 9, value: 'Job Offer Declined'}
     ];
 
-
+//
     //instantiated info
     activate();
 
@@ -52638,6 +52664,36 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
     function showJob(data) {
         $state.go('home.show', { jobId: data.id });
     };
+
+    // function voteJob(jobId) {
+    //   return JobFactory.voteJob(jobId)
+    //         .then(updateVote);
+    // };
+    //
+    // // sort the votes
+    // function sortVotes() {
+    //   vm.filteredList.sort(function(a, b) {
+    //     if (a.vote_count < b.vote_count) {
+    //       return -1;
+    //     }
+    //     else if (a.vote_count > b.vote_count) {
+    //       return +1;
+    //     }
+    //     else {
+    //       return 0;
+    //     }
+    //   })
+    //   console.log(vm.filteredList);
+    // }
+    //
+    // function updateVote(data) {
+    //   for (var i = 0; i < vm.jobs.length; i++) {
+    //     if (vm.jobs[i].id == data.id) {
+    //       vm.jobs[i].vote_count = data.vote_count;
+    //     }
+    //   }
+    // };
+
 
 
   };

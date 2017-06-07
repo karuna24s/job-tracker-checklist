@@ -20,10 +20,15 @@
     </select>
     <br />
 
+
+    <br />
+
     <ul id="jobs-list" ng-click>
       <li ng-repeat="job in vm.filteredList | filter: vm.search | filter: {status: vm.jobs.jobs.status} track by job.id">
         <a href="" ui-sref="home.show({ jobId: job.id })">{{ job.job_title }}, {{ job.company }}</a>
+        
       </li>
+
     </ul>
 
 
