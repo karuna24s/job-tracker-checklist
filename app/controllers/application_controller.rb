@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  after_filter :set_csrf_cookie
+  after_action :set_csrf_cookie
   before_action :configure_permitted_parameters, if: :devise_controller?
   respond_to :json
 
