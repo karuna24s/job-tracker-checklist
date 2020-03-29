@@ -17,7 +17,7 @@ gem 'angular-rails-templates'
 
 gem 'devise'
 gem 'json', github: 'flori/json', branch: 'v1.8'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '>= 3.4.1'
 # Use for icons
 gem 'font-awesome-sass', '~> 4.7.0'
 # Use Puma as the app server
