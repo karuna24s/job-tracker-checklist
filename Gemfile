@@ -8,7 +8,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0.3.2'
 gem 'responders'
 gem 'active_model_serializers', '~> 0.10.0'
 gem "bower-rails", "~> 0.11.0"
@@ -48,7 +48,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '1.3.13'
+  gem 'sqlite3', '~> 1.4', '>= 1.4.2'
   gem 'pry-rails'
 end
 
